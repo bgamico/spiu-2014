@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Puntos de Información Universitaria</title>
+	<meta name="description" content="Proyecto de software 2013 UNRN">
+	<meta name="author" content="castropnicolas@gmail.com">
+	<link href="<?php echo base_url();?>res/img/favicon.ico" rel="shortcut icon">
+	
+    <!-- CSS
+  ================================================== -->
+	<link href="<?php echo base_url();?>res/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="<?php echo base_url();?>res/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+	<link href="<?php echo base_url();?>res/css/login.css" rel="stylesheet" media="screen">
+        <link href="<?php echo base_url();?>res/css/style.css" rel="stylesheet">
+
+<!-- ==============================================
+		   JavaScript below!	-->
+
+<!-- jQuery via Google + local fallback, see h5bp.com -->
+	  <script src="<?php echo base_url();?>res/js/jquery-1.7.1.min.js"></script>
+<!-- Bootstrap JS -->
+	  <script src="<?php echo base_url();?>res/js/bootstrap.min.js"></script>
+<!-- Validate plugin -->
+	  <script src="<?php echo base_url();?>res/js/jquery.validate.min.js"></script>
+<!-- Scripts specific to this page -->
+	  <script src="<?php echo base_url();?>res/js/script.js"></script>
+</head>
+
+<body>
+<!--------------Header--------------->
+        <!-- HEADER AREA -->
+        <header>
+            <div class="container">
+                <div class="row">
+                    <!-- HEADER: LOGO AREA -->
+                    <div class="span4 logo">
+	                    <img alt="logo" title="Universidad Nacional de Río Negro" src="<?php echo base_url();?>/res/img/logounrn.png">
+                    </div>
+                    <div class="span4 offset4">
+                        <!-- HEADER: TEXT -->
+                        <p class="head_phone">
+                            <!--span class="icon-phone"></span>Sistema de puntos de interes</p-->
+                    </div>
+                </div>
+            </div>
+        </header>
+
+	
