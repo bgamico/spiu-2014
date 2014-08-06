@@ -1,0 +1,83 @@
+/* =======================================
+
+		Main Stylesheet
+		
+		Building on Twitter Bootstrap
+		http://twitter.github.com/bootstrap/
+		
+========================================== */
+
+/*
+@import url('../css/bootstrap.min.css');
+@import url('../css/bootstrap-responsive.min.css');*/
+
+html, body{
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+}
+
+#map-canvas {
+ /*position: relative;*/
+  top: 0px;
+  right: 0;
+  width: 900px;
+  height: 600px;
+}
+/* New styles below */
+
+		label.valid {
+		  width: 24px;
+		  height: 24px;
+		  background: url(../img/valid.png) center center no-repeat;
+		  display: inline;
+		  text-indent: -9999px;
+		}
+		label.error {
+			font-weight: bold;
+			color: red;
+			padding: 2px 8px;
+			margin-top: 2px;
+		}
+
+/*------------menu */
+nav {
+	width:100%;
+	height: 55px;
+	padding: 0px 12px;
+	border:1px solid #423531;
+	background-color: #8c0e0e;
+	color:#FF0000;
+}
+
+nav ul { 
+	width:960px; 
+	list-style: none;margin: 0 auto;
+	padding: 0;
+}
+
+nav ul li {
+	position: relative;
+	float: left;
+	padding: 6px 5px 0px 5px
+}
+nav ul li:hover {}
+
+nav ul li a {color: #fff;}
+
+
+/*Google map image instead background-color*/
+.page-title-map {
+    background: transparent url("../img/title_map.jpg") top left no-repeat;
+    color: #022752;
+    margin-bottom: 15px;
+}
+.page-title-map h1 {
+    color: #022752;
+}
+
+.page-title-map a {
+    position:relative;
+    left:980px;
+    top:-50px;
+}
