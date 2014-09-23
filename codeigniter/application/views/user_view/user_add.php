@@ -49,14 +49,29 @@
 	<?php if (isset($combo)):?>
 	    <div class="control-group">
 	        <?= form_label('Rol:', 'rol', array('class'=>'control-label')); ?>
-	        <?= form_dropdown('rol', $roles, 1);?>
+	        <?= form_dropdown('rol', $roles, 1,'id = "rol"');?>
 	    </div>
 	
-	    <div class="control-group">
+	    <div class="control-group" id="row_dim">
 	        <?= form_label('Sede:', 'sede', array('class'=>'control-label')); ?>
 	        <?= form_dropdown('sede', $sedes, '1');?>
 	    </div>
 	<?php endif;?>
+	
+<!--  script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-->
+<script>
+$(function() {
+    $('#row_dim').hide(); 
+    
+    $('#rol').change(function(){
+        if($('#rol').val() != 1) {
+            $('#row_dim').show(); 
+        } else {
+            $('#row_dim').hide(); 
+        } 
+    });
+});	
+</script>
 
     <div class="form-actions">
         <?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
