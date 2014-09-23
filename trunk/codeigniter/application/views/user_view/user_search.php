@@ -10,7 +10,7 @@
             
 			<!-- mostramos los mensajes de retroalimentación -->
 			<!-- < ?= my_validation_errors($this->session->flashdata('mensaje'),$this->session->flashdata('tipo_mensaje')); ?>-->
-			<?= my_validation_errors($mensaje,$tipo_mensaje); ?>
+			<!-- ?= my_validation_errors($mensaje,$tipo_mensaje); ?-->
 
             <?php
             //si se hace la actualización mostramos el mensaje que contiene
@@ -37,7 +37,6 @@
                 <table class="table table-striped table-hover table-condensed table-bordered">
                     <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Username</th>
                         <th>Role</th>
                         <th>Opciones</th>
@@ -46,7 +45,6 @@
                     <tbody>
                     <?php foreach ($query as $registro): ?>
                         <tr>
-                            <td> <?= $registro->user_id ?> </td>
                             <td> <?= $registro->user_name ?> </td>
                             <td> <?= $registro->role ?> </td>
                             <td>
