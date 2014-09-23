@@ -13,7 +13,6 @@
 <table class="table table-condensed table-bordered">
 	<thead>
 		<tr>
-			<th> ID </th>
 			<th> Nombre </th>
             <th> Direcci&oacute;n </th>
             <th> Latitud </th>
@@ -27,7 +26,6 @@
 	<tbody>
 		<?php foreach ($query as $registro): ?>
 		<tr>
-            <td> <?= $registro->sede_id ?> </td>
 			<td> <?= $registro->nombre ?> </td>
             <td> <?= $registro->direccion ?> </td>
             <td> <?= $registro->latitud ?> </td>
