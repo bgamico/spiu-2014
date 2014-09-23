@@ -161,7 +161,7 @@ class UserManage extends CI_Controller
      * user insert
      * @access public
      */
-    public function insert() {
+    /*public function insert() {
     	$registro = $this->input->post();
     	
     	$str = $registro['username'].'-'.$registro['nombre'].'-'.$registro['apellido'].'-'.$registro['documento'].'-'.$registro['fec_nac'].'-'.$registro['domicilio'].'-'.$registro['telefono'].'-'.$registro['mail'].'-'.$registro['rol'].'-'.$registro['sede'];
@@ -169,17 +169,14 @@ class UserManage extends CI_Controller
     	//exit;
     	
     	$this->form_validation->set_rules('username', 'username', 'required|callback_my_validation');
-    	//$this->form_validation->set_rules('nombre', 'nombre','required');
+
     	if ($this->form_validation->run() == FALSE) {
     		
     		$this->session->set_flashdata('tipo_mensaje', 'error');    		
     		$this->session->set_flashdata('mensaje', 'El Usuario ya existe. Verifique los datos.');
-    		//$this->session->keep_flashdata('tipo_mensaje');
-    		//$this->session->keep_flashdata('mensaje');
 			echo 'antes del redirect';
 			
     		redirect('usermanage/add');	             
-    		//$this->add();
     	}  
     	else{
     		
@@ -211,32 +208,25 @@ class UserManage extends CI_Controller
 	        }
 	        redirect('usermanage/search');	             
     	}
-        //unset($registro['username']);
-        //unset($registro['rol']);
-       // unset($registro['sede']);
-        //inserta en la tabla del perfil y lo retorna... no es necesario
-        //$sesion['perfil_id'] = $this->Model_Perfil->insert($registro);
-        
-        //validamos que el usuario sea único.
-        //$this->form_validation->set_rules('user_name', 'user_name', 'required|callback_my_validation');
-        //echo 'despues del set rules';
-        //echo 'respuesta del form_validation';
-        //$res = $this->form_validation->run();
-       // echo 'Es: '.$res;
-        /*
-        if ($res == FALSE) {
-        	echo 'ya existe ese usuario chaval!';
-        	
-        	$this->add();
-        }
-        else{
-        	echo 'voy a insertar jajaj';
-        	
-	        $this->Model_Usuario->insert($sesion);
-	        redirect('usermanage/search');
-        }*/
-    }
+    }*/
 
+	public function insert() {
+		$registro = $this->input->post();
+		$sesion['user_name'] = $registro['username'];
+		$sesion['role_id'] = $registro['rol'];
+		if($sesion['role_id'] == 1){
+			$sesion['sede_id'] = '';
+		}else{
+			$sesion['sede_id'] = $registro['sede'];
+		}
+		unset($registro['username']);
+		unset($registro['rol']);
+		unset($registro['sede']);
+		$sesion['perfil_id'] = $this->Model_Perfil->insert($registro);
+		$this->Model_Usuario->insert($sesion);
+		redirect('usermanage/search');
+	}
+	
 	/**
 	 * user delete page
 	 * @access public
