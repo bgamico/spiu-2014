@@ -37,7 +37,6 @@ class UserManage extends CI_Controller
         $this->load->model('Model_Roles');
         $this->load->model('Model_Sede');
         //set messeges, utilizados para algunas validaciones
-        $this->form_validation->set_message('my_validation', 'El Usuario ya existe. Verifique los datos.');
 	}
 	
 	/**
@@ -51,13 +50,8 @@ class UserManage extends CI_Controller
 			show_error("you have no privilege to access this page");
 			return ;
 		}*/
-		//echo 'se actualizó corectament';
-		//exit();
 		$data['query'] = $this->Model_Usuario->all($this->user->getUserId());
-		//agregamos el flasdata en la vista. Asi tenemos retroalimentación en la acción.
-		//indicamos su tipo
-		$data['tipo_mensaje'] = $this->session->flashdata('tipo_mensaje');
-		$data['mensaje'] = $this->session->flashdata('mensaje');
+
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('user_view/user_search',$data);
@@ -84,45 +78,7 @@ class UserManage extends CI_Controller
 		$this->load->view('user_view/user_search',$data);
 		$this->load->view('include/footer');
 	}
-	
-	/**
-	 * user edit page
-	 * @access public
-	 */
-	/*function edit($id)
-	{
-		if($this->user->checkPrivilege('user_edit') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-
-        $data['user'] = $this->Model_Usuario->find($id);
-
-		//a partir del id del usuario obtengo el perfil        
-        foreach ($data['user'] as $registro):
-            $perfil_id = $registro->perfil_id;
-        endforeach;
-        $data['query'] = $this->Model_Perfil->get($perfil_id);
-
-        if($this->user->getUserRole() == 'admingral'){
-            $data['roles'] = $this->Model_Roles->all();
-            $data['sedes'] = $this->Model_Sede->allArray();
-        }
-        else{
-            $lista = array();
-            $lista[0] = 'Operadores';
-            $data['roles'] = $lista;
-            $miSede = $this->user->getSedeId();
-            $data['sedes'] = $this->Model_Sede->get($miSede);
-        }
-        
-        $this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('user_view/user_edit',$data);
-		$this->load->view('include/footer');
-	}*/
-	
+		
 	public function my_validation() {
 		return $this->user->my_validation($this->input->post());
 	}	
@@ -132,15 +88,18 @@ class UserManage extends CI_Controller
 	 * @access public
 	 */
 	public function add(){
-		
-		$data['tipo_mensaje'] = $this->session->flashdata('tipo_mensaje');
-		$data['mensaje'] = $this->session->flashdata('mensaje');
-				
 		/*if($this->user->checkPrivilege('user_add') == false)
 		{
 			show_error("you have no privilege to access this page");
 			return ;
 		}*/
+		
+		if(isset($_POST['username'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
+			$this->form_validation->set_rules('username','Username','is_unique[user.user_name]');//  Configuramos las validaciones ayudandonos con la librería form_validation
+			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación
+					$this->insert();                     //  insertamos
+			}
+		}
 		
 		$data['url'] = 'usermanage/operadores';
 		
@@ -151,67 +110,19 @@ class UserManage extends CI_Controller
             $data['url'] = 'usermanage/search';
         }
 
+		$data['url'] = 'usermanage/search';
+		
   		$this->load->view('include/header');
 		$this->load->view('include/nav');
+		
 		$this->load->view('user_view/user_add',$data);
 		$this->load->view('include/footer');
 	}
 
-    /**
-     * user insert
-     * @access public
-     */
-    /*public function insert() {
-    	$registro = $this->input->post();
-    	
-    	$str = $registro['username'].'-'.$registro['nombre'].'-'.$registro['apellido'].'-'.$registro['documento'].'-'.$registro['fec_nac'].'-'.$registro['domicilio'].'-'.$registro['telefono'].'-'.$registro['mail'].'-'.$registro['rol'].'-'.$registro['sede'];
-    	echo $str;
-    	//exit;
-    	
-    	$this->form_validation->set_rules('username', 'username', 'required|callback_my_validation');
-
-    	if ($this->form_validation->run() == FALSE) {
-    		
-    		$this->session->set_flashdata('tipo_mensaje', 'error');    		
-    		$this->session->set_flashdata('mensaje', 'El Usuario ya existe. Verifique los datos.');
-			echo 'antes del redirect';
-			
-    		redirect('usermanage/add');	             
-    	}  
-    	else{
-    		
-	        $sesion['user_name'] = $registro['username'];
-	        $sesion['perfil_id'] = $registro['rol'];
-			//el combo de rol esta activo. Tomar la eleccion realizada.
-	        if (isSet($registro['combo']) == true){
-	        	$sesion['role_id'] = $registro['rol'];
-	        }
-	        else{
-	        	//rol por default (administrador general)
-	          	$sesion['role_id'] = 1;
-	        }
-	        //el administrador general no tiene sede asociada.
-	        if($sesion['role_id'] == 1){
-	            $sesion['sede_id'] = '';
-	        }else{
-	            $sesion['sede_id'] = $registro['sede'];
-	        }
-	        
-	        //insertamos el usuario
-	        $user = $registro['username'].'-'.$registro['nombre'].'-'.$registro['apellido'].'-'.$registro['documento'].'-'.$registro['fec_nac'].'-'.$registro['domicilio'].'-'.$registro['telefono'].'-'.$registro['mail'].'-'.$registro['rol'].'-'.$registro['sede'];
-	        $result = $this->Model_Usuario->insert($registro);
-	        //si la actualización ha sido correcta creamos una sesión flashdata para decirlo
-	        if($result)
-	        {
-	        	$this->session->set_flashdata('tipo_mensaje', 'aviso');
-	        	$this->session->set_flashdata('mensaje', 'El Usuario se cre&oacute; correctamente.');
-	        }
-	        redirect('usermanage/search');	             
-    	}
-    }*/
-
+   
 	public function insert() {
 		$registro = $this->input->post();
+		
 		$sesion['user_name'] = $registro['username'];
 		$sesion['role_id'] = $registro['rol'];
 		if($sesion['role_id'] == 1){
@@ -231,20 +142,6 @@ class UserManage extends CI_Controller
 	 * user delete page
 	 * @access public
 	 */
-    /*
-	public function delete()
-	{
-		if($this->user->checkPrivilege('user_delete') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('user_view/user_delete');
-		$this->load->view('include/footer');
-	}*/
 	
 	public function delete($id) {
 		
@@ -254,10 +151,13 @@ class UserManage extends CI_Controller
 			return ;
 		}		
 		$this->Model_Usuario->delete($id);
-		//search es nuestro equivalente de index
 		redirect('usermanage/search');
 	}	
 
+	/**
+	 * user edit page
+	 * @access public
+	 */
 	public function edit($id)
 	{
 		if($this->user->checkPrivilege('user_edit') == false)
