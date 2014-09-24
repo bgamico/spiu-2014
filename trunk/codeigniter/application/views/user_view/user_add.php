@@ -1,9 +1,9 @@
 <div class="span8">
-<?= form_open('usermanage/insert', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+<?= form_open('usermanage/add', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
     <legend> Crear Registro </legend>
 
 	<!-- mostramos los mensajes de retroalimentación -->
-	<?= my_validation_errors($mensaje,$tipo_mensaje); ?>
+	<?= validation_errors(); ?>
 	<!-- fin mensajes -->
     
     <div class="control-group">

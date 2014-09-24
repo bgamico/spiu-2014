@@ -51,7 +51,7 @@
                                 <?= anchor('usermanage/view/'.$registro->user_id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
                                 <?= anchor('usermanage/edit/'.$registro->user_id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
                                 <!--< ?= anchor('usermanage/delete/'.$registro->user_id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view')); ?> -->
-                                <?=anchor('usermanage/deletes/'.$registro->user_id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; el usuario. &iquest;Est&aacute; seguro&#63')"))?>
+                                <?=anchor('usermanage/delete/'.$registro->user_id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; el usuario. &iquest;Est&aacute; seguro&#63')"))?>
 
                             </td>
                         </tr>
