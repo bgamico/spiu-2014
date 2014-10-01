@@ -1,10 +1,20 @@
-<div style="width: 320px; margin: 0 auto;"><!-- No deberia aplicar el estilo en linea -->
-   <h3>Iniciar Sesi&oacute;n</h3>   
-   <form class="well" method="POST" action="<?php echo base_url('account/validate')?>">
-      <label>Usuario</label>
-      <input type="text" name="username" style="width: 260px;">
-      <label>Contrase&ntilde;a</label>
-      <input type="password" name="password" style="width: 260px;">
-      <button type="submit" class="btn btn-primary">Ingresar</button>
-   </form>
+
+<!-- formulario de login -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Iniciar Sesi&oacute;n</h1>
+            <div class="account-wall">
+                <form class="form-signin" method="POST" action="<?php echo base_url('account/validate')?>">
+                <input type="text" class="form-control" name="username" placeholder="Usuario" required autofocus>
+                <input type="password" class="form-control" name="password" placeholder="Contrase&ntilde;a" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Ingresar</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- end formulario de login -->
