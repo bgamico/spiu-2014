@@ -1,4 +1,4 @@
-<div class="span9">
+<div class="span11">
 <div class="bs-docs-section">
 
         <div class="col-lg-12">
@@ -16,6 +16,7 @@
                         <th> Fecha </th>
                         <th> Hora </th>
                         <th> Direcci&oacute;n </th>
+                        <th> Opciones </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,13 @@
                             <td> <?= date("d/m/Y", strtotime($registro->fecha)); ?> </td>
                             <td> <?= date("H:i", strtotime($registro->hora)); ?> </td>
                             <td> <?= $registro->direccion ?> </td>
+                            <td>
+                                <?= anchor('actividadmanage/view/'.$registro->actividad_id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+                                <?= anchor('actividadmanage/edit/'.$registro->actividad_id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
+                                <!--< ?= anchor('actividadmanage/delete/'.$registro->user_id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view')); ?> -->
+                                <?=anchor('actividadmanage/delete/'.$registro->actividad_id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; la actividad. &iquest;Est&aacute; seguro&#63')"))?>
+
+                            </td>                            
 
                         </tr>
                     <?php endforeach; ?>
