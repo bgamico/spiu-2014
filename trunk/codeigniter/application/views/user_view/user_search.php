@@ -1,8 +1,8 @@
-<div class="span9">
+<div class="span12">
 
 <div class="bs-docs-section">
 
-        <div class="col-lg-12">
+        <div class="col-lg-11">
             <div class="page-header">
                 <h1> Usuarios <small> mantenimiento de registros </small> 
 				</h1>
