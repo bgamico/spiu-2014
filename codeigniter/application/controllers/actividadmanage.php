@@ -11,6 +11,7 @@
 class ActividadManage extends CI_Controller
 {
 	
+	private $data;
 	/**
 	 * constructor for ActividadManage
 	 * @access public
@@ -19,6 +20,8 @@ class ActividadManage extends CI_Controller
 	{
 		parent::__construct();
         $this->load->model('Model_Actividad');
+        $this->data['titulo'] = '';
+        $this->data['urlCancelar'] = 'actividadmanage/search';
 	}
 	
 	/**
@@ -73,10 +76,12 @@ class ActividadManage extends CI_Controller
 			show_error("you have no privilege to access this page");
 			return ;
 		}
-	
+		
+		$this->data['titulo'] = 'Crear actividad';
+		$this->data['urlCancelar'];
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('act_view/act_add');
+		$this->load->view('act_view/act_add', $this->data);
 		$this->load->view('include/footer');
 	}
 
