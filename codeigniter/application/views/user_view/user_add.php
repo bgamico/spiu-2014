@@ -2,7 +2,7 @@
 <div class="well bs-component">
 <?= form_open('usermanage/insert', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
   <fieldset>
-    <legend>Crear Registro</legend>
+    <legend>Crear usuario</legend>
 
 
     <div class="form-group">    
@@ -74,7 +74,7 @@
     <div class="control-group">
         <?= form_label('E-Mail', 'mail', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">
-        <?= form_input(array('type'=>'email', 'class'=>'form-control', 'name'=>'mail', 'id'=>'mail', 'placeholder'=>'Email', 'value'=>set_value('mail'))); ?>
+        <?= form_input(array('type'=>'email', 'class'=>'form-control', 'name'=>'mail', 'id'=>'mail', 'placeholder'=>'E-mail', 'value'=>set_value('mail'))); ?>
         </div>
     </div>
     </div>   	
