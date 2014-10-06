@@ -57,7 +57,8 @@ class ActividadManage extends CI_Controller
 			return ;
 		}
 
-        $data['query'] = $this->Model_Actividad->find($id);
+        $data['registro'] = $this->Model_Actividad->find($id);
+        $data['titulo'] = 'Actualizar actividad';        
 	
 		$this->load->view('include/header');
 		$this->load->view('include/nav');

@@ -1,13 +1,18 @@
-<div class="span9">
+<div class="col-lg-9 offset1">
+<div class="well bs-component">
+
     <?= form_open('actividadmanage/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
-    <?php foreach ($query as $registro): ?>
-    <legend> Actualizar Registro </legend>
+  <fieldset>
+    <legend><?= $titulo ?></legend>
+
+    <div class="form-group">    
     <div class="control-group">
-        <?= form_label('ID:', 'id', array('class'=>'control-label')); ?>
+        <?= form_label('Id', 'id', array('class'=>'col-lg-3 control-label')); ?>    
         <span class="uneditable-input"> <?= $registro->actividad_id; ?> </span>
         <?= form_hidden('actividad_id', $registro->actividad_id); ?>
     </div>
-
+    </div>
+    
     <div class="control-group">
         <?= form_label('Nombre:', 'name', array('class'=>'control-label')); ?>
         <?= form_input(array('type'=>'text', 'name'=>'name', 'id'=>'name', 'value'=>$registro->name)); ?>
@@ -37,6 +42,7 @@
         <?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
         <?= anchor('actividadmanage/search', 'Cancelar', array('class'=>'btn')); ?>
     </div>
-    <?php endforeach; ?>
+	</fieldset>  
     <?= form_close(); ?>
+</div>
 </div>
