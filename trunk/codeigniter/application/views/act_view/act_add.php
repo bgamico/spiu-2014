@@ -7,34 +7,34 @@
 
     <div class="form-group">    
     <div class="control-group">
-        <?= form_label('Nombre:', 'name', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Nombre', 'name', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
-        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'name', 'id'=>'name', 'value'=>set_value('name'))); ?>
+        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'name', 'id'=>'name', 'placeholder'=>'Nombre de actividad', 'value'=>set_value('name'))); ?>
         </div>        
     </div>
     </div>
 
     <div class="form-group">    
     <div class="control-group">
-        <?= form_label('Descripci&oacute;n:', 'descripcion', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Descripci&oacute;n', 'descripcion', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
-        <?= form_textarea(array('type'=>'textarea', 'class'=>"form-control", 'name'=>'descripcion', 'id'=>'descripcion', 'value'=>set_value('descripcion'), 'cols'=>'4', 'rows'=>'4')); ?>
+        <?= form_textarea(array('type'=>'textarea', 'class'=>"form-control", 'name'=>'descripcion', 'id'=>'descripcion', 'placeholder'=>'Descripci&oacute;n', 'value'=>set_value('descripcion'), 'cols'=>'4', 'rows'=>'4')); ?>
         </div>        
     </div>
     </div>
     
     <div class="form-group">    
     <div class="control-group">   
-        <?= form_label('Fecha:', 'fecha', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Fecha', 'fecha', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
-        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'fecha', 'id'=>'fecha', 'value'=>set_value('fecha'))); ?>
+        <?= form_input(array('type'=>'date', 'class'=>"form-control", 'name'=>'fecha', 'id'=>'fecha', 'value'=>set_value('fecha'))); ?>
         </div>        
     </div>
-    </div>    
+    </div>      
 
     <div class="form-group">    
     <div class="control-group">
-        <?= form_label('Hora:', 'hora', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Hora', 'hora', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
         <?= form_input(array('type'=>'time', 'class'=>"form-control", 'name'=>'hora', 'id'=>'hora', 'value'=>set_value('hora'))); ?>
         </div>        
@@ -43,9 +43,9 @@
     
     <div class="form-group">    
     <div class="control-group">
-        <?= form_label('Direccion:', 'direccion', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Direccion', 'direccion', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
-        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'direccion', 'id'=>'direccion', 'value'=>set_value('direccion'))); ?>
+        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'direccion', 'id'=>'direccion','placeholder'=>'Direcci&oacute;n', 'value'=>set_value('direccion'))); ?>
         </div>        
     </div>
     </div>     
