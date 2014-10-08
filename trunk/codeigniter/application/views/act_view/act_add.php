@@ -1,5 +1,5 @@
 <?= $contenedor_aux; ?>    
-
+<?php echo validation_errors(); ?>
 <div class="col-lg-9 offset1">
 <div class="well bs-component">
 
@@ -9,9 +9,9 @@
 
     <div class="form-group">    
     <div class="control-group">
-        <?= form_label('Nombre', 'name', array('class'=>'col-lg-3 control-label')); ?>
+        <?= form_label('Nombre', 'nombre', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">        
-        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'name', 'id'=>'name', 'placeholder'=>'Nombre de actividad', 'value'=>set_value('name'))); ?>
+        <?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'name', 'id'=>'nombre', 'placeholder'=>'Nombre de actividad', 'value'=>set_value('name'))); ?>
         </div>        
     </div>
     </div>

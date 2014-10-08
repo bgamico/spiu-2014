@@ -5,8 +5,9 @@
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="keywords" content="">
-   <meta name="description" content="Proyecto de software 2013 UNRN">
+   <meta name="description" content="Proyecto de software 2014 UNRN">
    <meta name="author" content="castropnicolas@gmail.com">
+   <meta name="author" content="bruno.g.amico@gmail.com">   
    
    <link href="<?php echo base_url('assets/img/favicon.ico')?>" rel="shortcut icon">
    
@@ -19,8 +20,8 @@
    <link href="<?= base_url('assets/css/micss.css') ?>" rel="stylesheet">
 
    <!--script src="//code.jquery.com/jquery-1.9.1.min.js"></script-->
-   <script src="<?php echo base_url('assets/js/jquery-1.9.1.min.js') ?>"></script>
-   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+   <!-- <script src="< ?php echo base_url('assets/js/jquery-1.9.1.min.js') ?>"></script>-->
+   <!-- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>-->
    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.2.1/lodash.min.js"></script>
    <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
    <script src="<?php echo base_url('assets/js/custom.js') ?>"></script>

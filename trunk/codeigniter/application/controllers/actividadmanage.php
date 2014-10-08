@@ -12,6 +12,35 @@ class ActividadManage extends CI_Controller
 {
 
 	private $data;
+	private $reglas = array(
+			array(
+					'field'   => 'nombre',
+					'label'   => 'Nombre de actividad',
+					'rules'   => 'required'
+			),
+			array(
+					'field'   => 'descripcion',
+					'label'   => 'Descripci&oacute;n',
+					'rules'   => 'required'
+			),
+			array(
+					'field'   => 'fecha',
+					'label'   => 'Fecha',
+					'rules'   => 'required'
+			),
+			array(
+					'field'   => 'hora',
+					'label'   => 'Hora',
+					'rules'   => 'required'
+			),
+			array(
+					'field'   => 'direccion',
+					'label'   => 'Direcci&oacute;n',
+					'rules'   => 'required'
+			)
+	);
+	
+	
 	/**
 	 * constructor for ActividadManage
 	 * @access public
@@ -110,6 +139,10 @@ class ActividadManage extends CI_Controller
      * @access public
      */
     public function insert() {
+
+    	//reglas de validación
+    	$this->form_validation->set_rules($this->reglas);
+    	    	
         $registro = $this->input->post();
         $sede_id = $this->user->getSedeId();
         $registro['sede_id']= $sede_id;
@@ -132,8 +165,8 @@ class ActividadManage extends CI_Controller
         		//no se pudo insertar, algún problema con la BD
         		$this->session->set_flashdata('mensaje', 'La actividad no se puedo insertar.');        
         		$this->session->set_flashdata('tipo', 'danger');   
-        		//$this->add();
-        		redirect('actividadmanage/add', 'refresh');	
+        		$this->add();
+        		//redirect('actividadmanage/add', 'refresh');	
         	}
         }        
         
