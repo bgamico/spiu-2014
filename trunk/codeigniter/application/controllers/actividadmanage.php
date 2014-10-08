@@ -51,15 +51,14 @@ class ActividadManage extends CI_Controller
         $this->load->model('Model_Actividad');
         $this->data['titulo'] = '';
         $this->data['urlCancelar'] = 'actividadmanage/search';
-        //$this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Aviso: </strong>', '</div>');
-        $this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-danger">', '</div>');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>');
 	}
 	
 	/**
 	 * actividad search page
 	 * @access public
 	 */
-	function search()
+	public function search()
 	{
 		if($this->user->checkPrivilege('act_search') == false)
 		{
@@ -73,18 +72,18 @@ class ActividadManage extends CI_Controller
         if (isset($msj)){
         	$data['tipo']='success';
         }*/
-        $data['contenedor_aux'] = $this->error();
+        $data['contenedor_aux'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('act_view/act_search',$data);
 		$this->load->view('include/footer');
 	}
 	
-	function error(){	
+	public function retroalimentacion(){	
 		$msj_error = '';
 		$msj_error = $this->session->flashdata('mensaje');
 		if ($msj_error != ''){
-			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('tipo') .'">';
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('status') .'">';
 			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
 			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
 			$msj_error= $msj_error . '</div>'; 
@@ -97,7 +96,7 @@ class ActividadManage extends CI_Controller
 	 * actividad edit page
 	 * @access public
 	 */
-	function edit($id)
+	public function edit($id)
 	{
 		if($this->user->checkPrivilege('act_edit') == false)
 		{
@@ -118,7 +117,7 @@ class ActividadManage extends CI_Controller
 	 * actividad add page
 	 * @access public
 	 */
-	function add()
+	public function add()
 	{
 		if($this->user->checkPrivilege('act_add') == false)
 		{
@@ -160,12 +159,12 @@ class ActividadManage extends CI_Controller
         		//  insertamos
         		$this->Model_Actividad->insert($registro);
         		$this->session->set_flashdata('mensaje', 'La actividad se insert&oacute; correctamente.');  
-        		$this->session->set_flashdata('tipo', 'success');
+        		$this->session->set_flashdata('status', 'success');
         		redirect('actividadmanage/search', 'refresh');
         	}else {
         		//no se pudo insertar, algún problema con la BD
-        		$this->session->set_flashdata('mensaje', 'La actividad no se puedo insertar.');        
-        		$this->session->set_flashdata('tipo', 'danger');   
+        		//$this->session->set_flashdata('mensaje', 'La actividad no se puedo insertar.');        
+        		//$this->session->set_flashdata('status', 'danger');   
         		$this->add();
         		//redirect('actividadmanage/add', 'refresh');	
         	}
@@ -181,18 +180,24 @@ class ActividadManage extends CI_Controller
 	 * actividad delete page
 	 * @access public
 	 */
-	function delete()
+	public function delete($id)
 	{
 		if($this->user->checkPrivilege('act_delete') == false)
 		{
 			show_error("you have no privilege to access this page");
 			return ;
 		}
-	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('act_view/act_delete');
-		$this->load->view('include/footer');
+		$status = '';
+		$mensaje = '';
+		$this->Model_Actividad->delete($id);
+		if ($this->db->affected_rows() > 0){
+			$status = 'success';
+			$mensaje = 'La actividad se elimin&oacute; correctamente.';
+			$title = '';			
+		}
+		$this->session->set_flashdata('mensaje', $mensaje);
+		$this->session->set_flashdata('status', $status);		
+		redirect('actividadmanage/search', 'refresh');
 	}
 
     /**
