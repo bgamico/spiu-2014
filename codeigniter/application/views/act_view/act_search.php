@@ -1,3 +1,6 @@
+<!-- sección de avisos -->
+<?= $contenedor_aux; ?>
+
 <div class="span12">
 <div class="bs-docs-section">
 
@@ -29,7 +32,8 @@
                             <td> <?= date("H:i", strtotime($registro->hora)); ?> </td>
                             <td> <?= $registro->direccion ?> </td>
                             <td>
-                                <?= anchor('actividadmanage/view/'.$registro->actividad_id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+                            	<!-- solo se permite editar eliminar o agregar actividades  -->
+                                <!-- < ?= anchor('actividadmanage/view/'.$registro->actividad_id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>-->
                                 <?= anchor('actividadmanage/edit/'.$registro->actividad_id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
                                 <!--< ?= anchor('actividadmanage/delete/'.$registro->user_id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view')); ?> -->
                                 <?=anchor('actividadmanage/delete/'.$registro->actividad_id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; la actividad. &iquest;Est&aacute; seguro&#63')"))?>
