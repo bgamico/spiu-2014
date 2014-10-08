@@ -12,11 +12,11 @@ class ActividadManage extends CI_Controller
 {
 
 	private $data;
-	private $reglas = array(
+	private $reglas = array(        	//  Configuramos las validaciones ayudandonos con la librería form_validation
 			array(
-					'field'   => 'nombre',
+					'field'   => 'name',
 					'label'   => 'Nombre de actividad',
-					'rules'   => 'required'
+					'rules'   => 'required|is_unique[actividad.name]'
 			),
 			array(
 					'field'   => 'descripcion',
@@ -51,6 +51,8 @@ class ActividadManage extends CI_Controller
         $this->load->model('Model_Actividad');
         $this->data['titulo'] = '';
         $this->data['urlCancelar'] = 'actividadmanage/search';
+        //$this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Aviso: </strong>', '</div>');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-danger">', '</div>');
 	}
 	
 	/**
@@ -124,7 +126,7 @@ class ActividadManage extends CI_Controller
 			return ;
 		}
 		//seteo de los posibles warnings, errores, o logs
-		$this->data['contenedor_aux'] = $this->error();
+		//$this->data['contenedor_aux'] = $this->error();
 		
 		$this->data['titulo'] = 'Crear actividad';
 		$this->data['urlCancelar'];
@@ -152,8 +154,7 @@ class ActividadManage extends CI_Controller
         //en esta instancia hemos superado la validacion del formulario
         //verifico si la actividad es única (sin duplicados)
         if(isset($registro['name'])){    
-        	//  Configuramos las validaciones ayudandonos con la librería form_validation
-        	$this->form_validation->set_rules('name','Nombre','is_unique[actividad.name]');        	
+       	
         	//  Verificamos si el usuario superó la validación
         	if(($this->form_validation->run() == TRUE)){
         		//  insertamos
