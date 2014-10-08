@@ -10,7 +10,7 @@
 
 class ActividadManage extends CI_Controller
 {
-	
+
 	private $data;
 	/**
 	 * constructor for ActividadManage
@@ -38,11 +38,28 @@ class ActividadManage extends CI_Controller
 
         $sede_id = $this->user->getSedeId();
         $data['query'] = $this->Model_Actividad->all($sede_id);
-		
+		/*$msj = $this->session->flashdata('mensaje');
+        if (isset($msj)){
+        	$data['tipo']='success';
+        }*/
+        $data['contenedor_aux'] = $this->error();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('act_view/act_search',$data);
 		$this->load->view('include/footer');
+	}
+	
+	function error(){	
+		$msj_error = '';
+		$msj_error = $this->session->flashdata('mensaje');
+		if ($msj_error != ''){
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('tipo') .'">';
+			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
+			$msj_error= $msj_error . '</div>'; 
+		}
+
+		return 	$msj_error;
 	}
 	
 	/**
@@ -77,6 +94,8 @@ class ActividadManage extends CI_Controller
 			show_error("you have no privilege to access this page");
 			return ;
 		}
+		//seteo de los posibles warnings, errores, o logs
+		$this->data['contenedor_aux'] = $this->error();
 		
 		$this->data['titulo'] = 'Crear actividad';
 		$this->data['urlCancelar'];
@@ -92,9 +111,35 @@ class ActividadManage extends CI_Controller
      */
     public function insert() {
         $registro = $this->input->post();
-        $registro['sede_id'] = $this->user->getSedeId();
-        $this->Model_Actividad->insert($registro);
-        redirect('actividadmanage/search');
+        $sede_id = $this->user->getSedeId();
+        $registro['sede_id']= $sede_id;
+        //set rules, reglas de validación para el form
+
+        
+        //en esta instancia hemos superado la validacion del formulario
+        //verifico si la actividad es única (sin duplicados)
+        if(isset($registro['name'])){    
+        	//  Configuramos las validaciones ayudandonos con la librería form_validation
+        	$this->form_validation->set_rules('name','Nombre','is_unique[actividad.name]');        	
+        	//  Verificamos si el usuario superó la validación
+        	if(($this->form_validation->run() == TRUE)){
+        		//  insertamos
+        		$this->Model_Actividad->insert($registro);
+        		$this->session->set_flashdata('mensaje', 'La actividad se insert&oacute; correctamente.');  
+        		$this->session->set_flashdata('tipo', 'success');
+        		redirect('actividadmanage/search', 'refresh');
+        	}else {
+        		//no se pudo insertar, algún problema con la BD
+        		$this->session->set_flashdata('mensaje', 'La actividad no se puedo insertar.');        
+        		$this->session->set_flashdata('tipo', 'danger');   
+        		//$this->add();
+        		redirect('actividadmanage/add', 'refresh');	
+        	}
+        }        
+        
+        //$registro['sede_id'] = $this->user->getSedeId();
+        //$this->Model_Actividad->insert($registro);
+        
     }
 
 
