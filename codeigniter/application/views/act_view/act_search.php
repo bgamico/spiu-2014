@@ -1,3 +1,6 @@
+<!-- sección de avisos -->
+<?= $contenedor_aux; ?>
+
 <div class="span12">
 <div class="bs-docs-section">
 
@@ -5,7 +8,7 @@
             <div class="page-header">
                 <h1> Actividad <small> mantenimiento de registros </small> </h1>
             </div>
-            
+    
             <?= anchor('actividadmanage/add', 'Agregar', array('class'=>'btn btn-primary')); ?>
 
             <div class="bs-component">

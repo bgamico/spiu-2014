@@ -32,7 +32,7 @@ class Login extends CI_Controller{
 		$md5_password = md5($password);
 		
 		$ret = $this->rbac_model->validateUser($username, $md5_password);
-		
+
 		if($ret == 1)
 		{
 			//show_error("invalid username or password");

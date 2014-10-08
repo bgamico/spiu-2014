@@ -93,7 +93,7 @@ class UserManage extends CI_Controller
 			show_error("you have no privilege to access this page");
 			return ;
 		}*/
-		
+
 		if(isset($_POST['username'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
 			$this->form_validation->set_rules('username','Username','is_unique[user.user_name]');//  Configuramos las validaciones ayudandonos con la librería form_validation
 			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación

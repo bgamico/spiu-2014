@@ -1,3 +1,5 @@
+<?= $contenedor_aux; ?>    
+
 <div class="col-lg-9 offset1">
 <div class="well bs-component">
 
