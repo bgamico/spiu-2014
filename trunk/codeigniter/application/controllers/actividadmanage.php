@@ -67,15 +67,15 @@ class ActividadManage extends CI_Controller
 		}
 
         $sede_id = $this->user->getSedeId();
-        $data['query'] = $this->Model_Actividad->all($sede_id);
+        $this->data['query'] = $this->Model_Actividad->all($sede_id);
 		/*$msj = $this->session->flashdata('mensaje');
         if (isset($msj)){
         	$data['tipo']='success';
         }*/
-        $data['contenedor_aux'] = $this->retroalimentacion();
+        $this->data['contenedor_aux'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('act_view/act_search',$data);
+		$this->load->view('act_view/act_search',$this->data);
 		$this->load->view('include/footer');
 	}
 	
@@ -104,12 +104,13 @@ class ActividadManage extends CI_Controller
 			return ;
 		}
 
-        $data['registro'] = $this->Model_Actividad->find($id);
-        $data['titulo'] = 'Actualizar actividad';        
-	
+        $this->data['registro'] = $this->Model_Actividad->find($id);
+        $this->data['titulo'] = 'Actualizar actividad';        
+        $this->data['urlCancelar'];
+        	
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('act_view/act_edit',$data);
+		$this->load->view('act_view/act_edit', $this->data);
 		$this->load->view('include/footer');
 	}
 	
@@ -147,33 +148,43 @@ class ActividadManage extends CI_Controller
         $registro = $this->input->post();
         $sede_id = $this->user->getSedeId();
         $registro['sede_id']= $sede_id;
-        //set rules, reglas de validación para el form
-
         
-        //en esta instancia hemos superado la validacion del formulario
-        //verifico si la actividad es única (sin duplicados)
-        if(isset($registro['name'])){    
-       	
-        	//  Verificamos si el usuario superó la validación
+        if(isset($registro['name'])){
         	if(($this->form_validation->run() == TRUE)){
+        		//en esta instancia hemos superado la validacion del formulario        		
         		//  insertamos
         		$this->Model_Actividad->insert($registro);
         		$this->session->set_flashdata('mensaje', 'La actividad se insert&oacute; correctamente.');  
         		$this->session->set_flashdata('status', 'success');
         		redirect('actividadmanage/search', 'refresh');
         	}else {
-        		//no se pudo insertar, algún problema con la BD
-        		//$this->session->set_flashdata('mensaje', 'La actividad no se puedo insertar.');        
-        		//$this->session->set_flashdata('status', 'danger');   
+        		//no se pudo insertar, algún problema con la BD   
         		$this->add();
         		//redirect('actividadmanage/add', 'refresh');	
         	}
-        }        
-        
-        //$registro['sede_id'] = $this->user->getSedeId();
-        //$this->Model_Actividad->insert($registro);
-        
+        }               
     }
+
+    /**
+     * actividad update
+     * @access public
+     */
+    public function update() {
+    	//reglas de validación
+    	$this->form_validation->set_rules($this->reglas);
+    	$registro = $this->input->post();
+    	if(isset($registro['name'])){
+    		if(($this->form_validation->run() == TRUE)){    
+    			$this->session->set_flashdata('mensaje', 'La actividad se actualiz&oacute; correctamente.');
+    			$this->session->set_flashdata('status', 'success');
+    			$this->Model_Actividad->update($registro);
+    			redirect('actividadmanage/search', 'refresh');
+    		}else {
+        		//no se pudo actualizar   
+        		$this->edit();	
+        	}
+    	}
+    }    
 
 
     /**
@@ -199,14 +210,4 @@ class ActividadManage extends CI_Controller
 		$this->session->set_flashdata('status', $status);		
 		redirect('actividadmanage/search', 'refresh');
 	}
-
-    /**
-     * actividad update
-     * @access public
-     */
-    public function update() {
-        $registro = $this->input->post();
-        $this->Model_Actividad->update($registro);
-        redirect('actividadmanage/search');
-    }
 }

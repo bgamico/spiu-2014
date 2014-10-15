@@ -16,7 +16,8 @@ class Model_Actividad extends CI_Model {
 
     function find($id) {
     	$this->db->where('actividad_id', $id);
-		return $this->db->get($this->tabla)->result();
+		//return $this->db->get($this->tabla)->result();
+		return $this->db->get('actividad')->row();		
     }
 
     function insert($registro) {
