@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Model_Actividad extends CI_Model {
+class Model_Aviso extends CI_Model {
 	
-	private $tabla = 'actividad';
+	private $tabla = 'aviso';
 	
 	function __construct() {
 		parent::__construct();
@@ -15,7 +15,7 @@ class Model_Actividad extends CI_Model {
     }
 
     function find($id) {
-    	$this->db->where('actividad_id', $id);
+    	$this->db->where('aviso_id', $id);
 		return $this->db->get($this->tabla)->row();		
     }
 	
@@ -34,12 +34,12 @@ class Model_Actividad extends CI_Model {
 
     function update($registro) {
     	$this->db->set($registro);
-		$this->db->where('actividad_id', $registro['actividad_id']);
+		$this->db->where('aviso_id', $registro['aviso_id']);
 		$this->db->update($this->tabla);
     }
 
     function delete($id) {
-    	$this->db->where('actividad_id', $id);
+    	$this->db->where('aviso_id', $id);
 		$this->db->delete($this->tabla);
     }
 }

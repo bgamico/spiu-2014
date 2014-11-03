@@ -12,11 +12,13 @@ class ActividadManage extends CI_Controller
 {
 
 	private $data;
+	private $actividad_id;
 	private $reglas = array(        	//  Configuramos las validaciones ayudandonos con la librería form_validation
 			array(
 					'field'   => 'name',
 					'label'   => 'Nombre de actividad',
-					'rules'   => 'required|is_unique[actividad.name]'
+					'rules'   => 'required'
+					//'rules'   => 'required|callback_my_validation'
 			),
 			array(
 					'field'   => 'descripcion',
@@ -51,7 +53,9 @@ class ActividadManage extends CI_Controller
         $this->load->model('Model_Actividad');
         $this->data['titulo'] = '';
         $this->data['urlCancelar'] = 'actividadmanage/search';
-        $this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>');
+        //$this->form_validation->set_error_delimiters('<div class="alert alert-dismissable alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>');
+        $this->form_validation->set_error_delimiters('<p class="text-primary"><em><button type="button" class="close text-primary" data-dismiss="alert"><p class="text-primary">&times;</p></button>','</em></p>');
+        ///<p class="text-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
 	}
 	
 	/**
@@ -68,10 +72,7 @@ class ActividadManage extends CI_Controller
 
         $sede_id = $this->user->getSedeId();
         $this->data['query'] = $this->Model_Actividad->all($sede_id);
-		/*$msj = $this->session->flashdata('mensaje');
-        if (isset($msj)){
-        	$data['tipo']='success';
-        }*/
+
         $this->data['contenedor_aux'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
@@ -93,28 +94,6 @@ class ActividadManage extends CI_Controller
 	}
 	
 	/**
-	 * actividad edit page
-	 * @access public
-	 */
-	public function edit($id)
-	{
-		if($this->user->checkPrivilege('act_edit') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-
-        $this->data['registro'] = $this->Model_Actividad->find($id);
-        $this->data['titulo'] = 'Actualizar actividad';        
-        $this->data['urlCancelar'];
-        	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('act_view/act_edit', $this->data);
-		$this->load->view('include/footer');
-	}
-	
-	/**
 	 * actividad add page
 	 * @access public
 	 */
@@ -125,8 +104,6 @@ class ActividadManage extends CI_Controller
 			show_error("you have no privilege to access this page");
 			return ;
 		}
-		//seteo de los posibles warnings, errores, o logs
-		//$this->data['contenedor_aux'] = $this->error();
 		
 		$this->data['titulo'] = 'Crear actividad';
 		$this->data['urlCancelar'];
@@ -146,10 +123,11 @@ class ActividadManage extends CI_Controller
     	$this->form_validation->set_rules($this->reglas);
     	    	
         $registro = $this->input->post();
+
         $sede_id = $this->user->getSedeId();
         $registro['sede_id']= $sede_id;
         
-        if(isset($registro['name'])){
+        //if(isset($registro['name'])){
         	if(($this->form_validation->run() == TRUE)){
         		//en esta instancia hemos superado la validacion del formulario        		
         		//  insertamos
@@ -162,8 +140,30 @@ class ActividadManage extends CI_Controller
         		$this->add();
         		//redirect('actividadmanage/add', 'refresh');	
         	}
-        }               
+        //}               
     }
+
+    /**
+     * actividad edit page
+     * @access public
+     */
+    public function edit($id)
+    {
+    	/*if($this->user->checkPrivilege('act_edit') == false)
+    	{
+    		show_error("you have no privilege to access this page");
+    		return ;
+    	}*/
+    	$this->actividad_id = $id;
+    	$this->data['registro'] = $this->Model_Actividad->find($id);
+    	$this->data['titulo'] = 'Actualizar actividad';
+    	$this->data['urlCancelar'];
+    	 
+    	$this->load->view('include/header');
+    	$this->load->view('include/nav');
+    	$this->load->view('act_view/act_edit', $this->data);
+    	$this->load->view('include/footer');
+    }    
 
     /**
      * actividad update
@@ -173,6 +173,8 @@ class ActividadManage extends CI_Controller
     	//reglas de validación
     	$this->form_validation->set_rules($this->reglas);
     	$registro = $this->input->post();
+    	$this->actividad_id = $registro['actividad_id'];
+   	
     	if(isset($registro['name'])){
     		if(($this->form_validation->run() == TRUE)){    
     			$this->session->set_flashdata('mensaje', 'La actividad se actualiz&oacute; correctamente.');
@@ -181,11 +183,39 @@ class ActividadManage extends CI_Controller
     			redirect('actividadmanage/search', 'refresh');
     		}else {
         		//no se pudo actualizar   
-        		$this->edit();	
+        		$this->edit($registro['actividad_id']);	
         	}
     	}
     }    
 
+    /**
+     * valida si la actividad se repite en la sede que gestiona el operador. 
+     * */
+    public function my_validation()
+    {
+    	$registro = $this->input->post();
+    	$name_actividad = $registro['name'];
+    	if (isset($registro['actividad_id'])){
+    		$actividad_id = $registro['actividad_id'];
+    	}
+
+    	$session_data = $this->session->userdata('user');
+    	//tomo la sede del usser logueado desde la sesión
+    	$sede_id = $session_data['sede_id'];
+	
+		$row = $this->Model_Actividad->find($actividad_id);
+		$hayCambios = $row->name != $name_actividad;
+
+    	if ($row->name == $name_actividad && $row->sede_id == $sede_id )
+    	{
+    		return TRUE;
+    	}
+    	else
+    	{
+    		$this->form_validation->set_message('my_validation', 'Ya existe una actividad con el mismo nombre en la sede actual.');
+    		return FALSE;    		
+    	}
+    }    
 
     /**
 	 * actividad delete page

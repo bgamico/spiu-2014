@@ -1,5 +1,6 @@
+<!-- sección de avisos -->
+<?= $contenedor_aux; ?>
 <div class="span12">
-
 <div class="bs-docs-section">
 
         <div class="col-lg-11">
