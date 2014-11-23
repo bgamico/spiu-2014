@@ -26,17 +26,7 @@ class Model_Usuario extends CI_Model {
 		) );
 		return $query->result ();
 	}
-	
-	function get($id) {
-		$this->db->where ('user_id', $id );
-		return $this->db->get ('user')->result ();
-	}
-	
-	function find($id) {
-		$this->db->where ( 'user_id', $id );
-		return $this->db->get ( 'user' )->result ();
-	}
-	
+		
 	function insert($registro) {
 		$this->db->insert('usuarios',array('usuario' => $registro['username'],'role_id' => $registro['rol']));
 		$user_id = $this->db->insert_id();
@@ -48,16 +38,15 @@ class Model_Usuario extends CI_Model {
 	}
 	
 	function update($registro) {
-		$this->db->set ( $registro );
-		$this->db->where ( 'user_id', $registro ['user_id'] );
-		$this->db->update ( 'user' );
-		$this->db->select ( 'perfil_id' );
-		$this->db->where ( 'user_id', $registro ['user_id'] );
-		return $this->db->get ( 'user' )->row ();
+		$rol = array(role_id=>$registro['rol']);
+		unset($registro['rol']);
+		$this->db->where('id', $registro['id']);
+		$this->db->update('usuarios' ,$rol);
+		$this->db->update('perfiles', $registro, "user_id =".$registro['id']);
 	}
 	
 	function delete($id) {
-		$this->db->where ( 'user_id', $id );
-		$this->db->delete ( 'user' );
+		$this->db->where ( 'id', $id );
+		$this->db->delete ( 'usuarios' );
 	}
 }
