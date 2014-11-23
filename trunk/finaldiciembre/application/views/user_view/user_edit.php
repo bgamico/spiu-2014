@@ -1,12 +1,38 @@
+<script>
+	$(function() {
+// 		if (<!--?= $this->session->userdata('rol') ?--> != 1){
+// 		    $('#rol_dim').remove();
+// 		    $('#row_dim').remove();
+// 		}else{
+// 	    	$('#row_dim').hide();
+// 		}
+
+		if($('#rol').val() != 1) {
+            $('#row_dim').show();
+        } else {
+            $('#row_dim').hide();
+        }
+	    
+	    $('#rol').change(function(){
+	        if($('#rol').val() != 1) {
+	            $('#row_dim').show();
+	        } else {
+	            $('#row_dim').hide();
+	        } 
+	    });
+	});	
+</script>
 <div class="col-lg-9 offset1">
 	<div class="well bs-component">
-    <?= form_open('usermanage/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+	<?php $roles =  $this->user->getRoles();?>
+	<?php $sedes =  $this->user->getSedes();?>
+	
+    <?= form_open('usuario/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
   <fieldset>
     <legend> Actualizar Usuario </legend>
-    <!--?php foreach ($user as $registro): ?-->
     <?php foreach ($query as $registro): ?>
     
-    <?= form_hidden('user_id', $registro->user_id); ?>
+    <?= form_hidden('id', $registro->user_id); ?>
 
     <div class="form-group">
 	    <div class="control-group">
@@ -66,33 +92,29 @@
     <div class="control-group">
         <?= form_label('E-Mail:', 'email', array('class'=>'col-lg-3 control-label')); ?>
         <div class="col-lg-9">
-        <?= form_input(array('type'=>'email','class'=>"form-control", 'name'=>'mail', 'id'=>'mail', 'value'=>$registro->email)); ?>
+        <?= form_input(array('type'=>'email','class'=>"form-control", 'name'=>'email', 'id'=>'email', 'value'=>$registro->email)); ?>
     </div>
     </div>
 	</div>
-
-<!--     <div class="form-group"> -->
-<!--     <div class="control-group"> -->
-        <!-- ?= form_label('Sede:', 'sede', array('class'=>'col-lg-3 control-label')); ?-->
-<!--         <div class="col-lg-9"> -->
-        <!-- ?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'sede', 'id'=>'sede', 'value'=>$registro->sede)); ?-->
-        <!-- ?= form_dropdown('sede_id', $this->user->getSedes(), $registro->sede, 'id = "sede", class="form-control"');?-->
-<!--     </div> -->
-<!--     </div> -->
-<!-- 	</div> -->
-    
-	<?php if (isset($combo)):?>
-	    <div class="control-group">
-	        <?= form_label('Rol:', 'rol', array('class'=>'control-label')); ?>
-	        <?= form_dropdown('rol', $roles, $registro->role_id);?>
-	    </div>
 	
+	<div class="form-group">
 	    <div class="control-group">
-	        <?= form_label('Sede:', 'sede', array('class'=>'control-label')); ?>
-	        <?= form_dropdown('sede', $sedes, $registro->sede_id);?>
+	        <?= form_label('Rol:', 'rol', array('class'=>'col-lg-3 control-label')); ?>
+	        <div class="col-lg-9">
+	        	<?= form_dropdown('rol', $roles, $registro->rol,'id = "rol" class="form-control"');?>
+	        </div>
 	    </div>
-	<?php endif;?>
+    </div>
 	
+	<div class="form-group" id="row_dim">
+	    <div class="control-group">
+	        <?= form_label('Sede:', 'sede', array('class'=>'col-lg-3 control-label')); ?>
+	        <div class="col-lg-9">
+	        	<?= form_dropdown('sede_id', $sedes, $registro->sede,'id = "rol", class="form-control"');?>
+	    	</div>
+		</div>
+    </div>	    
+	    
     <div class="form-actions">
     <div class="col-lg-9 col-lg-offset-3">
         <?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>

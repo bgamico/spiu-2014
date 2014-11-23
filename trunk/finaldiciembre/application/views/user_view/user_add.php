@@ -1,7 +1,7 @@
 <div class="col-lg-9 offset1">
 	<div class="well bs-component">
-	<?= $roles =  $this->user->getRoles();?>
-	<?= $sedes =  $this->user->getSedes();?>
+	<?php $roles =  $this->user->getRoles();?>
+	<?php $sedes =  $this->user->getSedes();?>
 	<?= form_open('usuario/add', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
 
   <fieldset>
@@ -84,48 +84,41 @@
 				</div>
 			</div>
 
-
-			<!-- ?php if (isset($combo)):?> -->
 			<div class="form-group" id="rol_dim">
 				<div class="control-group">
 			        <?= form_label('Rol*', 'rol', array('class'=>'col-lg-3 control-label')); ?>
 			        <div class="col-lg-9">
-			        	<?= form_dropdown('rol', $roles, NULL,'id = "rol", class="form-control"');?>
+			        	<?= form_dropdown('rol', $roles, NULL,'id = "rol" class="form-control"');?>
 					</div>
 				</div>
 			</div>
-    <p class = "col-lg-3"></p>
-	<p class="col-lg-9" >*<em>campos obligatorios.</em></p>    
 			
 			<div class="form-group" id="row_dim">
 				<div class="control-group" >
 			        <?= form_label('Sede*', 'sede_id', array('class'=>'col-lg-3 control-label')); ?>
 			        <div class="col-lg-9">
-			        	<?= form_dropdown('sede_id', $sedes, '', 'id = "sede", class="form-control"');?>
+			        	<?= form_dropdown('sede_id', $sedes, '', 'id = "sede" class="form-control"');?>
 	        		</div>
 				</div>
 			</div>
 			
-			<!-- ?php endif;?>  -->
-
+    <p class = "col-lg-3"></p>
+	<p class="col-lg-9" >*<em>campos obligatorios.</em></p>    
 			
 			<script>
 				$(function() {
 					if (<?= $this->session->userdata('rol') ?> != 1){
 					    $('#rol_dim').remove();
 					    $('#row_dim').remove();
+					}else{
+				    	$('#row_dim').hide();
 					}
-					
-// 				    $('#row_dim').hide();
-//  					$('#row_dim').datepicker();
-				    
 				    
 				    $('#rol').change(function(){
 				        if($('#rol').val() != 1) {
 				            $('#row_dim').show();
 				        } else {
 				            $('#row_dim').hide();
-				            $('#row_dim').empty();
 				        } 
 				    });
 				});	

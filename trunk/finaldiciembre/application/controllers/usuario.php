@@ -60,11 +60,14 @@ class Usuario extends CI_Controller
 
    
 	public function insert() {
-				
+		
 		$registro = $this->input->post();
-// 		$algo = $this->Model_Usuario->insert($registro);
- 		print_r($registro);
-// 		redirect('usuario/get');
+		if (element('rol', $registro) == 1 ){
+			unset($registro['sede_id']);
+		}
+			
+		$this->Model_Usuario->insert($registro);
+		redirect('usuario/get');
 		}
 
 	/**
@@ -73,7 +76,6 @@ class Usuario extends CI_Controller
 	 */
 	public function edit($id)
 	{
-	
 		$data['query'] = $this->Model_Perfil->getByUserId($id);
 		
 		$this->load->view('include/header');
@@ -87,9 +89,9 @@ class Usuario extends CI_Controller
      * @access public
      */
     public function update() {
-    	
-    	$registro = $this->input->post(); 
-    	
+    	$registro = $this->input->post();
+    	$this->Model_Usuario->update($registro);
+    	redirect('usuario/get');
     }
 
     /**
@@ -115,5 +117,6 @@ class Usuario extends CI_Controller
     
     public function delete($id) {
     	$this->Model_Usuario->delete($id);
+    	redirect('usuario/get');
     }
 }
