@@ -1,0 +1,68 @@
+<head>
+
+    <script type="text/javascript">
+    function datos_marker(lat, lng, marker)
+    {
+     var mi_marker = new google.maps.LatLng(lat, lng);
+     map.panTo(mi_marker);
+     google.maps.event.trigger(marker, 'click');
+    }
+    </script>
+    <?=$map['js']?>
+			<script>
+				$(function() {
+					if (<?= $this->session->userdata('rol') ?> != 1){
+					    $('#admin').remove();
+					    $('#delete').remove();  
+					}
+				});	
+			</script>
+</head>
+<body>
+
+<div class="bs-example" id="admin">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Sedes</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <form class="navbar-form navbar-right" role="search">
+			<?= anchor('sede/add', 'Agregar', array('class'=>'btn btn-default')); ?>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+<div class="row row-offcanvas row-offcanvas-right">
+	<div class="col-xs-12 col-sm-8">
+	<?=$map['html']?>
+	</div>
+	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+				  <li role="presentation" onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><a><?=substr($marker_sidebar->nombre,0)?></a>			  
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+		        <li role="presentation"><a></a></li>
+					<?= anchor('sede/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
+					<?= anchor('sedemanage/delete/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view', 'id'=>'delete')); ?>
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+	
+</div>
+</body>
+</html>
