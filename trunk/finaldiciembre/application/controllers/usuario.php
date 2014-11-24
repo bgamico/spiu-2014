@@ -16,28 +16,18 @@ class Usuario extends CI_Controller
 	 */
 	public function get()
 	{	
-		$this->data['query'] = $this->Model_Usuario->all($this->session->userdata('username'));
-		
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('user_view/user_get',$this->data);
-		$this->load->view('include/footer');
-	}
-	
-	/**
-	 * listar operadores
-	 * @access public
-	 */
-	public function operadores()
-	{
-		$data['query'] = $this->Model_Usuario->allOperadores($this->session->userdata('username'));
-		
+		if ($this->session->userdata('rol') == 1){
+			$data['query'] = $this->Model_Usuario->all($this->session->userdata('username'));
+		}
+		else{
+			$data['query'] = $this->Model_Usuario->allOperadores($this->session->userdata('username'));
+		}
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('user_view/user_get',$data);
 		$this->load->view('include/footer');
 	}
-	
+		
 	/**
 	 * pagina de creacion de usuarios
 	 * @access public
@@ -59,8 +49,7 @@ class Usuario extends CI_Controller
 	}
 
    
-	public function insert() {
-		
+	public function insert() {		
 		$registro = $this->input->post();
 		if (element('rol', $registro) == 1 ){
 			unset($registro['sede_id']);
@@ -68,7 +57,7 @@ class Usuario extends CI_Controller
 			
 		$this->Model_Usuario->insert($registro);
 		redirect('usuario/get');
-		}
+	}
 
 	/**
 	 * user edit page
@@ -90,6 +79,9 @@ class Usuario extends CI_Controller
      */
     public function update() {
     	$registro = $this->input->post();
+    	if (element('rol', $registro) == 1 ){
+    		$registro['sede_id'] = NULL;
+    	}
     	$this->Model_Usuario->update($registro);
     	redirect('usuario/get');
     }
@@ -116,7 +108,7 @@ class Usuario extends CI_Controller
      */
     
     public function delete($id) {
-    	$this->Model_Usuario->delete($id);
+     	$this->Model_Usuario->delete($id);
     	redirect('usuario/get');
     }
 }
