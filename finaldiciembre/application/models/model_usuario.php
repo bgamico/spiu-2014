@@ -42,7 +42,9 @@ class Model_Usuario extends CI_Model {
 		unset($registro['rol']);
 		$this->db->where('id', $registro['id']);
 		$this->db->update('usuarios' ,$rol);
-		$this->db->update('perfiles', $registro, "user_id =".$registro['id']);
+		$user = array(user_id=>$registro['id']);
+		unset($registro['id']);
+		$this->db->update('perfiles', $registro, $user);
 	}
 	
 	function delete($id) {

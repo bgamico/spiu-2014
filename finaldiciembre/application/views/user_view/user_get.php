@@ -19,9 +19,8 @@
   </div>
 
 			<div class="bs-component">
-<!-- 			<div class="table-responsive"> -->
-			<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-<!-- 				<table class="table table-striped table-hover table-condensed table-bordered"> -->
+
+			<table id="example" class="table table-striped table-bordered" >
 					<thead>
 						<tr>
 							<th>Username</th>
@@ -37,11 +36,7 @@
 							<td>
                                 <?= anchor('usuario/view/'.$registro->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
                                 <?= anchor('usuario/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-                                <!--?= anchor('usuario/delete/'.$registro->id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; el usuario. &iquest;Est&aacute; seguro&#63')"))?-->
-                                <a data-href="delete.php?id=23" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-<!-- 								<a data-href="delete.php?id=54" data-toggle="modal" data-target="#confirm-delete" href="#">Delete record #54</a> -->
-                                
-
+                                <a data-href="delete.php?id=23" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>                                
                             </td>
 						</tr>
                     <?php endforeach; ?>
@@ -84,7 +79,7 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <?= anchor('usuario/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-<!--                     <a href="#" class="btn btn-danger danger">Borrar</a> -->
+                    
                 </div>
             </div>
         </div>

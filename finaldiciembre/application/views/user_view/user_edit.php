@@ -1,11 +1,9 @@
 <script>
 	$(function() {
-// 		if (<!--?= $this->session->userdata('rol') ?--> != 1){
-// 		    $('#rol_dim').remove();
-// 		    $('#row_dim').remove();
-// 		}else{
-// 	    	$('#row_dim').hide();
-// 		}
+		if (<?= $this->session->userdata('rol') ?> != 1){
+		    $("#rol").prop("disabled", true);
+		    $('#row_dim').remove();
+		}
 
 		if($('#rol').val() != 1) {
             $('#row_dim').show();
@@ -97,10 +95,11 @@
     </div>
 	</div>
 	
-	<div class="form-group">
+	<div class="form-group" id="rol_dim">
 	    <div class="control-group">
 	        <?= form_label('Rol:', 'rol', array('class'=>'col-lg-3 control-label')); ?>
 	        <div class="col-lg-9">
+	        	<?= form_hidden('rol', $registro->rol); ?>
 	        	<?= form_dropdown('rol', $roles, $registro->rol,'id = "rol" class="form-control"');?>
 	        </div>
 	    </div>
