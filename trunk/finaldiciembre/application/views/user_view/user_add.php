@@ -84,6 +84,7 @@
 				</div>
 			</div>
 
+        	<?= form_hidden('rol', 3); ?>
 			<div class="form-group" id="rol_dim">
 				<div class="control-group">
 			        <?= form_label('Rol*', 'rol', array('class'=>'col-lg-3 control-label')); ?>
@@ -93,6 +94,7 @@
 				</div>
 			</div>
 			
+        	<?= form_hidden('sede_id', $this->session->userdata('sede')); ?>
 			<div class="form-group" id="row_dim">
 				<div class="control-group" >
 			        <?= form_label('Sede*', 'sede_id', array('class'=>'col-lg-3 control-label')); ?>
@@ -126,7 +128,7 @@
 
 			<div class="form-actions">
 				<div class="col-lg-9 col-lg-offset-3">
-			        <?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>  
+			        <?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary' )); ?>  
 			        <a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
 				</div>
 			</div>

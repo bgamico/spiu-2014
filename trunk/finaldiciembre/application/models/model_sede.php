@@ -28,25 +28,12 @@ class Model_Sede extends CI_Model {
     function miSede($username) {    	
     	$this->db->select ( 's.*' );
     	$this->db->from ( 'usuarios u' );
-    	$this->db->join ( 'perfiles p', 'u.id = p.user_id' );
-    	$this->db->join ( 'sedes s', 's.id = p.sede_id' );
-    	$this->db->where ( 'u.usuario =', $username );
-    	$query = $this->db->get ();
-    	return $query->result ();
+    	$this->db->join ( 'perfiles p', 'p.user_id = u.id' );
+    	$this->db->join ( 'sedes s', 'p.sede_id = s.id' );
+    	$this->db->where ( 'u.usuario', $username );
+    	return $this->db->get()->result();
+//     	return $this->db->get()->row();
     }
-    /*
-     * select s.* from usuarios u join perfiles p on u.id = p.user_id join sedes s on s.id=p.sede_id where u.usuario='sede'
-     */
-
-//     function get($id) {
-//         $lista = array();
-//         $this ->db->where('sede_id',$id);
-//         $query = $this->db->get('sede')->result();
-//         foreach ($query as $registro) {
-//             $lista[$registro->sede_id] = $registro->nombre;
-//         }
-//         return $lista;
-//     }
 
     function insert($registro) {
     	$this->db->set($registro);

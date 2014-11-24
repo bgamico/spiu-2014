@@ -39,15 +39,15 @@ class Account extends CI_Controller
 		
 		if($ret == 1)
 		{
-// 			$this->load->view('include/header');
-// 			$this->load->view('login_index');
-// 			$this->load->view('include/footer');
+
 			redirect(base_url());
 		}
 		else
-		{			
+		{	
+			$query = $this->Model_Sede->miSede($username);
+			isset( $query[0]->id) AND $this->session->set_userdata('sede',$query[0]->id);  
 			$this->session->set_userdata('username',$username);
-			$this->session->set_userdata('rol',$ret['role_id']); 			
+			$this->session->set_userdata('rol',$ret['role_id']);				
 			redirect(base_url('manage'));
 		}
 
