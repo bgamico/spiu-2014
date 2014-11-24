@@ -45,7 +45,7 @@ class User
 		$sedes = $this->_CI->Model_Sede->allArray();
 		return $sedes;
 	}
-	
+		
 	/**
 	 * get user menu
 	 * @access public
