@@ -65,8 +65,38 @@ $(document).ready(function(){
 	      fec_nac: {
 	        date: 1,
 	        required: true
-	      }	  
-
+	      },	  
+	      provincia: {
+		      required: true
+		  },	  
+	      ciudad: {
+		      required: true
+		  },	  
+	      tipo: {
+	    	  minlength: 2,
+		      required: true
+		  },
+	      fecha: {
+		        date: 1,
+		        required: true
+	      },
+	      hora: {
+		        minlength: 2,
+		        required: true
+	      },
+	      materia: {
+		        minlength: 2,
+		        required: true
+	      },
+	      aula: {
+		        minlength: 2,
+		        required: true
+	      },
+	      profesor: {
+		        minlength: 2,
+		        required: true
+	      }
+	  
 
 	    },
 			/*highlight: function(element) {
