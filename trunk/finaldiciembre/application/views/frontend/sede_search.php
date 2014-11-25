@@ -1,42 +1,41 @@
-<div class="span9">
 
-<div class="page-header">
-	<h1> Sedes <small> mantenimiento de registros </small> </h1>
-</div>
 
-<?php if (isset($agregar)):?>
-	<?= anchor('sedemanage/add', 'Agregar', array('class'=>'btn btn-primary')); ?>
-<?php endif;?>
-<p></p>
+    <script type="text/javascript">
+    function datos_marker(lat, lng, marker)
+    {
+     var mi_marker = new google.maps.LatLng(lat, lng);
+     map.panTo(mi_marker);
+     google.maps.event.trigger(marker, 'click');
+    }
+    </script>
+    <?=$map['js']?>
 
-<div class="table-responsive">
-<table class="table table-condensed table-bordered">
-	<thead>
-		<tr>
-			<th> ID </th>
-			<th> Nombre </th>
-            <th> Direcci&oacute;n </th>
-            <th> Latitud </th>
-            <th> Longitud </th>
-            <th> Imagen </th>
-            <th> Descripci&oacute;n </th>
-		</tr>
-	</thead>
-
-	<tbody>
-		<?php foreach ($query as $registro): ?>
-		<tr>
-            <td> <?= anchor('sedemanage/edit/'.$registro->sede_id, $registro->sede_id); ?> </td>
-
-			<td> <?= $registro->nombre ?> </td>
-            <td> <?= $registro->direccion ?> </td>
-            <td> <?= $registro->latitud ?> </td>
-            <td> <?= $registro->longitud ?> </td>
-            <td> <img src="<?php echo base_url('uploads/'.$registro->imagen)?>" title=descripcion class=img-thumbnail> </td>
-            <td> <?= $registro->descripcion ?> </td>
-        </tr>
-		<?php endforeach; ?>
-	</tbody>
-</table>
-</div>
+<div class="row row-offcanvas row-offcanvas-right">
+	<div class="col-xs-12 col-sm-8">
+	<?=$map['html']?>
+	</div>
+	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+				  <li role="presentation" onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><a><?=substr($marker_sidebar->nombre,0)?></a>			  
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+		        <li role="presentation"><a></a></li>
+					<?= anchor('home/sede/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+	
 </div>

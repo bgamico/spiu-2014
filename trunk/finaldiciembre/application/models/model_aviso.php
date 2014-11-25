@@ -42,4 +42,9 @@ class Model_Aviso extends CI_Model {
     	$this->db->where('aviso_id', $id);
 		$this->db->delete($this->tabla);
     }
+    
+    function getBySedeId($id){
+    	$this->db->where('sede_id', $id);
+    	return $this->db->get($this->tabla)->result();
+    }
 }
