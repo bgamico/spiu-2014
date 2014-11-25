@@ -1,4 +1,17 @@
-<!-- <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+		$(document).ready(function() {
+			$("#provincia").change(function() {
+				$("#provincia option:selected").each(function() {
+					provincia = $('#provincia').val();
+					$.post("http://localhost/finaldiciembre/pdi/llena_localidades", {
+						provincia : provincia
+					}, function(data) {
+						$("#ciudad").html(data);
+					});
+				});
+			})
+		});
+</script>
 <script type="text/javascript">
 function updateDatabase(newLat, newLng)
 {
@@ -21,7 +34,65 @@ function updateDatabase(newLat, newLng)
 		<fieldset>
 			<legend> Crear Punto de Interes </legend>
 			<?= validation_errors(); ?>
+			
 			<div class="form-group">
+			<div class="control-group">
+				<?= form_label('Nombre*', 'nombre', array('class'=>'col-lg-3 control-label')); ?>
+				<div class="col-lg-9">
+				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'nombre', 'id'=>'nombre', 'value'=>set_value('nombre'))); ?>
+			</div>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<div class="control-group">
+				<?= form_label('Imagen:', 'imagen', array('class'=>'col-lg-3 control-label')); ?>
+				<div class="col-lg-9">
+				<?= form_input(array('type'=>'file', 'class'=>"form-control",'name'=>'userfile', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?>
+			</div>
+			</div>
+			</div>
+						
+			<div class="form-group">
+			<div class="control-group">
+			<?= form_label('Provincia*', 'provincia', array('class'=>'col-lg-3 control-label')); ?>
+			<div class="col-lg-9">
+			<select class="form-control" name="provincia" id="provincia">
+				<option value="">--Selecciona la provincia--</option>
+				<?php
+				foreach($provincias as $fila)
+				{
+				?>
+					<option value="<?=$fila -> id ?>"><?=$fila -> provincia_nombre ?></option>
+				<?php
+				}
+				?>		
+			</select>
+			</div>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<div class="control-group">
+			<?= form_label('Ciudad*', 'ciudad', array('class'=>'col-lg-3 control-label')); ?>
+			<div class="col-lg-9">
+			<select class="form-control" name="ciudad" id="ciudad">
+		    		<option value="">--Selecciona la ciudad--</option>
+		    </select>
+			</div>
+			</div>
+			</div>
+			
+			<div class="form-group">
+			<div class="control-group">
+				<?= form_label('Direccion*', 'direccion', array('class'=>'col-lg-3 control-label')); ?>
+				<div class="col-lg-9">
+				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'direccion', 'id'=>'direccion', 'value'=>set_value('direccion'))); ?>
+			</div>
+			</div>
+			</div>
+			
+						<div class="form-group">
 			<div class="control-group">
 				<?= form_label('Latitud*', 'latitud', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
@@ -41,37 +112,9 @@ function updateDatabase(newLat, newLng)
 			
 			<div class="form-group">
 			<div class="control-group">
-				<?= form_label('Provincia*', 'provincia', array('class'=>'col-lg-3 control-label')); ?>
+				<?= form_label('Tipo*', 'tipo', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'provincia', 'id'=>'provincia', 'value'=>set_value('provincia'))); ?>
-			</div>
-			</div>
-			</div>
-			
-			<div class="form-group">
-			<div class="control-group">
-				<?= form_label('Ciudad*', 'ciudad', array('class'=>'col-lg-3 control-label')); ?>
-				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'ciudad', 'id'=>'ciudad', 'value'=>set_value('ciudad'))); ?>
-			</div>
-			</div>
-			</div>
-			
-			<div class="form-group">
-			<div class="control-group">
-				<?= form_label('Direccion*', 'direccion', array('class'=>'col-lg-3 control-label')); ?>
-				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'direccion', 'id'=>'direccion', 'value'=>set_value('direccion'))); ?>
-			</div>
-			</div>
-			</div>
-			
-			<div class="form-group">
-			<div class="control-group">
-				<?= form_label('Nombre*', 'nombre', array('class'=>'col-lg-3 control-label')); ?>
-				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'nombre', 'id'=>'nombre', 'value'=>set_value('nombre'))); ?>
-				
+				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'tipo', 'id'=>'tipo', 'value'=>set_value('tipo'))); ?>
 			</div>
 			</div>
 			</div>
@@ -80,25 +123,8 @@ function updateDatabase(newLat, newLng)
 			<div class="control-group">
 				<?= form_label('Descripcion*', 'descripcion', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'descripcion', 'id'=>'descripcion', 'value'=>set_value('descripcion'))); ?>
-			</div>
-			</div>
-			</div>
-			
-			<div class="form-group">
-			<div class="control-group">
-				<?= form_label('Imagen:', 'imagen', array('class'=>'col-lg-3 control-label')); ?>
-				<div class="col-lg-9">
-				<?= form_input(array('type'=>'file', 'class'=>"form-control",'name'=>'userfile', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?>
-			</div>
-			</div>
-			</div>
-			
-			<div class="form-group">
-			<div class="control-group">
-				<?= form_label('Tipo*', 'tipo', array('class'=>'col-lg-3 control-label')); ?>
-				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'tipo', 'id'=>'tipo', 'value'=>set_value('tipo'))); ?>
+				<!-- ?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'descripcion', 'id'=>'descripcion', 'value'=>set_value('descripcion'))); ?-->
+				<?= form_textarea(array('class'=>"form-control",'name'=>'descripcion', 'id'=>'descripcion', 'rows'=>'3', 'value'=>set_value('descripcion'))); ?>
 			</div>
 			</div>
 			</div>
@@ -116,6 +142,5 @@ function updateDatabase(newLat, newLng)
 			</fieldset>
 		<?= form_close(); ?>
 	</div>
-	
 </div>
 

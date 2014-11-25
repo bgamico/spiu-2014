@@ -1,9 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * FechaManage Class
  *
- * Manage Fecha.
+ * Administracion de fechas de examen
  *
  * @author Castro Patricio Nicolas
  */
@@ -12,55 +11,64 @@ class Fecha extends CI_Controller
 {
 	
 	/**
-	 * constructor for FechaManage
-	 * @access public
-	 */
-	function __construct()
-	{
-		parent::__construct();
-	}
-	
-	/**
-	 * fecha search page
+	 * pagina para listar las fechas de examen
 	 * @access public
 	 */
 	function get()
 	{
+		$this->load->model('Model_Examen');
+		$data['query'] = $this->Model_Examen->getBySedeId($this->session->userdata('sede'));
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('fec_view/fec_get');
+		$this->load->view('fec_view/fec_get', $data);
 		$this->load->view('include/footer');
 	}
 	
 	/**
-	 * fecha edit page
+	 * insertar datos de la fecha de examen
 	 * @access public
 	 */
-	function edit()
+	public function insert() {
+			
+		$registro = $this->input->post() + array('sede_id'=> $this->session->userdata('sede'));
+		$this->load->model('Model_Examen');
+		$this->Model_Examen->insert($registro);
+		redirect('fecha/get');
+	}
+		
+	/**
+	 * pagina de edicion de fechas de examen
+	 * @access public
+	 */
+	function edit($id)
 	{
-		if($this->user->checkPrivilege('fec_edit') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-	
+		$this->load->model('Model_Examen');
+		$data['query'] = $this->Model_Examen->find($id);
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('fec_view/fec_edit');
+		$this->load->view('fec_view/fec_edit',$data);
 		$this->load->view('include/footer');
 	}
 	
 	/**
-	 * fecha add page
+	 * actualizar datos de la fecha de examen
+	 * @access public
+	 */
+	public function update() {
+		$registro = $this->input->post();
+		$this->load->model('Model_Examen');
+		$this->Model_Examen->update($registro);
+		redirect('fecha/get');
+	}
+	
+	/**
+	 * pagina para agregar fechas de examen
 	 * @access public
 	 */
 	function add()
 	{
-		if($this->user->checkPrivilege('fec_add') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
 	
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
@@ -69,20 +77,13 @@ class Fecha extends CI_Controller
 	}
 	
 	/**
-	 * fecha delete page
+	 * eliminacion de fechas de examen
 	 * @access public
 	 */
-	function delete()
+	function delete($id)
 	{
-		if($this->user->checkPrivilege('fec_delete') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('fec_view/fec_delete');
-		$this->load->view('include/footer');
+		$this->load->model('Model_Examen');
+		$this->Model_Examen->delete($id);
+		redirect('fecha/get');
 	}
 }

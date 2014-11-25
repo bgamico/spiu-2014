@@ -101,7 +101,10 @@ class Pdi extends CI_Controller
 		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
 		$this->googlemaps->add_marker($marker);
 		$data['map'] = $this->googlemaps->create_map();
-	
+		
+		$this->load->model('ciudades_model');
+		$data['provincias'] = $this->ciudades_model->provincias();
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('pdi_view/pdi_add', $data);
@@ -159,5 +162,22 @@ class Pdi extends CI_Controller
 		$this->Model_Pdi->update($registro);
 		redirect('pdi/get');
 	}
+	
+	public function llena_localidades()
+	{
+		$options = "";
+		if($this->input->post('provincia'))
+		{
+			$provincia = $this->input->post('provincia');
+			$this->load->model('ciudades_model');
+			$localidades = $this->ciudades_model->localidades($provincia);
+			foreach($localidades as $fila)
+			{
+				?>
+					<option value="<?=$fila -> id ?>"><?=$fila -> ciudad_nombre ?></option>
+				<?php
+				}
+			}
+		}
 	
 }
