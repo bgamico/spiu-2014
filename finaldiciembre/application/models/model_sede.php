@@ -48,7 +48,7 @@ class Model_Sede extends CI_Model {
 
     function delete($id) {
     	$this->db->where('id', $id);
-		$this->db->delete('sede');
+		$this->db->delete('sedes');
     }
 
 }

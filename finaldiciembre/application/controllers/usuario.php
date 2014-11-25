@@ -105,8 +105,7 @@ class Usuario extends CI_Controller
     /**
      * eliminación de usuarios
      * @access public
-     */
-    
+     */ 
     public function delete($id) {
      	$this->Model_Usuario->delete($id);
     	redirect('usuario');
