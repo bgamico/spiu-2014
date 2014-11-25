@@ -6,12 +6,6 @@ class Model_Perfil extends CI_Model {
 		parent::__construct();
     }
 
-    function insert($registro) {
-        $this->db->set($registro);
-        $this->db->insert('perfil');
-        return $this->db->insert_id();
-    }
-
     function get($username) {
     	$this->db->select('p.*');
     	$this->db->from('perfiles p');

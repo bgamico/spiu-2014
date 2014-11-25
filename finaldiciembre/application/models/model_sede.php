@@ -32,7 +32,7 @@ class Model_Sede extends CI_Model {
     	$this->db->join ( 'sedes s', 'p.sede_id = s.id' );
     	$this->db->where ( 'u.usuario', $username );
     	return $this->db->get()->result();
-//     	return $this->db->get()->row();
+
     }
 
     function insert($registro) {

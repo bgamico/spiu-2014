@@ -16,12 +16,12 @@ function updateDatabase(newLat, newLng)
 	<?php echo $map['html']; ?>
 	</div>
 	<div class="span4">
-		<?= form_open('pdi/insert', array('class'=>'','id'=>'contact-form')); ?>
+		<?= form_open_multipart('pdi/insert', array('class'=>'form-horizontal','id'=>'contact-form'));?>
 			<legend> Crear Registro </legend>
 			
 			<div class="control-group">
 				<?= form_label('Latitud:', 'latitud', array('class'=>'control-label')); ?>
-				<?= form_input(array('type'=>'text', 'name'=>'latitud', 'id'=>'latitud', 'value'=>set_value('latitud'))); ?>
+				<?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'latitud', 'id'=>'latitud', 'value'=>set_value('latitud'))); ?>				
 			</div>
 			
 			<div class="control-group">
@@ -46,7 +46,8 @@ function updateDatabase(newLat, newLng)
 			
 			<div class="control-group">
 				<?= form_label('Nombre:', 'nombre', array('class'=>'control-label')); ?>
-				<?= form_input(array('type'=>'text', 'name'=>'nombre', 'id'=>'nombre', 'value'=>set_value('nombre'))); ?>
+				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'nombre', 'id'=>'nombre', 'value'=>set_value('nombre'))); ?>
+				
 			</div>
 
 			<div class="control-group">
@@ -56,7 +57,8 @@ function updateDatabase(newLat, newLng)
 
 			<div class="control-group">
 				<?= form_label('Imagen:', 'imagen', array('class'=>'control-label')); ?>
-				<?= form_input(array('type'=>'text', 'name'=>'imagen', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?>
+				<!--?= form_input(array('type'=>'text', 'name'=>'imagen', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?-->
+				<?= form_input(array('type'=>'file', 'class'=>"form-control",'name'=>'userfile', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?>
 			</div>
 
 			<div class="control-group">

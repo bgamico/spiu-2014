@@ -14,16 +14,32 @@ class Pdi extends CI_Controller
 	 * @access public
 	 */
 	function get()
-	{		
+	{				
 		
+		$sede = $this->Model_Sede->find($this->session->userdata('sede'));
 		$this->load->library('googlemaps');
-
-		$config['center'] = '-40.8, -63';
-		$config['zoom'] = 'auto';
-		$config['onclick'] = 'createMarker_map({ map: map, position:event.latLng, draggable: true, ondragend:alert(event.latLng.lat()+ \', \' + event.latLng.lng()) });';
+		$config = array();
+// 		$config['center'] = 'rio negro,argentina';
+// 		$config['zoom'] = '6';
+		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
+		$config['zoom'] = '10';	
+		$config['map_type'] = 'ROADMAP';
+		$config['map_width'] = '750px';
+		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 		
-		
+		$markers = $this->Model_Pdi->all();
+		$data['datos'] = $markers;
+		foreach($markers as $info_marker)
+		{
+			$marker = array();
+			$marker ['animation'] = 'DROP';
+			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
+			$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
+			$marker['id'] = $info_marker->id;
+			$this->googlemaps->add_marker($marker);
+		}
+				
 		$data['map'] = $this->googlemaps->create_map();
 		
 		$this->load->view('include/header');
@@ -33,45 +49,55 @@ class Pdi extends CI_Controller
 	}
 	
 	/**
-	 * pdi edit page
+	 * pagina de edicion de puntos de informacion
 	 * @access public
 	 */
-	function edit()
+	function edit($id)
 	{
-		if($this->user->checkPrivilege('pdi_edit') == false)
+		$query = $this->Model_Pdi->find($id);
+		$data['query'] = $query;
+		
+		$this->load->library('googlemaps');
+		
+		foreach($query as $row)
 		{
-			show_error("you have no privilege to access this page");
-			return ;
+			$marker = array();
+			$marker ['position'] = $row->latitud.','.$row->longitud;
+			$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$row->imagen).'><br>'.$row->nombre;
+			$marker['id'] = $row->id;
+			$marker['draggable'] = true;
+			$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+			$this->googlemaps->add_marker($marker);
+			$config['center'] = $row->latitud.','.$row->longitud;
 		}
+		
+		$config['zoom'] = 10;
+		$this->googlemaps->initialize($config);
+		$data['map'] = $this->googlemaps->create_map();
 	
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('pdi_view/pdi_edit');
+		$this->load->view('pdi_view/pdi_edit',$data);
 		$this->load->view('include/footer');
 	}
 	
 	/**
-	 * pdi add page
+	 * pagina para agregar puntos de informacion
 	 * @access public
 	 */
 	function add()
 	{
 		$this->load->library('googlemaps');
-		/*$config['center'] = '-40.8, -63';
-		$config['zoom'] = 'auto';
-		$config['onclick'] = 'createMarker_map({ map: map, position:event.latLng, draggable: true, ondragend:alert(event.latLng.lat()+ \', \' + event.latLng.lng()) });';
-		$this->googlemaps->initialize($config);
 		
-		$data['map'] = $this->googlemaps->create_map();*/
+		$sede = $this->Model_Sede->find($this->session->userdata('sede'));
 		
-		$config['center'] = '37.4419, -122.1419';
-		$config['zoom'] = 'auto';
+		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
+		$config['zoom'] = '13';
 		$this->googlemaps->initialize($config);
 		
 		$marker = array();
-		$marker['position'] = '37.429, -122.1419';
+		$marker['position'] = $sede[0]->latitud.','.$sede[0]->longitud;
 		$marker['draggable'] = true;
-		/*$marker['ondragend'] = 'alert(\'You just dropped me at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';*/
 		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
 		$this->googlemaps->add_marker($marker);
 		$data['map'] = $this->googlemaps->create_map();
@@ -83,20 +109,55 @@ class Pdi extends CI_Controller
 	}
 	
 	/**
-	 * pdi delete page
+	 * eliminacion de puntos de informacion
 	 * @access public
 	 */
-	function delete()
+	function delete($id)
 	{
-		if($this->user->checkPrivilege('pdi_delete') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}
-	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('pdi_view/pdi_delete');
-		$this->load->view('include/footer');
+		$this->Model_Pdi->delete($id);
+		redirect('pdi/get');
 	}
+	
+	/**
+	 * insertar datos del punto de informacion de la sede
+	 * @access public
+	 */
+	public function insert() {
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload', $config);
+		 
+		$registro = $this->input->post();
+		 
+		if ( $this->upload->do_upload())
+		{
+			$upload_data = $this->upload->data();
+			$registro += array('imagen'=> $upload_data['file_name']);
+		}
+		
+		$registro+=array('sede_id'=> $this->session->userdata('sede'));
+		$this->Model_Pdi->insert($registro);
+		redirect('pdi/get');
+	}
+	
+	/**
+	 * actualizar datos del punto de informacion
+	 * @access public
+	 */
+	public function update() {
+		 
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+	
+		$this->load->library('upload', $config);
+		$registro = $this->input->post();
+		if ( $this->upload->do_upload())
+		{
+			$upload_data = $this->upload->data();
+			$registro += array('imagen'=> $upload_data['file_name']);
+		}
+		$this->Model_Pdi->update($registro);
+		redirect('pdi/get');
+	}
+	
 }
