@@ -9,13 +9,13 @@ class Model_Perfil extends CI_Model {
     function insert($registro) {
         $this->db->set($registro);
         $this->db->insert('perfil');
-        return $this->db->insert_id();//retorna el ultimo valor
+        return $this->db->insert_id();
     }
 
     function get($username) {
     	$this->db->select('p.*');
     	$this->db->from('perfiles p');
-    	$this->db->join('usuarios u', 'p.user_id = u.id');
+    	$this->db->join('usuarios u', 'p.id = u.perfil_id');
     	$this->db->where('u.usuario', $username);
     	$query = $this->db->get();
     	return $query->result();
@@ -23,9 +23,10 @@ class Model_Perfil extends CI_Model {
     
 	function getByUserId($id) {
 		$this->db->select('p.id, p.nombre, p.apellido, p.telefono, p.documento,
-		p.fec_nac, p.domicilio, p.email, p.sede_id as sede, p.user_id, u.role_id as rol');
+				p.fec_nac, p.domicilio, p.email, p.sede_id as sede,u.id as user_id, u.role_id as rol');
+// 		p.fec_nac, p.domicilio, p.email, p.sede_id as sede, p.user_id, u.role_id as rol');
         $this->db->from('perfiles p');
-		$this->db->join('usuarios u', 'p.user_id = u.id');
+		$this->db->join('usuarios u', 'u.perfil_id = p.id');
 		//$this->db->join('sedes s', 'p.sede_id = s.id','left');
 		$this->db->where('u.id', $id); 
         $query = $this->db->get();

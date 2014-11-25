@@ -13,14 +13,8 @@ class Perfil extends CI_Controller
 	 * detalles del perfil
 	 * @access public
 	 */
-	function get()
-	{
-// 		if($this->user->checkPrivilege('perfil_search') == false)
-// 		{
-// 			show_error("you have no privilege to access this page");
-// 			return ;
-// 		}
-				
+	function index()
+	{				
 		$data['query'] = $this->Model_Perfil->get($this->session->userdata('username'));
 		$data['titulo'] = 'Mi Perfil';
 		$data['opciones'] = true;
@@ -37,13 +31,6 @@ class Perfil extends CI_Controller
 	 */
 	function edit()
 	{
-		/*if($this->user->checkPrivilege('perfil_edit') == false)
-		{
-			show_error("you have no privilege to access this page");
-			return ;
-		}*/
-
-        //$miPerfil = $this->user->getPerfilId();
         $data['query'] = $this->Model_Perfil->get($this->session->userdata('username'));
 	
 		$this->load->view('include/header');
