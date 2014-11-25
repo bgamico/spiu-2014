@@ -6,14 +6,17 @@ function updateDatabase(newLat, newLng)
 }
 </script>
 
-<div class="row">
-<div class="span11">
+
+<div class="col-lg-11">
 	<?php echo $map['js']; ?>
 	<?php echo $map['html']; ?>
 </div>
-<div class="span4">
+<div class="col-lg-8">
+	<div class="well bs-component">
     <!--?= form_open('pdi/update', array('class'=>'','id'=>'contact-form')); ?-->
     <?= form_open_multipart('pdi/update', array('class'=>'form-horizontal','id'=>'contact-form'));?>
+    <fieldset>
+    <?= validation_errors(); ?>
     <?php foreach ($query as $registro): ?>
         <legend> Actualizar Punto de Informacion</legend>
 
@@ -107,6 +110,7 @@ function updateDatabase(newLat, newLng)
         </div>
         </div>
     <?php endforeach; ?>
+    </fieldset>
     <?= form_close(); ?>
 </div>
 </div>
