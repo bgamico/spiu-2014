@@ -14,7 +14,7 @@ class Fecha extends CI_Controller
 	 * pagina para listar las fechas de examen
 	 * @access public
 	 */
-	function get()
+	function index()
 	{
 		$this->load->model('Model_Examen');
 		$data['query'] = $this->Model_Examen->getBySedeId($this->session->userdata('sede'));
@@ -34,7 +34,7 @@ class Fecha extends CI_Controller
 		$registro = $this->input->post() + array('sede_id'=> $this->session->userdata('sede'));
 		$this->load->model('Model_Examen');
 		$this->Model_Examen->insert($registro);
-		redirect('fecha/get');
+		redirect('fecha');
 	}
 		
 	/**
@@ -60,7 +60,7 @@ class Fecha extends CI_Controller
 		$registro = $this->input->post();
 		$this->load->model('Model_Examen');
 		$this->Model_Examen->update($registro);
-		redirect('fecha/get');
+		redirect('fecha');
 	}
 	
 	/**
@@ -84,6 +84,6 @@ class Fecha extends CI_Controller
 	{
 		$this->load->model('Model_Examen');
 		$this->Model_Examen->delete($id);
-		redirect('fecha/get');
+		redirect('fecha');
 	}
 }
