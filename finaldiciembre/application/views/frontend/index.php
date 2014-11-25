@@ -1,50 +1,44 @@
-<html>
-<head>
-  <title>Mapa interactivo de España SVG/RaphaëlJs - Demo</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="<?php echo base_url('assets/js/raphael-min.js') ?>"></script>
-  <script src="<?php echo base_url('assets/js/rio-negro-map.js') ?>"></script>
-  <style type="text/css">
-    body {
-      background: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      text-align: center;
-      color: #555;
+
+
+    <script type="text/javascript">
+    function datos_marker(lat, lng, marker)
+    {
+     var mi_marker = new google.maps.LatLng(lat, lng);
+     map.panTo(mi_marker);
+     google.maps.event.trigger(marker, 'click');
     }
-    h1 {
-      font-size: 25px;
-      padding: 30px 0 10px;
-    }
-    p {
-      padding-bottom: 30px;
-    }
-    a {
-      color: #66bbdd;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
- 
-  <p>Mapa vectorial interactivo de Río Negro creado a partir de un mapa SVG y la librería <a href="http://raphaeljs.com" target="_blank">RaphaëlJs</a>.</p>
-  <div id="map">
-  <script type="text/javascript">
-    new RioNegroMap({
-      id: 'map',
-      width: 1100,
-      height: 500,
-      fillColor: "#eeeeee",
-      strokeColor: "#cccccc",
-      strokeWidth: 0.7,
-      selectedColor: "#66bbdd",
-      animationDuration: 200,
-      onClick: function(province, event) {
-        //alert("Has seleccionado " + province.name);
-		window.location = "sede/search/" + province.number;
-      }
-    });
-  </script>
-</body>
+    </script>
+    <?=$map['js']?>
+
+<div class="row row-offcanvas row-offcanvas-right">
+	<div class="col-xs-12 col-sm-8">
+	<?=$map['html']?>
+	</div>
+	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+				  <li role="presentation" onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><a><?=substr($marker_sidebar->nombre,0)?></a>			  
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+	    	<ul class="nav nav-pills nav-stacked">
+	    	<?php foreach($datos as $marker_sidebar)
+		        {?>
+		        <li role="presentation"><a></a></li>
+					<?= anchor('home/sede/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+					<?= anchor('home/aviso/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+					<?= anchor('home/actividad/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+					<?= anchor('home/examen/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
+				  <?php
+		        }
+		        ?>
+			</ul>
+    
+    </div>
+	
+</div>

@@ -29,5 +29,9 @@ class Model_Pdi extends CI_Model {
     	$this->db->delete('pdis');
     }
     
+    function getBySedeId($id){
+    	$this->db->where('sede_id', $id);
+    	return $this->db->get('pdis')->result();
+    }
     
 }
