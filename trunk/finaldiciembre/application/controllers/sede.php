@@ -15,6 +15,13 @@ class Sede extends CI_Controller
 	 */
 	function index(){
 
+		if ($this->session->userdata('rol') == 1){
+			$markers = $this->Model_Sede->all();
+		}
+		else{
+			$markers = $this->Model_Sede->miSede($this->session->userdata('username'));
+		}
+
 		$this->load->library('googlemaps');
 		$config = array();
 		$config['center'] = 'rio negro,argentina';
@@ -24,14 +31,14 @@ class Sede extends CI_Controller
 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 		
-		$markers = $this->Model_Sede->all();
+				
 		$data['datos'] = $markers;
 		foreach($markers as $info_marker)
 		{
 			$marker = array();
 			$marker ['animation'] = 'DROP';
 			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
-			$marker ['infowindow_content'] = '<img src='.base_url('uploads/patagones.jpg').'><br>'.$info_marker->nombre;
+			$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
 			$marker['id'] = $info_marker->id;
 			$this->googlemaps->add_marker($marker);
 		}
@@ -43,7 +50,7 @@ class Sede extends CI_Controller
 		$this->load->view('sede_view/sede_get',$data);
 		$this->load->view('include/footer');
 		
-	}
+	}	
 		
 	/**
 	 * formulario para agregar sedes
@@ -73,33 +80,26 @@ class Sede extends CI_Controller
     	$config['allowed_types'] = 'gif|jpg|png';
     	$this->load->library('upload', $config);
     	
-    	if ( ! $this->upload->do_upload())
-    	{
-    		$error = array('error' => $this->upload->display_errors());
+    	$registro = $this->input->post();
     	
-    		$this->load->view('sede_view/sede_add', $error);
-    	}
-    	else
-    	{    	
+    	if ( $this->upload->do_upload())
+    	{
     		$upload_data = $this->upload->data();
-    		$registro = $this->input->post() + array('imagen'=> $upload_data['file_name']);
- 	        $this->Model_Sede->insert($registro);
-	        redirect('sede/get');
+    		$registro += array('imagen'=> $upload_data['file_name']);
     	}
+ 	        $this->Model_Sede->insert($registro);
+	        redirect('sede');
     	 
     }
     
     /**
-	 * sede delete page
+	 * eliminación de sedes
 	 * @access public
 	 */
-	function delete()
+	function delete($id)
 	{
-	
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('sede_view/sede_delete');
-		$this->load->view('include/footer');
+		$this->Model_Sede->delete($id);
+		redirect('sede');
 	}
 	
 	 /**
@@ -116,34 +116,6 @@ class Sede extends CI_Controller
         $this->load->view('sede_view/sede_get',$data);
         $this->load->view('include/footer');
     }
-
-    function miSede()
-    {
-    	
-    	$query = $this->Model_Sede->miSede($this->session->userdata('username'));
-    	$data['datos'] = $query;
-    	$this->load->library('googlemaps');
-    	
-    	foreach($query as $row)
-    	{
-    		$marker = array();
-    		$marker ['position'] = $row->latitud.','.$row->longitud;
-    		$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$row->imagen).'><br>'.$row->nombre;
-    		$marker['id'] = $row->id;
-    		$this->googlemaps->add_marker($marker);
-    	}
-    	
-    	$config['center'] = 'rio negro,argentina';
-    	$config['zoom'] = 6;
-    	$this->googlemaps->initialize($config);
-    	    	
-    	$data['map'] = $this->googlemaps->create_map();
-		
-        $this->load->view('include/header');
-        $this->load->view('include/nav');
-        $this->load->view('sede_view/sede_get',$data);
-        $this->load->view('include/footer');
-    }
     
     /**
      * editar datos de la sede
@@ -151,32 +123,28 @@ class Sede extends CI_Controller
      */
     function edit($id )
     {
-    
+    	
     	$query = $this->Model_Sede->find($id);
     	$data['query'] = $query;
     
-    	foreach ($query as $row)
+    	$this->load->library('googlemaps');
+    	 
+    	foreach($query as $row)
     	{
-    		$latitud =  $row->latitud;
-    		$longitud =  $row->longitud;
-    		$nombre = $row->nombre;
-    		$imagen = $row->imagen;
+    		$marker = array();
+    		$marker ['position'] = $row->latitud.','.$row->longitud;
+    		$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$row->imagen).'><br>'.$row->nombre;
+    		$marker['id'] = $row->id;
+	    	$marker['draggable'] = true;
+	    	$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+	    	$this->googlemaps->add_marker($marker);
+	    	$config['center'] = $row->latitud.','.$row->longitud;
     	}
     
-    	$this->load->library('googlemaps');
-    	$config['center'] = $latitud.','. $longitud;
     	$config['zoom'] = 10;
     	$this->googlemaps->initialize($config);
-    
-    	$marker = array();
-    	$marker['position'] = $latitud.','. $longitud;
-    	$marker['draggable'] = true;
-    	$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
-//     	$marker['onmouseover'] = 'iw.setContent(this.get("content")); iw.open(map, this);';
-    	$marker['infowindow_content'] = '<img src='.base_url('uploads/patagones.jpg').'><br>'. $nombre;
-    	$this->googlemaps->add_marker($marker);
     	$data['map'] = $this->googlemaps->create_map();
-    
+    	
     	$this->load->view('include/header');
     	$this->load->view('include/nav');
     	$this->load->view('sede_view/sede_edit',$data);
@@ -193,20 +161,14 @@ class Sede extends CI_Controller
     	$config['allowed_types'] = 'gif|jpg|png';
     	 
     	$this->load->library('upload', $config);
-    	 
-    	if ( ! $this->upload->do_upload())
-    	{
-    		$error = array('error' => $this->upload->display_errors());
-    		 
-    		$this->load->view('sede_view/sede_edit');
-    	}
-    	else
+    	$registro = $this->input->post();
+    	if ( $this->upload->do_upload())
     	{
     		$upload_data = $this->upload->data();
-    		$registro = $this->input->post() + array('imagen'=> $upload_data['file_name']);
-    		$this->Model_Sede->update($registro);
-    		redirect('sede/get');
+    		$registro += array('imagen'=> $upload_data['file_name']);
     	}
+    	$this->Model_Sede->update($registro);
+    	redirect('sede');
     }
     
 }

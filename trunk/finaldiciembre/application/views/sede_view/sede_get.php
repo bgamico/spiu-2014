@@ -55,7 +55,8 @@
 		        {?>
 		        <li role="presentation"><a></a></li>
 					<?= anchor('sede/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-					<?= anchor('sedemanage/delete/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view', 'id'=>'delete')); ?>
+					<!-- ?= anchor('sedemanage/delete/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view', 'id'=>'delete')); ?-->
+					<a id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 				  <?php
 		        }
 		        ?>
@@ -65,4 +66,25 @@
 	
 </div>
 </body>
-</html>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar Borrado</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Esta seguro que desea borrar este usuario?</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <?= anchor('sede/delete/'.$marker_sidebar->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
