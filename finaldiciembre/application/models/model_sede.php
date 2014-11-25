@@ -28,7 +28,7 @@ class Model_Sede extends CI_Model {
     function miSede($username) {    	
     	$this->db->select ( 's.*' );
     	$this->db->from ( 'usuarios u' );
-    	$this->db->join ( 'perfiles p', 'p.user_id = u.id' );
+    	$this->db->join ( 'perfiles p', 'p.id = u.perfil_id' );
     	$this->db->join ( 'sedes s', 'p.sede_id = s.id' );
     	$this->db->where ( 'u.usuario', $username );
     	return $this->db->get()->result();
