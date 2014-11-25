@@ -46,6 +46,6 @@ class Perfil extends CI_Controller
     public function update() {
         $registro = $this->input->post();
         $this->Model_Perfil->update($registro);
-        redirect('perfilmanage/search');
+        redirect('perfil');
     }
 }
