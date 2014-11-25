@@ -6,13 +6,14 @@ function updateDatabase(newLat, newLng)
 }
 </script>
 
-<div class="row">
-<div class="span11">
+
+<div class="col-lg-11">
 	<?php echo $map['js']; ?>
 	<?php echo $map['html']; ?>
 </div>
-<div class="span4">
-    <!--?= form_open('sede/update', array('class'=>'','id'=>'contact-form')); ?-->
+<div class="col-lg-8">
+	<div class="well bs-component">
+	<fieldset>
     <?= form_open_multipart('sede/update', array('class'=>'form-horizontal','id'=>'contact-form'));?>
     <?php foreach ($query as $registro): ?>
         <legend> Actualizar Sede </legend>
@@ -81,5 +82,6 @@ function updateDatabase(newLat, newLng)
         </div>
     <?php endforeach; ?>
     <?= form_close(); ?>
+    </fieldset>
 </div>
 </div>

@@ -22,13 +22,13 @@ class Pdi extends CI_Controller
 // 		$config['center'] = 'rio negro,argentina';
 // 		$config['zoom'] = '6';
 		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
-		$config['zoom'] = '10';	
+		$config['zoom'] = '12';	
 		$config['map_type'] = 'ROADMAP';
 		$config['map_width'] = '750px';
 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 		
-		$markers = $this->Model_Pdi->all();
+		$markers = $this->Model_Pdi->getBySedeId($this->session->userdata('sede'));
 		$data['datos'] = $markers;
 		foreach($markers as $info_marker)
 		{

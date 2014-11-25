@@ -1,4 +1,6 @@
-<div class="span9">
+<div class="col-lg-8">
+	<div class="well bs-component">
+    <fieldset>
 <?= form_open('perfil/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
 <legend> Actualizar Perfil </legend>
 
@@ -78,4 +80,6 @@
 
 <?php endforeach; ?>
 <?= form_close(); ?>
+    </fieldset>
+</div>
 </div>

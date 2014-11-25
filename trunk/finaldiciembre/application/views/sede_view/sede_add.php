@@ -1,5 +1,7 @@
-<div class="span7">
+<div class="col-lg-8">
+	<div class="well bs-component">
     <?= form_open_multipart('sede/insert', array('class'=>'form-horizontal','id'=>'contact-form'));?>
+    <fieldset>
 	<legend> Crear Sede </legend>
 
 	<?= validation_errors(); ?>
@@ -66,5 +68,7 @@
 		<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
 	</div>
 	</div>
+	</fieldset>
 <?= form_close(); ?>
+    </div>
     </div>
