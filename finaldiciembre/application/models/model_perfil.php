@@ -24,19 +24,18 @@ class Model_Perfil extends CI_Model {
 	function getByUserId($id) {
 		$this->db->select('p.id, p.nombre, p.apellido, p.telefono, p.documento,
 				p.fec_nac, p.domicilio, p.email, p.sede_id as sede,u.id as user_id, u.role_id as rol');
-// 		p.fec_nac, p.domicilio, p.email, p.sede_id as sede, p.user_id, u.role_id as rol');
         $this->db->from('perfiles p');
 		$this->db->join('usuarios u', 'u.perfil_id = p.id');
-		//$this->db->join('sedes s', 'p.sede_id = s.id','left');
 		$this->db->where('u.id', $id); 
         $query = $this->db->get();
         return $query->result();
     }
     
     function update($registro) {
+		$this->db->where('id', $registro['perfil_id']);
+		unset($registro['perfil_id']);
     	$this->db->set($registro);
-		$this->db->where('perfil_id', $registro['perfil_id']);
-		$this->db->update('perfil');
+		$this->db->update('perfiles');
     }
 
 }

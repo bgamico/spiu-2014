@@ -1,5 +1,5 @@
 <div class="span9">
-<?= form_open('perfilmanage/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+<?= form_open('perfil/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
 <legend> Actualizar Perfil </legend>
 
 <?php foreach ($query as $registro): ?>
@@ -65,7 +65,7 @@
 <div class="control-group">
     <?= form_label('Email:', 'mail', array('class'=>'col-lg-3 control-label')); ?>
     <div class="col-lg-9">
-    <?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'mail', 'id'=>'mail', 'value'=>$registro->email)); ?>
+    <?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'email', 'id'=>'mail', 'value'=>$registro->email)); ?>
 </div>
 </div>
 </div>
