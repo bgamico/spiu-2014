@@ -1,6 +1,3 @@
-<!-- sección de avisos -->
-<?= $contenedor_aux; ?>
-
 <div class="span12">
 <div class="bs-docs-section">
 
@@ -42,12 +39,8 @@
                             <td> <?= date("H:i", strtotime($registro->hora)); ?> </td>
                             <td> <?= $registro->direccion ?> </td>
                             <td>
-                            	<!-- solo se permite editar eliminar o agregar actividades  -->
-                                <!-- < ?= anchor('actividadmanage/view/'.$registro->actividad_id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>-->
                                 <?= anchor('actividad/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-                                <!--< ?= anchor('actividadmanage/delete/'.$registro->user_id, '<i class="glyphicon glyphicon-remove"></i>',array('class'=>'view')); ?> -->
-                                <?=anchor('actividadmanage/delete/'.$registro->id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; la actividad. &iquest;Est&aacute; seguro&#63')"))?>
-
+                                <a id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>                            
 
                         </tr>
@@ -56,4 +49,26 @@
                 </table>
         </div>
 </div>
+</div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmar Borrado</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Esta seguro que desea borrar esta actividad?</p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <?= anchor('actividad/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
+                    
+                </div>
+            </div>
+        </div>
 </div>

@@ -19,14 +19,6 @@ class Model_Actividad extends CI_Model {
 		return $this->db->get($this->tabla)->row();		
     }
 	
-    /**
-     * búsqueda según una columna de la tabla y una clave.
-     * */
-    function find_by_x($columna,$key) {
-    	$this->db->where($columna, $key);
-    	return $this->db->get($this->tabla)->row();
-    }    
-
     function insert($registro) {
     	$this->db->set($registro);
 		$this->db->insert($this->tabla);
@@ -34,17 +26,17 @@ class Model_Actividad extends CI_Model {
 
     function update($registro) {
     	$this->db->set($registro);
-		$this->db->where('actividad_id', $registro['actividad_id']);
+		$this->db->where('id', $registro['id']);
 		$this->db->update($this->tabla);
     }
 
     function delete($id) {
-    	$this->db->where('actividad_id', $id);
+    	$this->db->where('id', $id);
 		$this->db->delete($this->tabla);
     }
     
     function getBySedeId($id){
     	$this->db->where('sede_id', $id);
-    	return $this->db->get('actividades')->result();
+    	return $this->db->get($this->tabla)->result();
     }
 }

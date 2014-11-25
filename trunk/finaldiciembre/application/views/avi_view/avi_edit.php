@@ -1,7 +1,7 @@
 <div class="col-lg-9 offset1">
 <div class="well bs-component">
 
-  <?= form_open('avisomanage/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+  <?= form_open('aviso/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
   <fieldset>
     <legend>Actualizar aviso</legend>
      

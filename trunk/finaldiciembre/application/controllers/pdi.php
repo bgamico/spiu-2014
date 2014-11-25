@@ -13,14 +13,12 @@ class Pdi extends CI_Controller
 	 * listar los pdi
 	 * @access public
 	 */
-	function get()
+	function index()
 	{				
 		
 		$sede = $this->Model_Sede->find($this->session->userdata('sede'));
 		$this->load->library('googlemaps');
 		$config = array();
-// 		$config['center'] = 'rio negro,argentina';
-// 		$config['zoom'] = '6';
 		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
 		$config['zoom'] = '12';	
 		$config['map_type'] = 'ROADMAP';

@@ -1,9 +1,9 @@
 <div class="col-lg-9 offset1">
 <div class="well bs-component">
 
-  <?= form_open('actividadmanage/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+  <?= form_open('actividad/update', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
   <fieldset>
-    <legend><?= $titulo ?></legend>
+    <legend>Actualizar actividad</legend>
      
     <?= form_hidden('id', $registro->id); ?>
 
