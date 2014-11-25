@@ -14,7 +14,7 @@ class Usuario extends CI_Controller
 	 * listar usuarios
 	 * @access public
 	 */
-	public function get()
+	public function index()
 	{	
 		if ($this->session->userdata('rol') == 1){
 			$data['query'] = $this->Model_Usuario->all($this->session->userdata('username'));
@@ -56,7 +56,7 @@ class Usuario extends CI_Controller
 		}
 			
 		$this->Model_Usuario->insert($registro);
-		redirect('usuario/get');
+		redirect('usuario');
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Usuario extends CI_Controller
     		$registro['sede_id'] = NULL;
     	}
     	$this->Model_Usuario->update($registro);
-    	redirect('usuario/get');
+    	redirect('usuario');
     }
 
     /**
@@ -109,6 +109,6 @@ class Usuario extends CI_Controller
     
     public function delete($id) {
      	$this->Model_Usuario->delete($id);
-    	redirect('usuario/get');
+    	redirect('usuario');
     }
 }

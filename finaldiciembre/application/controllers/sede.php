@@ -13,7 +13,7 @@ class Sede extends CI_Controller
 	 * listado de sedes
 	 * @access public
 	 */
-	function get(){
+	function index(){
 
 		$this->load->library('googlemaps');
 		$config = array();
@@ -133,11 +133,10 @@ class Sede extends CI_Controller
     		$this->googlemaps->add_marker($marker);
     	}
     	
-    	$config['center'] = $row->latitud.','.$row->longitud;
-    	$config['zoom'] = 10;
+    	$config['center'] = 'rio negro,argentina';
+    	$config['zoom'] = 6;
     	$this->googlemaps->initialize($config);
     	    	
-		//$data['query'] = $this->Model_Sede->miSede($this->session->userdata('username'));
     	$data['map'] = $this->googlemaps->create_map();
 		
         $this->load->view('include/header');

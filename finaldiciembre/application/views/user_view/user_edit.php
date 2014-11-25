@@ -30,7 +30,7 @@
     <legend> Actualizar Usuario </legend>
     <?php foreach ($query as $registro): ?>
     
-    <?= form_hidden('id', $registro->user_id); ?>
+    <?= form_hidden('id', $registro->id); ?>
 
     <div class="form-group">
 	    <div class="control-group">
