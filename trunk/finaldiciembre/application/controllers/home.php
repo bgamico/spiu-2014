@@ -39,7 +39,7 @@ class Home extends CI_Controller {
 		$this->load->view('include/footer');
 	}
 	
-	public function sede($id){
+	public function pdi($id){
 	
 		$this->load->library('googlemaps');
 		$markers = $this->Model_Pdi->getBySedeId($id);
