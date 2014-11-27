@@ -35,15 +35,12 @@ class Model_Usuario extends CI_Model {
 		$perfil_id = $this->db->insert_id();
  		$usuario['perfil_id'] = $perfil_id;
  		$this->db->insert('usuarios', $usuario);
-// 		return $user_id;
 	}
 	
-	function update($registro) {
-		$rol = array(role_id=>$registro['rol']);
-		unset($registro['rol']);
-		$this->db->where('id', $registro['id']);
-		$this->db->update('usuarios' ,$rol);
-		$perfil = array(id=>$registro['id']);
+	function update($registro) {		
+		$this->db->update('usuarios' ,array('role_id'=>$registro['rol']), array('perfil_id'=>$registro['id']));
+		unset($registro['rol']); 		
+		$perfil = $this->db->where('id', $registro['id']);
 		unset($registro['id']);
 		$this->db->update('perfiles', $registro, $perfil);
 	}
