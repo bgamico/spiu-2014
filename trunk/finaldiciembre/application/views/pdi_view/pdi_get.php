@@ -23,36 +23,35 @@
       </div>
     </nav>
   </div>
-<div class="row row-offcanvas row-offcanvas-right">
-	<div class="col-xs-12 col-sm-8">
+
+		<div class="col-sm-8">
 	<?=$map['html']?>
 	</div>
-	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-	    	<ul class="nav nav-pills nav-stacked">
-	    	<?php foreach($datos as $marker_sidebar)
+	<hr class="visible-xs" >
+
+
+
+  	<div class="col-md-4" id="left">
+    
+      <?php foreach($datos as $marker_sidebar)
 		        {?>
-				  <li role="presentation" onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><a><?=substr($marker_sidebar->nombre,0)?></a>			  
+				  <div class="panel panel-default">
+			        <div class="panel-heading" >
+			        		<a onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><?=substr($marker_sidebar->nombre,0)?></a>
+							<a class="pull-right col-md-1" id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+			        		<?= anchor('sede/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view pull-right')); ?>
+							 
+					</div>
+			      </div>
+			      		  				  
+				  			  
 				  <?php
 		        }
 		        ?>
-			</ul>
-    
+
     </div>
-    <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-	    	<ul class="nav nav-pills nav-stacked">
-	    	<?php foreach($datos as $marker_sidebar)
-		        {?>
-		        <li role="presentation"><a></a></li>
-					<?= anchor('pdi/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-					<a id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
-				  <?php
-		        }
-		        ?>
-			</ul>
     
-    </div>
-	
-</div>
+
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
