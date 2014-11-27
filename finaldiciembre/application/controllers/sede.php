@@ -38,7 +38,7 @@ class Sede extends CI_Controller
 			$marker = array();
 			$marker ['animation'] = 'DROP';
 			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
-			$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
+			$marker ['infowindow_content'] = '<img width="150" height="117" src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
 			$marker['id'] = $info_marker->id;
 			$this->googlemaps->add_marker($marker);
 		}
