@@ -36,7 +36,6 @@
 							<td>
                                 <?= anchor('usuario/view/'.$registro->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
                                 <?= anchor('usuario/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-<!--                                 <a data-href="delete.php?id=23" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>                                 -->
                                 <a data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
 						</tr>
