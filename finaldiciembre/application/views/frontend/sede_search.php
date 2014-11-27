@@ -14,6 +14,8 @@
 	<div class="col-xs-12 col-sm-8">
 	
 	</div>
+			<?=$map['js']?>
+			<?=$map['html']?>
 	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
 	    	<ul class="nav nav-pills nav-stacked">
 	    	<?php foreach($datos as $marker_sidebar)
@@ -35,8 +37,6 @@
 		        }
 		        ?>
 			</ul>
-			<?=$map['js']?>
-			<?=$map['html']?>
     
     </div>
 	
