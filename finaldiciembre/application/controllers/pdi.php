@@ -83,7 +83,7 @@ class Pdi extends CI_Controller
 	 * pagina para agregar puntos de informacion
 	 * @access public
 	 */
-	function add()
+	function addoriginal()
 	{
 		$this->load->library('googlemaps');
 		
@@ -103,6 +103,17 @@ class Pdi extends CI_Controller
 		$this->load->model('ciudades_model');
 		$data['provincias'] = $this->ciudades_model->provincias();
 		
+		$this->load->view('include/header');
+		$this->load->view('include/nav');
+		$this->load->view('pdi_view/pdi_add', $data);
+		$this->load->view('include/footer');
+	}
+	
+	function add()
+	{
+		$this->load->model('ciudades_model');
+		$data['provincias'] = $this->ciudades_model->provincias();
+	
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('pdi_view/pdi_add', $data);

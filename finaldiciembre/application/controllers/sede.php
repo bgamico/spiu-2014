@@ -56,7 +56,7 @@ class Sede extends CI_Controller
 	 * formulario para agregar sedes
 	 * @access public
 	 */
-	function add()
+	function addoriginal()
 	{
 // 		if(isset($_POST['nombre'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
 // 		 	$this->form_validation->set_rules('nombre','Nombre','is_unique[sede.nombre]');//  Configuramos las validaciones ayudandonos con la librería form_validation
@@ -65,12 +65,35 @@ class Sede extends CI_Controller
 // 			}
 // 		}
 		
+		$this->load->library('googlemaps');
+		
+		$marker = array();
+		$marker ['position'] = 'rio negro, argentina';
+		$marker['draggable'] = true;
+		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+		$this->googlemaps->add_marker($marker);
+		
+		
+		$config['center'] = 'rio negro, argentina';
+		$config['zoom'] = 6;
+		$this->googlemaps->initialize($config);
+		$data['map'] = $this->googlemaps->create_map();
+		 
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
-		$this->load->view('sede_view/sede_add', array('error' => ' ' ));
+		$this->load->view('sede_view/sede_addoriginal', $data);
 		$this->load->view('include/footer');
 	}
 
+	function add()
+	{
+		$this->load->view('include/header');
+		$this->load->view('include/nav');
+		$this->load->view('sede_view/sede_add');
+		$this->load->view('include/footer');
+	}
+	
+	
     /**
      * cargar imagen e insertar datos de la sede en la base
      * @access public

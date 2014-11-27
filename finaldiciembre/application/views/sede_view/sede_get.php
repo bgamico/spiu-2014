@@ -77,7 +77,7 @@
                 </div>
             
                 <div class="modal-body">
-                    <p>Esta seguro que desea borrar este usuario?</p>
+                    <p>Esta seguro que desea borrar esta Sede?</p>
                 </div>
                 
                 <div class="modal-footer">
