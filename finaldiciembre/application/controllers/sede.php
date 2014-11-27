@@ -27,8 +27,8 @@ class Sede extends CI_Controller
 		$config['center'] = 'rio negro,argentina';
 		$config['zoom'] = '6';
 		$config['map_type'] = 'ROADMAP';
-		$config['map_width'] = '750px';
-		$config['map_height'] = '500px';
+// 		$config['map_width'] = '750px';
+// 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 				
 		$data['datos'] = $markers;
@@ -142,7 +142,7 @@ class Sede extends CI_Controller
     	}
     	
     	$config['center'] = $row->latitud.','.$row->longitud;
-    	$config['onclick'] = 'marker_1.setPosition(event.latLng);updateDatabase(event.latLng.lat(), event.latLng.lng());';
+    	$config['onclick'] = 'marker_1.setPosition(event.latLng); updateDatabase(event.latLng.lat(), event.latLng.lng());';
      	
     	$config['zoom'] = 10;
     	$this->googlemaps->initialize($config);

@@ -15,7 +15,7 @@
 <!--         <li>&nbsp;</li> -->
 <!--       </ul> -->
 <!--       <form class="navbar-form"> -->
-        <div class="form-group" style="display:inline;">
+        <!-- div class="form-group" style="display:inline;"-->
 <!--           <div class="input-group"> -->
 <!--             <div class="input-group-btn"> -->
 <!--               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button> -->
