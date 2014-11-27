@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<head>
+  <link href="<?php echo base_url('assets/styles/main.css') ?>" rel="stylesheet">
+  <link href="<?php echo base_url('assets/styles/jquery-ui/jquery-ui-1.8.16.custom.css') ?>" rel="stylesheet">
+
+  <!-- google maps -->
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+  <!-- jquery -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  <!-- jquery UI -->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+  <!-- our javascript -->
+<!--   <script type="text/javascript" src="js/gmaps.js"></script> -->
+  <script src="<?php echo base_url('assets/js/gmaps.js') ?>"></script>
 <script type="text/javascript">
 		$(document).ready(function() {
 			$("#provincia").change(function() {
@@ -12,21 +29,15 @@
 			})
 		});
 </script>
-<script type="text/javascript">
-function updateDatabase(newLat, newLng)
-{
-	document.getElementById('latitud').value = newLat;
-	document.getElementById('longitud').value = newLng;
-}
+</head>    
 
-</script>
+    <div id='input'>
+      <input id='gmaps-input-address' placeholder='Ingresar el nombre del lugar' type='text' />
+      <div id='gmaps-error'></div>
+    </div>
 
-
-	<div class="col-lg-8">
-	<?php echo $map['js']; ?>
-	<?php echo $map['html']; ?>
-	</div>
-	
+    <div id='gmaps-canvas'></div>
+<hr/>	
 	<div class="col-lg-8">
 	<div class="well bs-component">
 	
@@ -46,7 +57,7 @@ function updateDatabase(newLat, newLng)
 			
 			<div class="form-group">
 			<div class="control-group">
-				<?= form_label('Imagen:', 'imagen', array('class'=>'col-lg-3 control-label')); ?>
+				<?= form_label('Imagen', 'imagen', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
 				<?= form_input(array('type'=>'file', 'class'=>"form-control",'name'=>'userfile', 'id'=>'imagen', 'value'=>set_value('imagen'))); ?>
 			</div>
@@ -96,7 +107,7 @@ function updateDatabase(newLat, newLng)
 			<div class="control-group">
 				<?= form_label('Latitud*', 'latitud', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'latitud', 'id'=>'latitud', 'value'=>set_value('latitud'))); ?>				
+				<?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'latitud', 'id'=>'gmaps-output-latitude', 'value'=>set_value('latitud'))); ?>				
 			</div>
 			</div>
 			</div>
@@ -105,7 +116,7 @@ function updateDatabase(newLat, newLng)
 			<div class="control-group">
 				<?= form_label('Longitud*', 'longitud', array('class'=>'col-lg-3 control-label')); ?>
 				<div class="col-lg-9">
-				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'longitud', 'id'=>'longitud', 'value'=>set_value('longitud'))); ?>
+				<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'longitud', 'id'=>'gmaps-output-longitude', 'value'=>set_value('longitud'))); ?>
 			</div>
 			</div>
 			</div>

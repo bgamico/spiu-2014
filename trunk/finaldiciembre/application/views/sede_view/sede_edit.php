@@ -6,10 +6,10 @@ function updateDatabase(newLat, newLng)
 }
 </script>
 
-
 <div class="col-lg-11">
 	<?php echo $map['js']; ?>
 	<?php echo $map['html']; ?>
+<hr/>
 </div>
 <div class="col-lg-8">
 	<div class="well bs-component">
