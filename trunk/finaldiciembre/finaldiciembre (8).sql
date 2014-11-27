@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-11-2014 a las 19:00:14
+-- Tiempo de generación: 27-11-2014 a las 23:52:48
 -- Versión del servidor: 5.5.8
 -- Versión de PHP: 5.3.5
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
 
 INSERT INTO `actividades` (`id`, `nombre`, `descripcion`, `fecha`, `hora`, `direccion`, `sede_id`) VALUES
 (1, 'Encuentro primer aniversario', 'La sede Atlántica conmemora su primer año de vida.', '2014-04-01', '00:00:00', 'Calle siempre viva 233', 1),
-(2, 'Seminarios', 'Seminario...', '2014-03-01', '00:00:00', 'Calle siempre viva 232', 2),
+(2, 'Seminarios', 'Seminario...', '2014-03-01', '23:59:00', 'Calle siempre viva 232', 2),
 (3, 'Festejos día del estudiante 2014', 'Encuentro recreativo para los estudiantes...', '2014-09-18', '00:00:00', 'Av. Costanera 200', 1),
 (4, 'Actividad de ejemplo', 'Es un ejemplo de actividad.', '2014-06-03', '00:00:00', 'Av. Juan soulin 33', 1),
 (5, 'Seminario', '...verificando que no exista una actividad con el mismo nombre por sede', '2014-03-06', '00:00:00', 'Calle siempre viva 100', 1),
@@ -51,7 +51,7 @@ INSERT INTO `actividades` (`id`, `nombre`, `descripcion`, `fecha`, `hora`, `dire
 (7, 'asdñkjdsl', 'alksjdkl', '0000-00-00', '00:00:00', 'lkajskldj', 3),
 (8, 'aksdñl', 'dalskdñ', '0000-00-00', '00:00:00', 'lksajkldas', 3),
 (9, 'adshkj', 'kjsahkdjh', '0000-00-00', '00:00:00', 'ksajhdkj', 3),
-(10, 'asjdjdklsa', 'akdjslk', '2014-01-01', '00:00:00', 'lkasjsdkl', 2);
+(10, 'asjdjdklsa', 'akdjslk', '2014-01-01', '23:59:00', 'lkasjsdkl', 2);
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   `sede_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_aviso_sede1_idx` (`sede_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcar la base de datos para la tabla `avisos`
@@ -23071,7 +23071,7 @@ CREATE TABLE IF NOT EXISTS `fechas_de_examen` (
   `sede_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_fecha_de_examen_sede1_idx` (`sede_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcar la base de datos para la tabla `fechas_de_examen`
@@ -23093,44 +23093,21 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `titulo` varchar(100) NOT NULL,
   `nivel` int(11) DEFAULT '1',
   `url` varchar(100) NOT NULL,
-  `parent_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Volcar la base de datos para la tabla `menus`
 --
 
-INSERT INTO `menus` (`id`, `titulo`, `nivel`, `url`, `parent_id`) VALUES
-(1, 'Gestión de Usuarios', 1, '/usuario', 0),
-(2, 'Listar usuarios', 1, '/usuario/get ', 1),
-(3, 'Agregar usuario', 2, '/usuario/add ', 1),
-(4, 'Gestión de PDI ', 2, '/pdi', 0),
-(5, 'Consultar PDI', 2, '/pdi/get', 4),
-(6, 'Editar PDI', 2, '/pdi/edit', 4),
-(7, 'Eliminar PDI', 2, '/pdi/delete', 4),
-(8, 'Agregar PDI', 2, '/pdi/add', 4),
-(9, 'Gestión de Sedes', 1, '/sede', 0),
-(10, 'Consultar sede', 2, '/sede/get', 9),
-(11, 'Agregar sede', 2, '/sede/add', 9),
-(12, 'Gestión de Perfil', 1, '/perfil', 0),
-(13, 'Consultar perfil', 2, '/perfil/get', 12),
-(14, 'Editar perfil', 2, '/perfilmanage/edit', 12),
-(15, 'Gestión de Actividades', 1, '/actividad', 0),
-(16, 'Consultar actividad', 2, '/actividad/get', 15),
-(17, 'Agregar actividad', 2, '/actividad/add', 15),
-(18, 'Gestión de Avisos', 1, '/aviso', 0),
-(19, 'Consultar avisos', 2, '/aviso/get', 18),
-(20, 'Editar avisos', 2, '/aviso/edit', 18),
-(21, 'Eliminar avisos', 2, '/aviso/delete', 18),
-(22, 'Agregar avisos', 2, '/aviso/add', 18),
-(23, 'Fechas de Exámenes', 1, '/fecha', 0),
-(24, 'Consultar fecha', 2, '/fecha/get', 23),
-(25, 'Editar fecha', 2, '/fecha/edit', 23),
-(26, 'Eliminar fecha', 2, '/fecha/delete', 23),
-(27, 'Agregar fecha', 2, '/fecha/add', 23),
-(28, 'Gestión de Usuarios', 1, '/usuario/operadores', 0),
-(29, 'Gestión de Sedes', 1, '/sede/miSede', 0);
+INSERT INTO `menus` (`id`, `titulo`, `nivel`, `url`) VALUES
+(1, 'Gestión de Usuarios', 1, '/usuario'),
+(2, 'Gestión de PDI ', 1, '/pdi'),
+(3, 'Gestión de Sedes', 1, '/sede'),
+(4, 'Gestión de Actividades', 1, '/actividad'),
+(5, 'Gestión de Avisos', 1, '/aviso'),
+(6, 'Fechas de Exámenes', 1, '/fecha'),
+(7, 'Gestión de Perfil', 1, '/perfil');
 
 -- --------------------------------------------------------
 
@@ -23185,7 +23162,7 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
   `sede_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_perfil_sede1_idx` (`sede_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=54 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- Volcar la base de datos para la tabla `perfiles`
@@ -23194,7 +23171,7 @@ CREATE TABLE IF NOT EXISTS `perfiles` (
 INSERT INTO `perfiles` (`id`, `nombre`, `apellido`, `telefono`, `documento`, `fec_nac`, `domicilio`, `email`, `sede_id`) VALUES
 (1, 'admin', 'admin', 9999999, 12345678, '2014-12-31', 'admin', 'admin@gmail.com', NULL),
 (2, 'sede', 'sede', 15638118, 27828706, '1980-04-18', 'sede', 'sede@domain.com', 1),
-(3, 'sede', 'sede', 12345678, 12345678, '1991-03-10', 'sede', 'sede@gmail.com', 2),
+(3, 'sede', 'sede', 12345678, 12345678, '1991-03-10', 'sede', 'sede@domain.com', 2),
 (4, 'dani', 'monte', 1234, 12345678, '2014-12-31', 'lejos', 'dani@gmail.com', NULL),
 (5, 'Nicolas', 'Castro', 15123456, 4012312, '1991-03-10', 'Yanquetruz 260', 'nicolas@domain.com', NULL),
 (6, 'Agustin', 'Rivero', 151234, 40123121, '2014-11-30', 'Gallardo 1023', 'arivero@domain.com', 1),
@@ -23226,7 +23203,9 @@ INSERT INTO `perfiles` (`id`, `nombre`, `apellido`, `telefono`, `documento`, `fe
 (50, 'Larry', 'Page', 9999999, 9999999, '1973-03-26', 'East Lansing, Míchigan, Estados Unidos', 'lpage@domain.com', 4),
 (51, 'Larry', 'Page', 111111111, 11111111, '1973-03-26', 'East Lansing, Míchigan, Estados Unidos', 'lpage@domain.com', 3),
 (52, 'Albert', 'Einstein', 11111111, 81230981, '1879-03-14', 'Ulm, Alemania', 'aeinstein@domain.com', 2),
-(53, 'borrar', 'borrar', 8098098, 81293819, '2014-12-31', 'lkajdlskj', 'borrar@domain.com', 2);
+(53, 'borrar', 'borrar', 8098098, 81293819, '2014-12-31', 'lkajdlskj', 'borrar@domain.com', 2),
+(54, 'marina', 'caceres', 68876, 3123132, '2014-11-30', 'marina', 'marina@dsjd.com', 4),
+(55, 'amico', 'anuci', 15123456, 23987868, '2014-11-06', 'rio de los sauces 61', 'nicoc_09@hotmail.com', 5);
 
 -- --------------------------------------------------------
 
@@ -23238,8 +23217,9 @@ CREATE TABLE IF NOT EXISTS `permisos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) DEFAULT NULL,
   `accion` varchar(100) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `menu_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_permiso_menu1_idx` (`menu_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
@@ -23248,33 +23228,33 @@ CREATE TABLE IF NOT EXISTS `permisos` (
 
 INSERT INTO `permisos` (`id`, `titulo`, `accion`, `menu_id`) VALUES
 (1, 'Consultar usuario', 'user_get', 1),
-(2, 'Editar usuario', 'user_edit', 0),
-(3, 'Eliminar usuario', 'user_delete', 0),
-(4, 'Agregar usuario', 'user_add', 0),
-(5, 'Consultar PDI', 'pdi_get', 4),
-(6, 'Editar PDI', 'pdi_edit', 0),
-(7, 'Eliminar PDI', 'pdi_delete', 0),
-(8, 'Agregar PDI', 'pdi_add', 0),
-(9, 'Consultar sede', 'sede_get', 9),
-(10, 'Editar sede', 'sede_edit', 0),
-(11, 'Eliminar sede', 'sede_delete', 0),
-(12, 'Agregar sede', 'sede_add', 0),
-(15, 'Consultar actividad', 'act_get', 15),
-(16, 'Editar actividad', 'act_edit', 0),
-(17, 'Eliminar actividad', 'act_delete', 0),
-(18, 'Agregar actividad', 'act_add', 0),
-(19, 'Consultar Aviso', 'avi_get', 18),
-(20, 'Editar Aviso', 'avi_edit', 0),
-(21, 'Eliminar Aviso', 'avi_delete', 0),
-(22, 'Agregar Aviso', 'avi_add', 0),
-(23, 'Consultar fecha', 'fec_get', 23),
-(24, 'Editar fecha', 'fec_edit', 0),
-(25, 'Eliminar fecha', 'fec_delete', 0),
-(26, 'Agregar fecha', 'fec_add', 0),
+(2, 'Editar usuario', 'user_edit', NULL),
+(3, 'Eliminar usuario', 'user_delete', NULL),
+(4, 'Agregar usuario', 'user_add', NULL),
+(5, 'Consultar PDI', 'pdi_get', 2),
+(6, 'Editar PDI', 'pdi_edit', NULL),
+(7, 'Eliminar PDI', 'pdi_delete', NULL),
+(8, 'Agregar PDI', 'pdi_add', NULL),
+(9, 'Consultar sede', 'sede_get', 3),
+(10, 'Editar sede', 'sede_edit', NULL),
+(11, 'Eliminar sede', 'sede_delete', NULL),
+(12, 'Agregar sede', 'sede_add', NULL),
+(15, 'Consultar actividad', 'act_get', 4),
+(16, 'Editar actividad', 'act_edit', NULL),
+(17, 'Eliminar actividad', 'act_delete', NULL),
+(18, 'Agregar actividad', 'act_add', NULL),
+(19, 'Consultar Aviso', 'avi_get', 5),
+(20, 'Editar Aviso', 'avi_edit', NULL),
+(21, 'Eliminar Aviso', 'avi_delete', NULL),
+(22, 'Agregar Aviso', 'avi_add', NULL),
+(23, 'Consultar fecha', 'fec_get', 6),
+(24, 'Editar fecha', 'fec_edit', NULL),
+(25, 'Eliminar fecha', 'fec_delete', NULL),
+(26, 'Agregar fecha', 'fec_add', NULL),
 (27, 'Consultar operadores', 'user_operadores', 1),
-(28, 'Consultar mi sede', 'sede_view', 9),
-(29, 'Consultar perfil', 'perfil_get', 12),
-(30, 'Editar perfil', 'perfil_edit', 0);
+(28, 'Consultar mi sede', 'sede_view', 3),
+(29, 'Consultar perfil', 'perfil_get', 7),
+(30, 'Editar perfil', 'perfil_edit', NULL);
 
 -- --------------------------------------------------------
 
@@ -23409,7 +23389,7 @@ CREATE TABLE IF NOT EXISTS `sedes` (
   `latitud` float DEFAULT NULL,
   `longitud` float DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
@@ -23421,13 +23401,13 @@ CREATE TABLE IF NOT EXISTS `sedes` (
 INSERT INTO `sedes` (`id`, `nombre`, `direccion`, `latitud`, `longitud`, `imagen`, `descripcion`) VALUES
 (1, 'Sede Atlántica', 'Viedma', -40.8137, -62.9931, 'Jellyfish.jpg', 'Sede Atlántica de Viedma'),
 (2, 'Sede Andina', 'Sede Andina', -41.1433, -71.2995, 'logoNoticiasNet.png', 'Prueba de edición de la sede'),
-(3, 'Sede Alto Valle', 'General Roca', -39.935, -66.1897, '77243.jpg', 'Descripción de la sede alto valle'),
+(3, 'Sede Alto Valle', 'General Roca', -39.935, -66.1897, 'images.jpg', 'Descripción de la sede alto valle'),
 (4, 'San Antonio Oeste', 'Hipólito Irigoyen N°862 (8520)', -40.742, -64.9663, 'inscripciones_2014_unrn_25307.jpg', 'Universidad Nacional de Río Negro | Sub-Sede San Antonio Oeste.\r\nDirección: Hipólito Irigoyen N°862 '),
 (5, 'Choele choel', 'Pacheco 460', -39.8342, -66.1635, 'choele1.jpg', 'Pacheco 460\r\nChoele Choel\r\nRío Negro\r\nArgentina'),
 (6, 'Sede Valle Medio', 'Brentana 350', -39.6678, -65.6587, 'Hydrangeas.jpg', 'Allen: \r\nBrentana 350\r\nTEL: 0298-451100'),
 (7, 'Patagones', 'Villa Linnch', 12, 12, 'patagones.jpg', 'asdjlaksjdlka'),
 (10, 'Sede Atlánticas', 'Ponele algo', -41.0477, -62.8517, 'descarga.jpg', 'Ponele otra cosa'),
-(11, 'Cipolletti', 'Calle siempre viva 232', -41.0477, -62.8517, 'cipolletti.jpg', 'descripcion');
+(11, 'jsdlajsldjalsk', 'Calle siempre viva 232', -41.0477, -62.8517, 'cipolletti.jpg', 'descripcion');
 
 -- --------------------------------------------------------
 
@@ -23445,7 +23425,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `usuario` (`usuario`),
   KEY `fk_usuario_perfil1_idx` (`perfil_id`),
   KEY `fk_usuario_rol1_idx` (`role_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
 
 --
 -- Volcar la base de datos para la tabla `usuarios`
@@ -23478,7 +23458,9 @@ INSERT INTO `usuarios` (`id`, `usuario`, `contrasena`, `role_id`, `perfil_id`) V
 (37, 'pallen', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 38),
 (41, 'borrarc', '5f4dcc3b5aa765d61d8327deb882cf99', 1, 42),
 (51, 'lpage', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 51),
-(52, 'aeinstein', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 52);
+(52, 'aeinstein', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 52),
+(53, 'marina', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 54),
+(54, 'carlos', '5f4dcc3b5aa765d61d8327deb882cf99', 2, 55);
 
 --
 -- Filtros para las tablas descargadas (dump)
@@ -23513,6 +23495,12 @@ ALTER TABLE `pdis`
 --
 ALTER TABLE `perfiles`
   ADD CONSTRAINT `perfiles_ibfk_3` FOREIGN KEY (`sede_id`) REFERENCES `sedes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `permisos`
+--
+ALTER TABLE `permisos`
+  ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `permisos_has_roles`
