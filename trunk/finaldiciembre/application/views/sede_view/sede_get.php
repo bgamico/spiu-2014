@@ -40,16 +40,16 @@
 	</div>
 	<hr class="visible-xs" >
 
-<div class="container-fluid" id="main">
 
-  	<div class="col-md-3" id="left">
+
+  	<div class="col-sm-3" id="left">
     
       <?php foreach($datos as $marker_sidebar)
 		        {?>
 				  <div class="panel panel-default">
 			        <div class="panel-heading" >
 			        		<a onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><?=substr($marker_sidebar->nombre,0)?></a>
-							<a class="pull-right col-md-3" id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+							<a class="pull-right col-sm-3" id="delete" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 			        		<?= anchor('sede/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view pull-right')); ?>
 							 
 					</div>
@@ -62,8 +62,7 @@
 
     </div>
     
-    </div>
-
+	
 
 </body>
 
