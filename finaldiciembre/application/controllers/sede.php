@@ -30,7 +30,6 @@ class Sede extends CI_Controller
 		$config['map_width'] = '750px';
 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
-		
 				
 		$data['datos'] = $markers;
 		foreach($markers as $info_marker)
@@ -56,37 +55,15 @@ class Sede extends CI_Controller
 	 * formulario para agregar sedes
 	 * @access public
 	 */
-	function addoriginal()
-	{
-// 		if(isset($_POST['nombre'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
-// 		 	$this->form_validation->set_rules('nombre','Nombre','is_unique[sede.nombre]');//  Configuramos las validaciones ayudandonos con la librería form_validation
-// 			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación
-// 				$this->insert();                     //  insertamos
-// 			}
-// 		}
-		
-		$this->load->library('googlemaps');
-		
-		$marker = array();
-		$marker ['position'] = 'rio negro, argentina';
-		$marker['draggable'] = true;
-		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
-		$this->googlemaps->add_marker($marker);
-		
-		
-		$config['center'] = 'rio negro, argentina';
-		$config['zoom'] = 6;
-		$this->googlemaps->initialize($config);
-		$data['map'] = $this->googlemaps->create_map();
-		 
-		$this->load->view('include/header');
-		$this->load->view('include/nav');
-		$this->load->view('sede_view/sede_addoriginal', $data);
-		$this->load->view('include/footer');
-	}
-
 	function add()
 	{
+		// 		if(isset($_POST['nombre'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
+		// 		 	$this->form_validation->set_rules('nombre','Nombre','is_unique[sede.nombre]');//  Configuramos las validaciones ayudandonos con la librería form_validation
+		// 			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación
+		// 				$this->insert();                     //  insertamos
+		// 			}
+		// 		}
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('sede_view/sede_add');
@@ -156,14 +133,17 @@ class Sede extends CI_Controller
     	{
     		$marker = array();
     		$marker ['position'] = $row->latitud.','.$row->longitud;
-    		$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$row->imagen).'><br>'.$row->nombre;
+    		$marker ['infowindow_content'] = '<img width="150" height="117" src='.base_url('uploads/'.$row->imagen).'><br>'.$row->nombre;
     		$marker['id'] = $row->id;
 	    	$marker['draggable'] = true;
+	    	$marker['set_position'] = true;
 	    	$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
 	    	$this->googlemaps->add_marker($marker);
-	    	$config['center'] = $row->latitud.','.$row->longitud;
     	}
-    
+    	
+    	$config['center'] = $row->latitud.','.$row->longitud;
+    	$config['onclick'] = 'marker_1.setPosition(event.latLng);updateDatabase(event.latLng.lat(), event.latLng.lng());';
+     	
     	$config['zoom'] = 10;
     	$this->googlemaps->initialize($config);
     	$data['map'] = $this->googlemaps->create_map();
