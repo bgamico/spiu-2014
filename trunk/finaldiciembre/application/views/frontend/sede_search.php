@@ -8,11 +8,11 @@
      google.maps.event.trigger(marker, 'click');
     }
     </script>
-    <?=$map['js']?>
+    
 
 <div class="row row-offcanvas row-offcanvas-right">
 	<div class="col-xs-12 col-sm-8">
-	<?=$map['html']?>
+	
 	</div>
 	<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
 	    	<ul class="nav nav-pills nav-stacked">
@@ -35,6 +35,8 @@
 		        }
 		        ?>
 			</ul>
+			<?=$map['js']?>
+			<?=$map['html']?>
     
     </div>
 	
