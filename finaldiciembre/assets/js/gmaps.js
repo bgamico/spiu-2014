@@ -95,12 +95,12 @@ function geocode_lookup( type, value, update ) {
 
       if( type == 'address' ) {
         // User has typed in an address which we can't geocode to a location
-        $('#gmaps-error').html("Sorry! We couldn't find " + value + ". Try a different search term, or click the map." );
+        $('#gmaps-error').html("¡Lo sentimos! No pudimos encontrar " + value + ". Pruebe con un término de búsqueda diferente o haga clic en el mapa." );
         $('#gmaps-error').show();
       } else {
         // User has clicked or dragged marker to somewhere that Google can't do a reverse lookup for
         // In this case we display a warning, clear the address box, but fill in LatLng
-        $('#gmaps-error').html("Woah... that's pretty remote! You're going to have to manually enter a place name." );
+        $('#gmaps-error').html("¡Eso esta muy alejado! Vas a tener que introducir manualmente el nombre del lugar." );
         $('#gmaps-error').show();
         update_ui('', value)
       }
