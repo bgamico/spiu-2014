@@ -27,12 +27,30 @@ class Actividad extends CI_Controller
 	{
 
         $data['query'] = $this->Model_Actividad->getBySedeId($this->session->userdata('sede'));
-
+        $data['div_mensajes'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('act_view/act_get',$data);
 		$this->load->view('include/footer');
 	}
+	
+	/**
+	 *
+	 * este metodo "arma" en div que muestra los mensajes de retroalimentación
+	 *
+	 */
+	public function retroalimentacion(){
+		$msj_error = '';
+		$msj_error = $this->session->flashdata('mensaje');
+		if ($msj_error != ''){
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('status') .'">';
+			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
+			$msj_error= $msj_error . '</div>';
+		}
+	
+		return 	$msj_error;
+	}	
 	
 	/**
 	 * pagina para agregar actividad
@@ -53,6 +71,8 @@ class Actividad extends CI_Controller
     public function insert() {
 		$registro = $this->input->post() + array('sede_id'=> $this->session->userdata('sede'));
 		$this->Model_Actividad->insert($registro);
+		$this->session->set_flashdata('mensaje', 'La actividad se cre&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
 		redirect('actividad');    
     }
 
@@ -77,6 +97,8 @@ class Actividad extends CI_Controller
     public function update() {
 		$registro = $this->input->post();
 		$this->Model_Actividad->update($registro);
+		$this->session->set_flashdata('mensaje', 'La actividad se actualiz&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
 		redirect('actividad');
    }    
 
@@ -87,6 +109,8 @@ class Actividad extends CI_Controller
 	public function delete($id)
 	{
 		$this->Model_Actividad->delete($id);
+		$this->session->set_flashdata('mensaje', 'La actividad se elimin&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
 		redirect('actividad');	
 	}
 }
