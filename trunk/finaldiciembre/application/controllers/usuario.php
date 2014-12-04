@@ -22,11 +22,31 @@ class Usuario extends CI_Controller
 		else{
 			$data['query'] = $this->Model_Usuario->allOperadores($this->session->userdata('username'));
 		}
+
+		$data['div_mensajes'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('user_view/user_get',$data);
 		$this->load->view('include/footer');
 	}
+
+	/**
+	 * 
+	 * este metodo "arma" en div que muestra los mensajes de retroalimentación
+	 * 
+	 */
+	public function retroalimentacion(){
+		$msj_error = '';
+		$msj_error = $this->session->flashdata('mensaje');
+		if ($msj_error != ''){
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('status') .'">';
+			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
+			$msj_error= $msj_error . '</div>';
+		}
+
+		return 	$msj_error;
+	}	
 		
 	/**
 	 * pagina de creacion de usuarios
@@ -56,6 +76,8 @@ class Usuario extends CI_Controller
 		}
 			
 		$this->Model_Usuario->insert($registro);
+		$this->session->set_flashdata('mensaje', 'El usuario se cre&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
 		redirect('usuario');
 	}
 
@@ -83,6 +105,8 @@ class Usuario extends CI_Controller
     		$registro['sede_id'] = NULL;
     	}
     	$this->Model_Usuario->update($registro);
+    	$this->session->set_flashdata('mensaje', 'El usuario se actualiz&oacute; correctamente.');
+    	$this->session->set_flashdata('status', 'success');    	
     	redirect('usuario');
     }
 
@@ -108,6 +132,8 @@ class Usuario extends CI_Controller
      */ 
     public function delete($id) {
      	$this->Model_Usuario->delete($id);
+     	$this->session->set_flashdata('mensaje', 'El usuario se elimin&oacute; correctamente.');
+     	$this->session->set_flashdata('status', 'success');     	
     	redirect('usuario');
     }
 }
