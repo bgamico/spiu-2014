@@ -43,12 +43,31 @@ class Sede extends CI_Controller
 		}
 		
 		$data['map'] = $this->googlemaps->create_map();
-		
+		$data['div_mensajes'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('sede_view/sede_get',$data);
 		$this->load->view('include/footer');
 		
+	}	
+	
+
+	/**
+	 *
+	 * este metodo "arma" en div que muestra los mensajes de retroalimentación
+	 *
+	 */
+	public function retroalimentacion(){
+		$msj_error = '';
+		$msj_error = $this->session->flashdata('mensaje');
+		if ($msj_error != ''){
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('status') .'">';
+			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
+			$msj_error= $msj_error . '</div>';
+		}
+	
+		return 	$msj_error;
 	}	
 		
 	/**
@@ -88,6 +107,8 @@ class Sede extends CI_Controller
     		$registro += array('imagen'=> $upload_data['file_name']);
     	}
  	        $this->Model_Sede->insert($registro);
+ 	        $this->session->set_flashdata('mensaje', 'La sede se cre&oacute; correctamente.');
+ 	        $this->session->set_flashdata('status', 'success'); 	        
 	        redirect('sede');
     	 
     }
@@ -99,6 +120,8 @@ class Sede extends CI_Controller
 	function delete($id)
 	{
 		$this->Model_Sede->delete($id);
+		$this->session->set_flashdata('mensaje', 'La sede se elimin&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
 		redirect('sede');
 	}
 	
@@ -171,6 +194,9 @@ class Sede extends CI_Controller
     		$registro += array('imagen'=> $upload_data['file_name']);
     	}
     	$this->Model_Sede->update($registro);
+    	$this->session->set_flashdata('mensaje', 'La sede se actualiz&oacute; correctamente.');
+    	$this->session->set_flashdata('status', 'success');
+    	    	
     	redirect('sede');
     }
     
