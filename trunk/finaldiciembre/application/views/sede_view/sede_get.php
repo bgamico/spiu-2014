@@ -19,7 +19,8 @@
 			</script>
 </head>
 <body>
-
+<!-- sección de avisos -->
+<?= $div_mensajes; ?>	
 <div class="bs-example" id="admin">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
