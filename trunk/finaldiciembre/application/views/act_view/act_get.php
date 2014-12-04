@@ -2,7 +2,8 @@
 <div class="bs-docs-section">
 
         <div class="col-lg-11">
-        
+		<!-- sección de avisos -->
+		<?= $div_mensajes; ?>        
         <div class="bs-example">
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
