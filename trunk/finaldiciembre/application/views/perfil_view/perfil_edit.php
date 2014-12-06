@@ -72,6 +72,11 @@
 				</div>
 			</div>
 
+			<p class="col-lg-3"></p>
+			<p class="col-lg-9">
+				*<em>campos obligatorios.</em>
+			</p>
+
 			<div class="form-actions">
 				<div class="col-lg-9 col-lg-offset-3">
 					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
