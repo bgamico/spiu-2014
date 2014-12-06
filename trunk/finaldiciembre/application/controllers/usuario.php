@@ -118,7 +118,8 @@ class Usuario extends CI_Controller
     {
     	$data['titulo'] = 'Consultar Usuario';
         $data['query'] = $this->Model_Perfil->getByUserId($id);
-
+        $data['div_mensajes'] = $this->retroalimentacion();
+        
         $this->load->view('include/header');
         $this->load->view('include/nav');
         $this->load->view('perfil_view/perfil_get',$data);

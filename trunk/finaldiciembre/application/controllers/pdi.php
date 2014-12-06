@@ -40,6 +40,7 @@ class Pdi extends CI_Controller
 				
 		$data['map'] = $this->googlemaps->create_map();
 		
+		$data['div_mensajes'] = $this->retroalimentacion();		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('pdi_view/pdi_get', $data);
@@ -47,7 +48,25 @@ class Pdi extends CI_Controller
 	}
 	
 	/**
-	 * pagina de edicion de puntos de informacion
+	 *
+	 * este metodo "arma" en div que muestra los mensajes de retroalimentación
+	 *
+	 */
+	public function retroalimentacion(){
+		$msj_error = '';
+		$msj_error = $this->session->flashdata('mensaje');
+		if ($msj_error != ''){
+			$msj_error= '<div class="alert alert-dismissable alert-' . $this->session->flashdata('status') .'">';
+			$msj_error= $msj_error . '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
+			$msj_error= $msj_error . '</div>';
+		}
+	
+		return 	$msj_error;
+	}	
+	
+	/**
+	 * pagina de edicion de puntos de informaci&oacute;n
 	 * @access public
 	 */
 	function edit($id)
@@ -80,7 +99,7 @@ class Pdi extends CI_Controller
 	}
 	
 	/**
-	 * pagina para agregar puntos de informacion
+	 * pagina para agregar puntos de informaci&oacute;n
 	 * @access public
 	 */
 	function addoriginal()
@@ -121,17 +140,19 @@ class Pdi extends CI_Controller
 	}
 	
 	/**
-	 * eliminacion de puntos de informacion
+	 * eliminacion de puntos de informaci&oacute;n
 	 * @access public
 	 */
 	function delete($id)
 	{
 		$this->Model_Pdi->delete($id);
-		redirect('pdi/get');
+		$this->session->set_flashdata('mensaje', 'El punto de informaci&oacute;n se elimin&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
+		redirect('pdi');
 	}
 	
 	/**
-	 * insertar datos del punto de informacion de la sede
+	 * insertar datos del punto de informaci&oacute;n de la sede
 	 * @access public
 	 */
 	public function insert() {
@@ -149,11 +170,13 @@ class Pdi extends CI_Controller
 		
 		$registro+=array('sede_id'=> $this->session->userdata('sede'));
 		$this->Model_Pdi->insert($registro);
-		redirect('pdi/get');
+		$this->session->set_flashdata('mensaje', 'El punto de informaci&oacute;n se cre&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
+		redirect('pdi');
 	}
 	
 	/**
-	 * actualizar datos del punto de informacion
+	 * actualizar datos del punto de informaci&oacute;n
 	 * @access public
 	 */
 	public function update() {
@@ -169,7 +192,9 @@ class Pdi extends CI_Controller
 			$registro += array('imagen'=> $upload_data['file_name']);
 		}
 		$this->Model_Pdi->update($registro);
-		redirect('pdi/get');
+		$this->session->set_flashdata('mensaje', 'El punto de informaci&oacute;n se actualiz&oacute; correctamente.');
+		$this->session->set_flashdata('status', 'success');		
+		redirect('pdi');
 	}
 	
 	public function llena_localidades()
