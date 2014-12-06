@@ -4,11 +4,11 @@
  * Administracion de Actividades.
  *
  * @author Castro Patricio Nicolas
- */
+*/
 
 class Actividad extends CI_Controller
 {
-	
+
 	/**
 	 * constructor for ActividadManage
 	 * @access public
@@ -16,9 +16,9 @@ class Actividad extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model('Model_Actividad');
+		$this->load->model('Model_Actividad');
 	}
-	
+
 	/**
 	 * listar actividades
 	 * @access public
@@ -26,14 +26,14 @@ class Actividad extends CI_Controller
 	public function index()
 	{
 
-        $data['query'] = $this->Model_Actividad->getBySedeId($this->session->userdata('sede'));
-        $data['div_mensajes'] = $this->retroalimentacion();
+		$data['query'] = $this->Model_Actividad->getBySedeId($this->session->userdata('sede'));
+		$data['div_mensajes'] = $this->retroalimentacion();
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('act_view/act_get',$data);
 		$this->load->view('include/footer');
 	}
-	
+
 	/**
 	 *
 	 * este metodo "arma" en div que muestra los mensajes de retroalimentación
@@ -48,10 +48,10 @@ class Actividad extends CI_Controller
 			$msj_error= $msj_error . '<strong>Aviso: </strong>' . $this->session->flashdata('mensaje');
 			$msj_error= $msj_error . '</div>';
 		}
-	
+
 		return 	$msj_error;
-	}	
-	
+	}
+
 	/**
 	 * pagina para agregar actividad
 	 * @access public
@@ -64,45 +64,45 @@ class Actividad extends CI_Controller
 		$this->load->view('include/footer');
 	}
 
-    /**
-     * pagina para insertar datos de la actividad
-     * @access public
-     */
-    public function insert() {
+	/**
+	 * pagina para insertar datos de la actividad
+	 * @access public
+	 */
+	public function insert() {
 		$registro = $this->input->post() + array('sede_id'=> $this->session->userdata('sede'));
 		$this->Model_Actividad->insert($registro);
 		$this->session->set_flashdata('mensaje', 'La actividad se cre&oacute; correctamente.');
-		$this->session->set_flashdata('status', 'success');		
-		redirect('actividad');    
-    }
+		$this->session->set_flashdata('status', 'success');
+		redirect('actividad');
+	}
 
-    /**
-     * actividad edit page
-     * @access public
-     */
-    public function edit($id)
-    {
-    	$data['registro'] = $this->Model_Actividad->find($id);
-    	 
-    	$this->load->view('include/header');
-    	$this->load->view('include/nav');
-    	$this->load->view('act_view/act_edit', $data);
-    	$this->load->view('include/footer');
-    }    
+	/**
+	 * actividad edit page
+	 * @access public
+	 */
+	public function edit($id)
+	{
+		$data['registro'] = $this->Model_Actividad->find($id);
 
-    /**
-     * actulizar datos de la actividad
-     * @access public
-     */
-    public function update() {
+		$this->load->view('include/header');
+		$this->load->view('include/nav');
+		$this->load->view('act_view/act_edit', $data);
+		$this->load->view('include/footer');
+	}
+
+	/**
+	 * actulizar datos de la actividad
+	 * @access public
+	 */
+	public function update() {
 		$registro = $this->input->post();
 		$this->Model_Actividad->update($registro);
 		$this->session->set_flashdata('mensaje', 'La actividad se actualiz&oacute; correctamente.');
-		$this->session->set_flashdata('status', 'success');		
+		$this->session->set_flashdata('status', 'success');
 		redirect('actividad');
-   }    
+	}
 
-    /**
+	/**
 	 * actividad delete page
 	 * @access public
 	 */
@@ -110,7 +110,7 @@ class Actividad extends CI_Controller
 	{
 		$this->Model_Actividad->delete($id);
 		$this->session->set_flashdata('mensaje', 'La actividad se elimin&oacute; correctamente.');
-		$this->session->set_flashdata('status', 'success');		
-		redirect('actividad');	
+		$this->session->set_flashdata('status', 'success');
+		redirect('actividad');
 	}
 }
