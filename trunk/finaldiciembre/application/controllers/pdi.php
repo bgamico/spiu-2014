@@ -22,8 +22,6 @@ class Pdi extends CI_Controller
 		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
 		$config['zoom'] = '12';	
 		$config['map_type'] = 'ROADMAP';
-// 		$config['map_width'] = '750px';
-// 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 		
 		$markers = $this->Model_Pdi->getBySedeId($this->session->userdata('sede'));
