@@ -25,13 +25,7 @@ class Actividad extends CI_Controller
 	 */
 	public function index()
 	{
-// 		if($this->user->checkPrivilege('act_get') == false)
-// 		{
-// 			show_error("you have no privilege to access this page");
-// 			return ;
-// 		}
-
-		
+	
         $data['query'] = $this->Model_Actividad->getBySedeId($this->session->userdata('sede'));
 
 
