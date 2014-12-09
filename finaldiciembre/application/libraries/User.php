@@ -81,7 +81,6 @@ class User
 	function checkPrivilege($action)
 	{
 		$this->_CI->load->model('rbac_model');
-// 		$username = $this->_CI->session->userdata('username');
 		$username = null;
 		if($this->_CI->session->userdata('username')){
 			$username = $this->_CI->session->userdata('username');
