@@ -254,12 +254,12 @@ class rbac_model extends CI_Model
 	 */
 	function checkUserPrivilege($username, $action)
 	{
-		$sql = "select * from user, role, role_privilege, privilege
-				where user.user_name = ? and
-				user.role_id = role.role_id and
-				role.role_id = role_privilege.role_id and
-				role_privilege.privilege_id = privilege.privilege_id and
-				privilege.action = ?";
+		$sql = "select * from usuarios, roles, permisos_has_roles, permisos
+				where usuarios.usuario = ? and
+				usuarios.role_id = roles.id and
+				roles.id = permisos_has_roles.roles_id and
+				permisos_has_roles.permisos_id = permisos.id and
+				permisos.accion = ?";
 				
 		// OPTIMIZAR CONSULTA
 		// PROBAR DESDE PHPMYADMIN y VER QUE RETORNA
