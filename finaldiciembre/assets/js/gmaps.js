@@ -138,17 +138,17 @@ function autocomplete_init() {
   });
 
   // triggered when user presses a key in the address box
-  $("#gmaps-input-address").bind('keydown', function(event) {
-    if(event.keyCode == 13) {
-      geocode_lookup( 'address', $('#gmaps-input-address').val(), true );
-
-      // ensures dropdown disappears when enter is pressed
-      $('#gmaps-input-address').autocomplete("disable")
-    } else {
-      // re-enable if previously disabled above
-      $('#gmaps-input-address').autocomplete("enable")
-    }
-  });
+//  $("#gmaps-input-address").bind('keydown', function(event) {
+//    if(event.keyCode == 13) {
+//      geocode_lookup( 'address', $('#gmaps-input-address').val(), true );
+//
+//      // ensures dropdown disappears when enter is pressed
+//      $('#gmaps-input-address').autocomplete("disable")
+//    } else {
+//      // re-enable if previously disabled above
+//      $('#gmaps-input-address').autocomplete("enable")
+//    }
+//  });
 }; // autocomplete_init
 
 $(document).ready(function() { 
