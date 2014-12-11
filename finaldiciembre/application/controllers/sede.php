@@ -27,8 +27,6 @@ class Sede extends CI_Controller
 		$config['center'] = 'rio negro,argentina';
 		$config['zoom'] = '6';
 		$config['map_type'] = 'ROADMAP';
-		// 		$config['map_width'] = '750px';
-		// 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
 
 		$data['datos'] = $markers;
@@ -37,7 +35,7 @@ class Sede extends CI_Controller
 			$marker = array();
 			$marker ['animation'] = 'DROP';
 			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
-			$marker ['infowindow_content'] = '<img width="150" height="117" src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
+			$marker ['infowindow_content'] = '<img width="150" height="117" src='.base_url('uploads/'.$info_marker->imagen).'><br>'."Nombre: ".$info_marker->nombre.'<br>'."Direccion: ".$info_marker->direccion;
 			$marker['id'] = $info_marker->id;
 			$this->googlemaps->add_marker($marker);
 		}
