@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="bs-component">
-				<table class="table table-striped table-hover table-bordered">
+				<table id="tabla" class="table table-striped table-hover table-bordered">
 					<thead>
 						<tr>
 							<th>Nombre</th>
@@ -65,7 +65,7 @@
 				</div>
 
 				<div class="modal-body">
-					<p>Esta seguro que desea borrar esta actividad?</p>
+					<p>&iquest;Esta seguro que desea borrar esta actividad?</p>
 				</div>
 
 				<div class="modal-footer">
