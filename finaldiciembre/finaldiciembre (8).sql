@@ -23569,3 +23569,66 @@ INSERT INTO `tipos` (`id`, `descripcion`) VALUES
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+
+
+
+
+
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.0.4.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 12-12-2014 a las 01:04:12
+-- Versión del servidor: 5.5.32
+-- Versión de PHP: 5.4.19
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de datos: `finaldiciembre`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pdis`
+--
+
+CREATE TABLE IF NOT EXISTS `pdis` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `ciudad` varchar(100) DEFAULT NULL,
+  `provincia` varchar(100) DEFAULT NULL,
+  `latitud` float DEFAULT NULL,
+  `longitud` float DEFAULT NULL,
+  `imagen` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `tipo` smallint(2) NOT NULL,
+  `sede_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_pdi_sede1_idx` (`sede_id`),
+  KEY `tipo` (`tipo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- Filtros para la tabla `pdis`
+--
+ALTER TABLE `pdis`
+  ADD CONSTRAINT `pdis_ibfk_2` FOREIGN KEY (`tipo`) REFERENCES `tipos` (`id`),
+  ADD CONSTRAINT `pdis_ibfk_1` FOREIGN KEY (`sede_id`) REFERENCES `sedes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
