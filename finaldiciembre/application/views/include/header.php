@@ -41,16 +41,7 @@
 	<script type="text/javascript"
 		src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 
-	<script type="text/javascript" class="init">
-
-	$(document).ready(function() {
-		$('#tbl').dataTable();
-	} );
-	
-	$('#confirm-delete').on('show.bs.modal', function(e) {
-	    $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
-	});
-	</script>   
+ 
 	
 </head>
 <body>
