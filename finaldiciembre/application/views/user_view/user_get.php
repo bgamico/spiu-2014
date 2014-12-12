@@ -26,8 +26,8 @@
 				<table id="example" class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Username</th>
-							<th>Role</th>
+							<th>Usuario</th>
+							<th>Rol</th>
 							<th>Opciones</th>
 						</tr>
 					</thead>
