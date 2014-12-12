@@ -108,5 +108,13 @@ $(document).ready(function(){
 				.closest('.control-group').removeClass('error').addClass('success');
 			}*/	
 	  });
+		
+		/* estilo para la tabla */
+		$('#tabla').dataTable();
+
+		/* mensaje de confirmación al eliminar */
+		$('#confirm-delete').on('show.bs.modal', function(e) {
+		    $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+		});		
 
 }); // end document.ready
