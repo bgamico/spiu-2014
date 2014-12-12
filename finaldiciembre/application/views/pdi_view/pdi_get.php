@@ -74,7 +74,7 @@
 						</div>
 
 						<div class="modal-body">
-							<p>Esta seguro que desea borrar este punto de informaci&oacute;n?</p>
+							<p>&iquest;Esta seguro que desea borrar este punto de informaci&oacute;n?</p>
 						</div>
 
 						<div class="modal-footer">
