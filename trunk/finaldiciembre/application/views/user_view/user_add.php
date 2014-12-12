@@ -9,9 +9,9 @@
 
 			<div class="form-group">
 				<div class="control-group">
-					<?= form_label('Username*', 'username', array('class'=>'col-lg-3 control-label')); ?>
+					<?= form_label('Usuario*', 'username', array('class'=>'col-lg-3 control-label')); ?>
 					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'username', 'id'=>'username', 'placeholder'=>'Username','value'=>set_value('username'))); ?>
+						<?= form_input(array('type'=>'text', 'class'=>"form-control",'name'=>'username', 'id'=>'username', 'placeholder'=>'Usuario','value'=>set_value('username'))); ?>
 					</div>
 				</div>
 			</div>
