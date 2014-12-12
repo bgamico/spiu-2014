@@ -15,8 +15,6 @@ class Home extends CI_Controller {
 		$config = array();
 		$config['center'] = 'rio negro,argentina';
 		$config['zoom'] = '6';
-		// 		$config['cluster'] = TRUE;
-		// 		$config['map_type'] = 'ROADMAP';
 		$config['map_width'] = '750px';
 		$config['map_height'] = '500px';
 		$this->googlemaps->initialize($config);
@@ -86,7 +84,7 @@ class Home extends CI_Controller {
 		$this->load->view('include/footer');
 	}
 
-	public function examen($id){ // falta fecha de examen
+	public function examen($id){
 		$data['query'] = $this->Model_Actividad->getBySedeId($id);
 
 		$this->load->view('include/header');
@@ -94,7 +92,7 @@ class Home extends CI_Controller {
 		$this->load->view('include/footer');
 	}
 
-	public function frontend(){ // falta fecha de examen
+	public function frontend(){ 
 		$this->load->library('googlemaps');
 		$markers = $this->Model_Sede->all();
 		$this->load->library('googlemaps');
@@ -113,7 +111,6 @@ class Home extends CI_Controller {
 			$marker ['animation'] = 'DROP';
 			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
 			$marker ['infowindow_content'] = '<img width="150" height="117" src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
-			// 			$marker ['infowindow_content'] = '<div class="col-xs-3">'.$info_marker->nombre.'</div>';
 			$marker['id'] = $info_marker->id;
 			$this->googlemaps->add_marker($marker);
 		}
@@ -122,8 +119,13 @@ class Home extends CI_Controller {
 
 		$this->load->view('include/header');
 		$this->load->view('frontend/frontend',$data);
-		// 		$this->load->view('frontend/index', $data);
 		$this->load->view('include/footer');
 	}
+	
+	public function twitter(){
+		$this->load->view('frontend/twitter');		
+	}
+	
+	
 
 }
