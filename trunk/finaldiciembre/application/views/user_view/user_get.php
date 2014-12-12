@@ -23,7 +23,7 @@
 
 			<div class="bs-component">
 
-				<table id="example" class="table table-striped table-bordered">
+				<table id="tabla" class="table table-striped table-bordered">
 					<thead>
 						<tr>
 							<th>Usuario</th>
@@ -52,25 +52,6 @@
 	</div>
 
 
-	<link rel="stylesheet" type="text/css"
-		href="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
-	<script type="text/javascript"
-		src="<?php echo base_url('assets/js/jquery.dataTables.min.js')?>"></script>
-	<script type="text/javascript"
-		src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-
-	<script type="text/javascript" class="init">
-
-$(document).ready(function() {
-	$('#example').dataTable();
-} );
-
-$('#confirm-delete').on('show.bs.modal', function(e) {
-    $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
-});
-	</script>
-
-
 	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -83,7 +64,7 @@ $('#confirm-delete').on('show.bs.modal', function(e) {
 				</div>
 
 				<div class="modal-body">
-					<p>Esta seguro que desea borrar este usuario?</p>
+					<p>&iquest;Esta seguro que desea borrar este usuario?</p>
 				</div>
 
 				<div class="modal-footer">

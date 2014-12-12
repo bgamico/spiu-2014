@@ -60,3 +60,12 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="#" class="thumbnail">
+      <img data-src="c:\masa_vago2.png" alt="...">
+    </a>
+  </div>
+  ...
+</div>

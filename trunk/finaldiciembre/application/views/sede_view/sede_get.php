@@ -88,7 +88,7 @@
 			</div>
 
 			<div class="modal-body">
-				<p>Esta seguro que desea borrar esta Sede?</p>
+				<p>&iquest;Esta seguro que desea borrar esta Sede?</p>
 			</div>
 
 			<div class="modal-footer">

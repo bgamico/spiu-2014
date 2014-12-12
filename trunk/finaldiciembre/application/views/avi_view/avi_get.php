@@ -23,7 +23,7 @@
 
 
 			<div class="bs-component">
-				<table class="table table-striped table-hover table-bordered">
+				<table id="tabla" class="table table-striped table-hover table-bordered">
 					<thead>
 						<tr>
 							<th>Nombre</th>
@@ -35,15 +35,17 @@
 					<tbody>
 						<?php foreach ($query as $registro): ?>
 						<tr>
-							<td><?= $registro->nombre ?></td>
-							<td><?= $registro->descripcion ?></td>
-							<td><?= date("d/m/Y", strtotime($registro->fecha)); ?></td>
+							<td><?= $registro->nombre ?>
+							</td>
+							<td><?= $registro->descripcion ?>
+							</td>
+							<td><?= date("d/m/Y", strtotime($registro->fecha)); ?>
+							</td>
 							<td>
 								<!-- solo se permite editar eliminar o agregar avisos  --> <?= anchor('aviso/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
 								<!-- ?=anchor('aviso/delete/'.$registro->id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; el aviso. &iquest;Est&aacute; seguro&#63')"))?-->
 								<a id="delete" data-toggle="modal" data-target="#confirm-delete"
-								href="#"><i class="glyphicon glyphicon-remove"></i>
-							</a>
+								href="#"><i class="glyphicon glyphicon-remove"></i> </a>
 
 							</td>
 
@@ -54,6 +56,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -66,7 +71,7 @@
 				</div>
 
 				<div class="modal-body">
-					<p>Esta seguro que desea borrar este aviso?</p>
+					<p>&iquest;Esta seguro que desea borrar este aviso?</p>
 				</div>
 
 				<div class="modal-footer">
