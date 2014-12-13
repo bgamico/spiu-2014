@@ -34,4 +34,15 @@ class Model_Pdi extends CI_Model {
     	return $this->db->get('pdis')->result();
     }
     
+    /**
+     * 
+     * retona los tipos de PDIs, ordenados de manera ascendente por descripción.
+     * 
+     * */
+    function getTipos() {
+    	//$this->db->order_by('tipos.descripcion', 'asc');
+    	return $this->db->get('tipos')->result();
+    }    
+
+    
 }
