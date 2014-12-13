@@ -72,10 +72,12 @@ $(document).ready(function(){
 	      ciudad: {
 		      required: true
 		  },	  
-	      tipo: {
-	    	  minlength: 2,
+	      /*
+	       * es un form_dropdown que siempre estará con una opción seleccionada.
+		  tipo: {
 		      required: true
 		  },
+		  */
 	      fecha: {
 		        date: 1,
 		        required: true
