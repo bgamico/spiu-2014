@@ -1,4 +1,4 @@
-<div class="col-lg-8">
+<div class="col-lg-9 offset1">
 	<div class="well bs-component">
 		<?= form_open_multipart('fecha/update', array('class'=>'form-horizontal','id'=>'contact-form'));?>
 		<fieldset>
