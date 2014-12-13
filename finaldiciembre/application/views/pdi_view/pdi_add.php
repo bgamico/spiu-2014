@@ -23,7 +23,7 @@
 			$("#provincia").change(function() {
 				$("#provincia option:selected").each(function() {
 					provincia = $('#provincia').val();
-					$.post("http://localhost:8880/finaldiciembre/pdi/llena_localidades", {
+					$.post("http://localhost/finaldiciembre/pdi/llena_localidades", {
 						provincia : provincia
 					}, function(data) {
 						$("#ciudad").html(data);
