@@ -89,7 +89,9 @@ class Pdi extends CI_Controller
 		$config['zoom'] = 10;
 		$this->googlemaps->initialize($config);
 		$data['map'] = $this->googlemaps->create_map();
-	
+		//tipos de pdi
+		$data['tipos'] = $this->getTipos();
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('pdi_view/pdi_edit',$data);
@@ -130,7 +132,8 @@ class Pdi extends CI_Controller
 	{
 		$this->load->model('ciudades_model');
 		$data['provincias'] = $this->ciudades_model->provincias();
-	
+		$data['tipos'] = $this->getTipos();		
+		
 		$this->load->view('include/header');
 		$this->load->view('include/nav');
 		$this->load->view('pdi_view/pdi_add', $data);
@@ -189,6 +192,7 @@ class Pdi extends CI_Controller
 			$upload_data = $this->upload->data();
 			$registro += array('imagen'=> $upload_data['file_name']);
 		}
+
 		$this->Model_Pdi->update($registro);
 		$this->session->set_flashdata('mensaje', 'El punto de informaci&oacute;n se actualiz&oacute; correctamente.');
 		$this->session->set_flashdata('status', 'success');		
@@ -211,5 +215,19 @@ class Pdi extends CI_Controller
 				}
 			}
 		}
+		
+		/**
+		 * retorna los tipos de PDIs
+		 * @return tipos
+		 */
+		public function getTipos()
+		{
+			$query = $this->Model_Pdi->getTipos();
+			$tipos = array ();
+			foreach ( $query as $registro ) {
+				$tipos [$registro->id] = $registro->descripcion;
+			}			
+			return $tipos;
+		}		
 	
 }
