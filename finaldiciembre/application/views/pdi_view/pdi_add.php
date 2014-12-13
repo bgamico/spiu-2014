@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<head>
+
 <link href="<?php echo base_url('assets/styles/main.css') ?>"
 	rel="stylesheet">
 <link
@@ -10,9 +9,7 @@
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<!-- jquery -->
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
 
 <!-- jquery UI -->
 <script type="text/javascript"
@@ -26,7 +23,7 @@
 			$("#provincia").change(function() {
 				$("#provincia option:selected").each(function() {
 					provincia = $('#provincia').val();
-					$.post("http://localhost/finaldiciembre/pdi/llena_localidades", {
+					$.post("http://localhost:8880/finaldiciembre/pdi/llena_localidades", {
 						provincia : provincia
 					}, function(data) {
 						$("#ciudad").html(data);
@@ -35,7 +32,7 @@
 			})
 		});
 </script>
-</head>
+
 
 <div id='input'>
 	<input id='gmaps-input-address'
@@ -129,15 +126,15 @@
 					</div>
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<div class="control-group">
 					<?= form_label('Tipo*', 'tipo', array('class'=>'col-lg-3 control-label')); ?>
 					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'tipo', 'id'=>'tipo', 'value'=>set_value('tipo'))); ?>
+						<?= form_dropdown('tipo', $tipos, NULL,'id="tipo" class="form-control"');?>
 					</div>
 				</div>
-			</div>
+			</div>				
 
 			<div class="form-group">
 				<div class="control-group">

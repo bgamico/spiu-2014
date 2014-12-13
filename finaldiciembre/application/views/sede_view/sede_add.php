@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<head>
+
 <link href="<?php echo base_url('assets/styles/main.css') ?>"
 	rel="stylesheet">
 <link
@@ -10,9 +9,7 @@
 <script type="text/javascript"
 	src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-<!-- jquery -->
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
 
 <!-- jquery UI -->
 <script type="text/javascript"
@@ -20,7 +17,6 @@
 
 <!-- our javascript -->
 <script src="<?php echo base_url('assets/js/gmaps.js') ?>"></script>
-</head>
 
 <div id='input'>
 	<input id='gmaps-input-address'
