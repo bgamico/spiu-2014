@@ -137,4 +137,17 @@ class Usuario extends CI_Controller
      	$this->session->set_flashdata('status', 'success');     	
     	redirect('usuario');
     }
+
+    /**
+     * metodo para resetear la contraseña del usuario
+     * @access public
+     */
+    public function resetPassword($id) {	
+    	$this->Model_Usuario->resetPassword($id);
+    	$this->session->set_flashdata('mensaje', 'Se ha restaurado la contrase&ntilde;a del usuario.');
+    	$this->session->set_flashdata('status', 'success');
+    	redirect('usuario');
+    }
+        
+    
 }

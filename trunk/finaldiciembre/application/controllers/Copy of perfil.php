@@ -135,9 +135,25 @@ class Perfil extends CI_Controller
     	echo $registro['contrasena_act'];
     	echo $registro['contrasena'];
     	echo $registro['contrasena_confirm'];
-    	// se encripa contraseña
-    	$md5_password = md5($registro['contrasena']);
+    	
+    	//$this->form_validation->set_rules('contrasena_act', 'Contrase&ntilde;a actual', 'required');
+    	//$this->form_validation->set_rules('contrasena', 'Nueva Contrase&ntilde;a', 'required');
+    	//$this->form_validation->set_rules('contrasena_confirm', 'Confirmar Contrase&ntilde;a', 'required');
+    	//$this->form_validation->set_rules('contrasena', 'Nueva Contrase&ntilde;a', 'required|matches[contrasena_confirm]');
+    	
+    	//reglas de validación
+    	$this->form_validation->set_rules($this->reglas);    	
+    	if(($this->form_validation->run() == TRUE)){
+    		//en esta instancia hemos superado la validacion del formulario
 
+    		echo 'superamos validacion';
+
+    	}else {
+    		$this->cambiarPassword();
+    		//echo 'contraseñas no son iguales';
+    		
+    	}    	
+    	/*
     	$query = $this->Model_Perfil->get($this->session->userdata('username'));
     	echo $this->session->userdata('username');
     	echo $this->session->userdata('usuario');
@@ -146,10 +162,8 @@ class Perfil extends CI_Controller
     	{
     		$id = $row->id;
     	}    	
-    	$this->Model_Perfil->updatePassword($id,$md5_password);
-    	$this->session->set_flashdata('mensaje', 'La contrase&ntilde;a se actualiz&oacute; correctamente.');
-    	$this->session->set_flashdata('status', 'success');    	
-    	redirect('perfil');
+    	
+    	*/
     	//exit;
     }
     
