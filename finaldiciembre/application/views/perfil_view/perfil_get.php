@@ -10,6 +10,13 @@
 						<div class="navbar-header">
 							<a class="navbar-brand"><?= $titulo ?> </a>
 						</div>
+						<div class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-2">
+							<form class="navbar-form navbar-right" role="search">
+
+								<?= anchor('perfil/cambiarPassword', 'Cambiar Contrase&ntilde;a', array('class'=>'btn btn-default')); ?>
+							</form>
+						</div>						
 					</div>
 				</nav>
 			</div>

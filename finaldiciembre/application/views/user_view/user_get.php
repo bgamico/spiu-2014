@@ -40,8 +40,10 @@
 							</td>
 							<td><?= anchor('usuario/view/'.$registro->id, '<i class="glyphicon glyphicon-search"></i>',array('class'=>'view')); ?>
 								<?= anchor('usuario/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-								<a data-toggle="modal" data-target="#confirm-delete" href="#"><i
-									class="glyphicon glyphicon-remove"></i> </a>
+
+								<a data-href="<?= 'usuario/delete/'.$registro->id?>" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
+								<a data-href="<?= 'usuario/resetPassword/'.$registro->id?>" data-toggle="modal" data-target="#confirm-reset" href="#"><i class="glyphicon glyphicon-asterisk"></i></a>									
+									
 							</td>
 						</tr>
 						<?php endforeach; ?>
@@ -69,9 +71,46 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<?= anchor('usuario/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-
+					
+					<a href="#" class="btn btn-danger danger">Borrar</a>
 				</div>
 			</div>
 		</div>
 	</div>
+    
+    	
+	<div class="modal fade" id="confirm-reset" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Confirmar Restaurar Contrase&ntilde;a</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>&iquest;Esta seguro que desea restaurar la contrase&ntilde;a de este usuario?</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<a href="#" class="btn btn-danger brestaurar">Restaurar</a>
+				</div>
+			</div>
+		</div>
+	</div>	
+	
+	
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
+        })    
+    </script>
+    
+    <script>
+        $('#confirm-reset').on('show.bs.modal', function(e) {
+            $(this).find('.brestaurar').attr('href', $(e.relatedTarget).data('href'));
+        })        
+    </script>
