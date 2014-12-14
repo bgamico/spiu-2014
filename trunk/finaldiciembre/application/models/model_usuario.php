@@ -46,7 +46,15 @@ class Model_Usuario extends CI_Model {
 	}
 	
 	function delete($id) {
-		$this->db->where ( 'perfil_id', $id );
+		$this->db->where ( 'usuarios.id', $id );
 		$this->db->delete ( 'usuarios' );
 	}
+	
+	function resetPassword($id) {
+		$this->db->where( 'usuarios.id', $id );
+		$registro['contrasena'] = '5f4dcc3b5aa765d61d8327deb882cf99';
+		//test 1234
+		//$registro['contrasena'] = '81dc9bdb52d04dc20036dbd8313ed055';
+		$this->db->update('usuarios', $registro, $perfil);
+	}	
 }
