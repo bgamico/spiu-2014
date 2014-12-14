@@ -1,0 +1,57 @@
+<div class="col-lg-9 offset1">
+	<div class="well bs-component">
+		<fieldset>
+			<?= form_open('perfil/updatePassword', array('class'=>'form-horizontal','id'=>'contact-form')); ?>
+			<legend> Cambiar Contrase&ntilde;a </legend>
+
+			<?php foreach ($query as $registro): ?>
+			<div class="control-group">
+				<?= form_hidden('perfil_id', $registro->id); ?>
+			</div>
+
+			<div class="form-group">
+				<div class="control-group">
+					<?= form_label('Contrase&ntilde;a actual*', 'contrasena_act', array('class'=>'col-lg-3 control-label')); ?>
+					<div class="col-lg-9">
+						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena_act', 'id'=>'contrasena_act', 'placeholder'=>'Contrase&ntilde;a actual', 'value'=>set_value('nombre'))); ?>						
+					</div>
+				</div>
+			</div>
+
+		
+
+			<div class="form-group">
+				<div class="control-group">
+					<?= form_label('Nueva Contrase&ntilde;a*', 'contrasena', array('class'=>'col-lg-3 control-label')); ?>
+					<div class="col-lg-9">
+						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena', 'id'=>'contrasena', 'placeholder'=>'Nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="control-group">
+					<?= form_label('Repita nueva Contrase&ntilde;a*', 'contrasena_confirm', array('class'=>'col-lg-3 control-label')); ?>
+					<div class="col-lg-9">
+						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena_confirm', 'id'=>'contrasena_confirm', 'placeholder'=>'Nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
+					</div>
+				</div>
+			</div>
+
+			<p class="col-lg-3"></p>
+			<p class="col-lg-9">
+				*<em>campos obligatorios.</em>
+			</p>
+
+			<div class="form-actions">
+				<div class="col-lg-9 col-lg-offset-3">
+					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
+					<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
+				</div>
+			</div>
+
+			<?php endforeach; ?>
+			<?= form_close(); ?>
+		</fieldset>
+	</div>
+</div>
