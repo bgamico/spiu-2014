@@ -11,9 +11,9 @@
 
 			<div class="form-group">
 				<div class="control-group">
-					<?= form_label('Contrase&ntilde;a actual*', 'contrasena_act', array('class'=>'col-lg-3 control-label')); ?>
-					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena_act', 'id'=>'contrasena_act', 'placeholder'=>'Contrase&ntilde;a actual', 'value'=>set_value('nombre'))); ?>						
+					<?= form_label('Contrase&ntilde;a actual*', 'contrasena_act', array('class'=>'col-lg-4 control-label')); ?>
+					<div class="col-lg-7">
+						<?= form_password(array( 'class'=>"form-control", 'name'=>'contrasena_act', 'id'=>'contrasena_act', 'placeholder'=>'Contrase&ntilde;a actual', 'value'=>set_value('nombre'))); ?>						
 					</div>
 				</div>
 			</div>
@@ -22,29 +22,29 @@
 
 			<div class="form-group">
 				<div class="control-group">
-					<?= form_label('Nueva Contrase&ntilde;a*', 'contrasena', array('class'=>'col-lg-3 control-label')); ?>
-					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena', 'id'=>'contrasena', 'placeholder'=>'Nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
+					<?= form_label('Nueva Contrase&ntilde;a*', 'contrasena', array('class'=>'col-lg-4 control-label')); ?>
+					<div class="col-lg-7">
+						<?= form_password(array( 'class'=>"form-control", 'name'=>'contrasena', 'id'=>'contrasena', 'placeholder'=>'Nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
 					</div>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="control-group">
-					<?= form_label('Repita nueva Contrase&ntilde;a*', 'contrasena_confirm', array('class'=>'col-lg-3 control-label')); ?>
-					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text', 'class'=>"form-control", 'name'=>'contrasena_confirm', 'id'=>'contrasena_confirm', 'placeholder'=>'Nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
+					<?= form_label('Repita nueva Contrase&ntilde;a*', 'contrasena_confirm', array('class'=>'col-lg-4 control-label')); ?>
+					<div class="col-lg-7">
+						<?= form_input(array('type'=>'password', 'class'=>"form-control", 'name'=>'contrasena_confirm', 'id'=>'contrasena_confirm', 'placeholder'=>'Repita nueva Contrase&ntilde;a', 'value'=>set_value('nombre'))); ?>
 					</div>
 				</div>
 			</div>
 
-			<p class="col-lg-3"></p>
-			<p class="col-lg-9">
+			<p class="col-lg-4"></p>
+			<p class="col-lg-7">
 				*<em>campos obligatorios.</em>
 			</p>
 
 			<div class="form-actions">
-				<div class="col-lg-9 col-lg-offset-3">
+				<div class="col-lg-9 col-lg-offset-4">
 					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
 					<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
 				</div>

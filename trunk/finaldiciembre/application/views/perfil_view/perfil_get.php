@@ -10,12 +10,12 @@
 						<div class="navbar-header">
 							<a class="navbar-brand"><?= $titulo ?> </a>
 						</div>
-						<div class="collapse navbar-collapse"
-							id="bs-example-navbar-collapse-2">
-							<form class="navbar-form navbar-right" role="search">
-
-								<?= anchor('perfil/cambiarPassword', 'Cambiar Contrase&ntilde;a', array('class'=>'btn btn-default')); ?>
-							</form>
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+							<!-- form para cambio de contraseña desde gestión de usuarios -->
+							<?= form_open('perfil/cambiarPassword', array('class'=>'navbar-form navbar-right','role'=>'search')); ?>
+								<?= form_hidden('usuario_id', $this->uri->segment(3)); ?>
+								<?= form_button(array('type'=>'submit', 'content'=>'Cambiar Contrase&ntilde;a', 'class'=>'btn btn-default')); ?>
+							<?= form_close(); ?>
 						</div>						
 					</div>
 				</nav>
