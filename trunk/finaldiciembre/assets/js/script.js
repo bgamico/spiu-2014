@@ -97,10 +97,24 @@ $(document).ready(function(){
 	      profesor: {
 		        minlength: 2,
 		        required: true
-	      }
-	  
-
+	      },
+	      contrasena_act: {
+		        minlength: 2,
+		        required: true
+	      },
+	      contrasena: {
+		        required: true
+	      },
+	      contrasena_confirm: {
+		        required: true
+	      },
+	      contrasena_confirm: {
+		  equalTo: "#contrasena"
+		  }      
 	    },
+	      messages: {
+	          contrasena_confirm :"La contrase&ntilde;a debe coincidir con la nueva contrase&ntilde;a."
+	      }		    
 			/*highlight: function(element) {
 				$(element).closest('.control-group').removeClass('success').addClass('error');
 			},
@@ -122,6 +136,6 @@ $(document).ready(function(){
 		/* mensaje de confirmación restaurar contraseña */
         $('#confirm-reset').on('show.bs.modal', function(e) {
             $(this).find('.brestaurar').attr('href', $(e.relatedTarget).data('href'));
-        })    		
+        })     
 
 }); // end document.ready
