@@ -118,5 +118,10 @@ $(document).ready(function(){
 		$('#confirm-delete').on('show.bs.modal', function(e) {
 		    $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
 		});		
+		
+		/* mensaje de confirmación restaurar contraseña */
+        $('#confirm-reset').on('show.bs.modal', function(e) {
+            $(this).find('.brestaurar').attr('href', $(e.relatedTarget).data('href'));
+        })    		
 
 }); // end document.ready
