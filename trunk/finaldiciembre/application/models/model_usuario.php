@@ -46,7 +46,7 @@ class Model_Usuario extends CI_Model {
 	}
 	
 	function delete($id) {
-		$this->db->where ( 'usuarios.perfil_id', $id );
+		$this->db->where ( 'id', $id );
 		$this->db->delete ( 'usuarios' );
 	}
 	
