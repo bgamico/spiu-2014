@@ -95,62 +95,38 @@ class Perfil extends CI_Controller
      * @access public
      */
     public function cambiarPassword() {
-    	
-    	
-    	$data['query'] = $this->Model_Perfil->get($this->session->userdata('username'));
+    	//recibimos el usuario_id desde el post, puede que venga vacio.
+    	$registro = $this->input->post();
+    	$usuario_id = $registro['usuario_id'];
+    	if ($usuario_id != null && $usuario_id != '') {
+    		//echo $usuario_id;
+    		//p.id, id del perfil del usuario al que se le cambia la constraseña
+    		$data['query'] = $this->Model_Perfil->getByUserId($usuario_id);
+    	}else{
+    		//p.id, id del perfil del usuario al que se le cambia la constraseña
+    		$data['query'] = $this->Model_Perfil->get($this->session->userdata('username'));
+    	}
     	
     	$this->load->view('include/header');
     	$this->load->view('include/nav');
     	$this->load->view('perfil_view/perfil_cpassword',$data);
     	$this->load->view('include/footer');
-    	 /*  	
-    	$query = $this->Model_Perfil->get($this->session->userdata('username'));
-    	echo $this->session->userdata('username');
-    	echo $this->session->userdata('usuario');
-
-	    foreach ($query as $row)
-		{
-		   $id = $row->id;
-		}
-    	echo $id;
-    	$registro = $this->Model_Perfil->getPassword($id);
-    	foreach ($registro as $row)
-    	{
-    		$contrasena = $row->contrasena;
-    	}    	
-    	echo $contrasena;
-    	$data['registro'] = $registro;
-    	exit;
-    	
-    	$registro = $this->input->post();
-    	$this->Model_Perfil->update($registro);
-    	$this->session->set_flashdata('mensaje', 'El perfil se actualiz&oacute; correctamente.');
-    	$this->session->set_flashdata('status', 'success');
-    	redirect('perfil');*/
     }    
     
     public function updatePassword() {    
     	
     	$registro = $this->input->post();
-    	echo $registro['contrasena_act'];
-    	echo $registro['contrasena'];
-    	echo $registro['contrasena_confirm'];
+    	//perfil id del usuario al que se le quiere cambiar la contraseña
+    	//puede ser uno seleccionado desde gestion usuarios o el usuario logueado
+    	$perfil_id = $registro['perfil_id'];
     	// se encripa contraseña
     	$md5_password = md5($registro['contrasena']);
 
-    	$query = $this->Model_Perfil->get($this->session->userdata('username'));
-    	echo $this->session->userdata('username');
-    	echo $this->session->userdata('usuario');
-    	
-    	foreach ($query as $row)
-    	{
-    		$id = $row->id;
-    	}    	
-    	$this->Model_Perfil->updatePassword($id,$md5_password);
+    	$id_perfil = $registro['perfil_id'];
+    	$this->Model_Perfil->updatePassword($perfil_id,$md5_password);
     	$this->session->set_flashdata('mensaje', 'La contrase&ntilde;a se actualiz&oacute; correctamente.');
     	$this->session->set_flashdata('status', 'success');    	
     	redirect('perfil');
-    	//exit;
     }
     
     
