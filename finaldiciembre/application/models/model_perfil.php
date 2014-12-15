@@ -41,8 +41,8 @@ class Model_Perfil extends CI_Model {
     	return $query->result();
     }    
     
-    function updatePassword($id,$contrasena) {
-    	$this->db->where('usuarios.id', $id);
+    function updatePassword($perfil_id,$contrasena) {
+    	$this->db->where('usuarios.perfil_id', $perfil_id);
     	$this->db->set('contrasena', $contrasena);
 		$this->db->update('usuarios');
     }    
