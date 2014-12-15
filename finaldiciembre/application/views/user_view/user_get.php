@@ -53,7 +53,7 @@
 		</div>
 	</div>
 
-
+	<!-- modal para eliminar -->
 	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -78,7 +78,7 @@
 		</div>
 	</div>
     
-    	
+   	<!-- modal para restaurar contraseña -->
 	<div class="modal fade" id="confirm-reset" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -101,16 +101,3 @@
 			</div>
 		</div>
 	</div>	
-	
-	
-    <script>
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.danger').attr('href', $(e.relatedTarget).data('href'));
-        })    
-    </script>
-    
-    <script>
-        $('#confirm-reset').on('show.bs.modal', function(e) {
-            $(this).find('.brestaurar').attr('href', $(e.relatedTarget).data('href'));
-        })        
-    </script>
