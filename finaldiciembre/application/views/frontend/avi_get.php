@@ -4,16 +4,21 @@
 
         <div class="col-lg-11">
 
-            <div class="bs-example">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">Avisos</a>
-        </div>
-       </div>
-    </nav>
-  </div>
-            
+<div class="bs-example">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand">Actividades</a>
+						</div>
+						<div class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-2">
+							<form class="navbar-form navbar-right" role="search">
+								<a class="btn btn-default" onclick="window.history.back();">Volver</a>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>  
 
             <div class="bs-component">
                 <table class="table table-striped table-hover table-bordered">
