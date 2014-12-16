@@ -31,8 +31,7 @@ class Pdi extends CI_Controller
 			$marker = array();
 			$marker ['animation'] = 'DROP';
 			$marker ['position'] = $info_marker->latitud.','.$info_marker->longitud;
-// 			$marker ['infowindow_content'] = '<img src='.base_url('uploads/'.$info_marker->imagen).'><br>'.$info_marker->nombre;
-			$marker['infowindow_content'] = '<img width="190" height="149" src='.base_url('uploads/'.$info_marker->imagen).'><br>'."<strong>Nombre: </strong>".$info_marker->nombre.'<br>'."<strong>Direccion: </strong>".$info_marker->direccion.'<br>'."<strong>Ciudad: </strong>".$info_marker->ciudad.'<br>'."<strong>Provincia: </strong>".$info_marker->provincia;
+			$marker['infowindow_content'] = '<img width="190" height="149" src='.base_url('uploads/'.$info_marker->imagen).'><br>'."<strong>Nombre: </strong>".$info_marker->nombre.'<br>'."<strong>Direccion: </strong>".$info_marker->direccion.'<br>'."<strong>Ciudad: </strong>".$info_marker->ciudad.'<br>'."<strong>Provincia: </strong>".$info_marker->provincia."<br><strong>Descripcion: </strong><br><textarea rows='3' cols='25' readonly>".$info_marker->direccion."</textarea>";;
 			// 170 - 132
 			$marker['id'] = $info_marker->id;
 			$this->googlemaps->add_marker($marker);
