@@ -6,7 +6,7 @@
 
 		<fieldset>
 			<legend>Crear Usuario </legend>
-
+			<?= validation_errors(); ?>
 			<div class="form-group">
 				<div class="control-group">
 					<?= form_label('Usuario*', 'username', array('class'=>'col-lg-3 control-label')); ?>
