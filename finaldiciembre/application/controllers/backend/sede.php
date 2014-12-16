@@ -75,12 +75,12 @@ class Sede extends CI_Controller
 	 */
 	function add()
 	{
-		// 		if(isset($_POST['nombre'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
-		// 		 	$this->form_validation->set_rules('nombre','Nombre','is_unique[sede.nombre]');//  Configuramos las validaciones ayudandonos con la librería form_validation
-		// 			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación
-		// 				$this->insert();                     //  insertamos
-		// 			}
-		// 		}
+		if(isset($_POST['nombre'])){    //  Si no recibimos ningún valor proveniente del formulario, significa que el usuario recién ingresa.
+		 	$this->form_validation->set_rules('nombre','Nombre','is_unique[sedes.nombre]');//  Configuramos las validaciones ayudandonos con la librería form_validation
+			if(($this->form_validation->run()==TRUE)){               //  Verificamos si el usuario superó la validación
+				$this->insert();                     //  insertamos
+			}
+		}
 
 		$this->load->view('backend/include/header');
 		$this->load->view('backend/include/nav');

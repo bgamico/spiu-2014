@@ -29,10 +29,11 @@
 
 <div class="col-lg-9 offset1">
 	<div class="well bs-component">
-		<?= form_open_multipart('backend/sede/insert', array('class'=>'form-horizontal','id'=>'contact-form'));?>
+		<!-- ?= form_open_multipart('backend/sede/insert', array('class'=>'form-horizontal','id'=>'contact-form'));?-->
+		<?= form_open_multipart('backend/sede/add', array('class'=>'form-horizontal','id'=>'contact-form'));?>
 		<fieldset>
 			<legend> Crear Sede </legend>
-
+			<?= validation_errors(); ?>
 			<div class="form-group">
 				<div class="control-group">
 					<?= form_label('Nombre*', 'nombre', array('class'=>'col-lg-3 control-label')); ?>
@@ -95,7 +96,7 @@
 			<div class="form-actions">
 				<div class="col-lg-9 col-lg-offset-3">
 					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
-					<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
+					<?= anchor('backend/sede', 'Cancelar', array('class'=>'btn btn-default')); ?>
 				</div>
 			</div>
 		</fieldset>
