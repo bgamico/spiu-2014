@@ -32,9 +32,9 @@ class Home extends CI_Controller {
 
 		$data['map'] = $this->googlemaps->create_map();
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/index', $data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/index', $data);
+		$this->load->view('backend/include/footer');
 	}
 
 	public function pdi($id){
@@ -63,33 +63,33 @@ class Home extends CI_Controller {
 
 		$data['map'] = $this->googlemaps->create_map();
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/sede_search', $data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/sede_search', $data);
+		$this->load->view('backend/include/footer');
 	}
 
 	public function aviso($id){
 		$data['query'] = $this->Model_Aviso->getBySedeId($id);
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/avi_get', $data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/avi_get', $data);
+		$this->load->view('backend/include/footer');
 	}
 
 	public function actividad($id){
 		$data['query'] = $this->Model_Actividad->getBySedeId($id);
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/act_get', $data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/act_get', $data);
+		$this->load->view('backend/include/footer');
 	}
 
 	public function examen($id){
 		$data['query'] = $this->Model_Actividad->getBySedeId($id);
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/act_get', $data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/act_get', $data);
+		$this->load->view('backend/include/footer');
 	}
 
 	public function frontend(){ 
@@ -117,13 +117,13 @@ class Home extends CI_Controller {
 
 		$data['map'] = $this->googlemaps->create_map();
 
-		$this->load->view('include/header');
-		$this->load->view('frontend/frontend',$data);
-		$this->load->view('include/footer');
+		$this->load->view('backend/include/header');
+		$this->load->view('backend/frontend/frontend',$data);
+		$this->load->view('backend/include/footer');
 	}
 	
 	public function twitter(){
-		$this->load->view('frontend/twitter');		
+		$this->load->view('backend/frontend/twitter');		
 	}
 	
 	
