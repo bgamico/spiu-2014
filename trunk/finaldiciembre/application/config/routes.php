@@ -38,9 +38,15 @@
 |
 */
 
-$route['default_controller'] = "account";
+/*$route['default_controller'] = "account";
+$route['404_override'] = '';*/
+$route['default_controller'] = 'frontend/home';
 $route['404_override'] = '';
 
+/* Rutas para Frontend y Backend */
+$route['backend'] = 'backend/login';
+$route['backend/(:any)'] = 'backend/$1';
+$route['(:any)'] = 'frontend/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
