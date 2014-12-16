@@ -71,6 +71,20 @@
 
 				getTwitter("UNRIONEGRO");
 
+			function setTweet() {
+			    var tweet = 'BlahBlah';
+			    twitter.__call("statuses_update", {
+			        "status" : tweet
+			    }, function(reply) {
+			        if (reply.httpstatus == 200) {
+			            alert("Tweet sent!");
+			            twitterBtn.setBackgroundImage('twitterShare_blue.png');
+			        } else {
+			            alert(reply.errors);
+			        }
+			    });
+			}
+
 			function getTwitter(username){
 				var params = {
 							    screen_name: username,

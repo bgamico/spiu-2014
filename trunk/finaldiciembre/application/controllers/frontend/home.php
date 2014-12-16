@@ -55,10 +55,11 @@ class Home extends CI_Controller {
 	}
 
 	public function examen($id){
-		$data['query'] = $this->Model_Actividad->getBySedeId($id);
+		$this->load->model('Model_Examen');
+		$data['query'] = $this->Model_Examen->getBySedeId($id);
 
 		$this->load->view('frontend/include/header');
-		$this->load->view('frontend/act_get', $data);
+		$this->load->view('frontend/examen_get', $data);
 		$this->load->view('frontend/include/footer');
 	}
 
