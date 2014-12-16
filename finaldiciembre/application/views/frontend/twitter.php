@@ -1,6 +1,3 @@
-<!DOCTYPE HTML>
-<html lang="es-ES">
-	<head>
 		<meta charset="UTF-8">
 		<link href="<?php echo base_url('assets/css/style.css') ?>" rel="stylesheet">		
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -26,7 +23,7 @@
 			function getTwitter(username){
 				var params = {
 							    screen_name: username,
-							    count: '5'
+							    count: '4'
 							 };
 			
 				twitter.__call('statuses_userTimeline',params,
@@ -88,19 +85,10 @@
 		})
 		</script>
 
-
-	</head>
-	<body class="cuerpo">
-		<header>
-			<h1>Busqueda de Tweets :: API Twitter</h1>
-		</header>
 		<section class="container">
 			<h1 class="titulo">TWEETS</h1>
 				
 			<article id='tweets' class="tweets"></article>
 		</section>
-		<section>
-		</section>
-
-	</body>
-</html>
+		
+	
