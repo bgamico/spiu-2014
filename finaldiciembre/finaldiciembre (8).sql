@@ -23101,14 +23101,13 @@ CREATE TABLE IF NOT EXISTS `menus` (
 --
 
 INSERT INTO `menus` (`id`, `titulo`, `nivel`, `url`) VALUES
-(1, 'Gestión de Usuarios', 1, '/usuario'),
-(2, 'Gestión de PDI ', 1, '/pdi'),
-(3, 'Gestión de Sedes', 1, '/sede'),
-(4, 'Gestión de Actividades', 1, '/actividad'),
-(5, 'Gestión de Avisos', 1, '/aviso'),
-(6, 'Fechas de Exámenes', 1, '/fecha'),
-(7, 'Gestión de Perfil', 1, '/perfil');
-
+(1, 'Gestión de Usuarios', 1, 'backend/usuario'),
+(2, 'Gestión de PDI ', 1, 'backend/pdi'),
+(3, 'Gestión de Sedes', 1, 'backend/sede'),
+(4, 'Gestión de Actividades', 1, 'backend/actividad'),
+(5, 'Gestión de Avisos', 1, 'backend/aviso'),
+(6, 'Fechas de Exámenes', 1, 'backend/fecha'),
+(7, 'Gestión de Perfil', 1, 'backend/perfil');
 -- --------------------------------------------------------
 
 --
