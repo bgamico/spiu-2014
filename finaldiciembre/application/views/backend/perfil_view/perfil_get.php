@@ -13,7 +13,7 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 							<!-- form para cambio de contraseña desde gestión de usuarios -->
 							<?= form_open('backend/perfil/cambiarPassword', array('class'=>'navbar-form navbar-right','role'=>'search')); ?>
-								<?= form_hidden('usuario_id', $this->uri->segment(3)); ?>
+								<?= form_hidden('usuario_id', $this->uri->segment(4)); ?>
 								<?= form_button(array('type'=>'submit', 'content'=>'Cambiar Contrase&ntilde;a', 'class'=>'btn btn-default')); ?>
 							<?= form_close(); ?>
 						</div>						
