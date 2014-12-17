@@ -99,7 +99,6 @@ class Perfil extends CI_Controller
     	$registro = $this->input->post();
     	$usuario_id = $registro['usuario_id'];
     	if ($usuario_id != null && $usuario_id != '') {
-    		//echo $usuario_id;
     		//p.id, id del perfil del usuario al que se le cambia la constraseña
     		$data['query'] = $this->Model_Perfil->getByUserId($usuario_id);
     	}else{
@@ -128,6 +127,19 @@ class Perfil extends CI_Controller
     	$this->session->set_flashdata('status', 'success');    	
     	redirect('backend/perfil');
     }
+
+    public function passwordCheck(){
+    	$username = $this->session->userdata ( 'username' );
+    	$md5pass = $this->input->post('contrasena_act');
+    	$results = $this->Model_Perfil->getPassword();
+    	$currentPass = $results->password;
     
+    	if($md5pass==$currentPass){
+    		return true;
+    	}else{
+    		$this->form_validation->set_message('passwordCheck', 'Invalid current password, please try again');
+    		return false;
+    	}
+    }
     
 }
