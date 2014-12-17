@@ -114,6 +114,6 @@ class Actividad extends CI_Controller
 		$this->Model_Actividad->delete($id);
 		$this->session->set_flashdata('mensaje', 'La actividad se elimin&oacute; correctamente.');
 		$this->session->set_flashdata('status', 'success');
-		redirect('backend/dactividad');
+		redirect('backend/actividad');
 	}
 }
