@@ -1,7 +1,21 @@
 <div class="container-fluid" id="main">
   <div class="row">
-      <h2>Puntos de Interes</h2>
   	<div class="col-md-7" id="left">
+      <div class="bs-example">
+				<nav class="navbar navbar-default" role="navigation">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand">Puntos de Interes</a>
+						</div>
+						<div class="collapse navbar-collapse"
+							id="bs-example-navbar-collapse-2">
+							<form class="navbar-form navbar-right" role="search">
+								<a class="btn btn-default" onclick="window.history.back();">Volver</a>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>
     
       <?php foreach($datos as $marker_sidebar)
 		        {?>
