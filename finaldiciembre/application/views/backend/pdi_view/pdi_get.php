@@ -45,9 +45,8 @@
 					<div class="panel-heading">
 						<a
 							onclick="datos_marker(<?=$marker_sidebar->latitud?>,<?=$marker_sidebar->longitud?>,marker_<?=$marker_sidebar->id?>)"><?=substr($marker_sidebar->nombre,0)?>
-						</a> <a class="pull-right col-md-1" id="delete"
-							data-toggle="modal" data-target="#confirm-delete" href="#"><i
-							class="glyphicon glyphicon-remove"></i> </a>
+						</a> 
+						<a data-href="<?= 'pdi/delete/'.$marker_sidebar->id?>" data-toggle="modal" data-target="#confirm-delete" href="#" class="pull-right col-md-1" id="delete"><i class="glyphicon glyphicon-remove"></i></a>							
 						<?= anchor('backend/pdi/edit/'.$marker_sidebar->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view pull-right')); ?>
 
 					</div>
@@ -78,11 +77,10 @@
 						</div>
 
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancelar</button>
-							<?= anchor('backend/pdi/delete/'.$marker_sidebar->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-
-						</div>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							
+							<a href="#" class="btn btn-danger danger">Borrar</a>
+						</div>	
 					</div>
 				</div>
 			</div>

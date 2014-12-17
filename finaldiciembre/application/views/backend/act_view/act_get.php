@@ -41,8 +41,8 @@
 							<td><?= date("H:i", strtotime($registro->hora)); ?></td>
 							<td><?= $registro->direccion ?></td>
 							<td><?= anchor('backend/actividad/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
-								<a id="delete" data-toggle="modal" data-target="#confirm-delete"
-								href="#"><i class="glyphicon glyphicon-remove"></i>
+								
+								<a data-href="<?= 'actividad/delete/'.$registro->id?>" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 							</a></td>
 
 						</tr>
@@ -70,8 +70,8 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<?= anchor('backend/actividad/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-
+					
+					<a href="#" class="btn btn-danger danger">Borrar</a>
 				</div>
 			</div>
 		</div>
