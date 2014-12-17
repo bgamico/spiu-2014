@@ -66,7 +66,7 @@
 			<div class="form-group">
 				<div class="col-lg-9 col-lg-offset-3">
 					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
-					<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
+					<?= anchor('backend/actividad', 'Cancelar', array('class'=>'btn btn-default')); ?>
 				</div>
 			</div>
 		</fieldset>
