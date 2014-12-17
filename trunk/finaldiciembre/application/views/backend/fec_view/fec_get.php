@@ -42,8 +42,7 @@
 							<td><?= $registro->profesor ?></td>
 							<td><?= anchor('backend/fecha/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
 								<!-- ?=anchor('fecha/delete/'.$registro->id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; la actividad. &iquest;Est&aacute; seguro&#63')"))?-->
-								<a id="delete" data-toggle="modal" data-target="#confirm-delete"
-								href="#"><i class="glyphicon glyphicon-remove"></i>
+								<a data-href="<?= 'fecha/delete/'.$registro->id?>" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 							</a></td>
 
 						</tr>
@@ -70,8 +69,8 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<?= anchor('backend/fecha/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-
+					
+					<a href="#" class="btn btn-danger danger">Borrar</a>
 				</div>
 			</div>
 		</div>

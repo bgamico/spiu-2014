@@ -44,8 +44,7 @@
 							<td>
 								<!-- solo se permite editar eliminar o agregar avisos  --> <?= anchor('backend/aviso/edit/'.$registro->id, '<i class="glyphicon glyphicon-pencil"></i>',array('class'=>'view')); ?>
 								<!-- ?=anchor('aviso/delete/'.$registro->id,'<i class="glyphicon glyphicon-remove"></i>',array('onclick' => "return confirm('Se eliminar&aacute; el aviso. &iquest;Est&aacute; seguro&#63')"))?-->
-								<a id="delete" data-toggle="modal" data-target="#confirm-delete"
-								href="#"><i class="glyphicon glyphicon-remove"></i> </a>
+								<a data-href="<?= 'aviso/delete/'.$registro->id?>" data-toggle="modal" data-target="#confirm-delete" href="#"><i class="glyphicon glyphicon-remove"></i></a>
 
 							</td>
 
@@ -76,8 +75,8 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<?= anchor('backend/aviso/delete/'.$registro->id,'Borrar',array('class'=>"btn btn-danger danger"))?>
-
+					
+					<a href="#" class="btn btn-danger danger">Borrar</a>
 				</div>
 			</div>
 		</div>
