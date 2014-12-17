@@ -39,8 +39,11 @@ class Login extends CI_Controller
 
 		if($ret == 1)
 		{
-
-			redirect(base_url('backend'));
+			$this->load->view('backend/include/header');
+			$this->load->view('backend/include/error');
+			$this->load->view('backend/login_index');
+			$this->load->view('backend/include/footer');
+			//redirect(base_url('backend'));
 		}
 		else
 		{
