@@ -102,7 +102,7 @@ function updateDatabase(newLat, newLng)
 			        <?= form_label('Tipo*', 'tipo', array('class'=>'col-lg-3 control-label')); ?>
 			        <div class="col-lg-9">   
 			        <?= form_hidden('tipo', $registro->tipo); ?>   
-			        <?= form_dropdown('tipo', $tipos, $registro->descripcion, 'id = "tipo" class="form-control"');?>
+			        <?= form_dropdown('tipo', $tipos, $registro->tipo, 'id = "tipo" class="form-control"');?>
 			        
 			        </div>
 			    </div>
