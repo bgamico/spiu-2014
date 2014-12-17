@@ -18,8 +18,6 @@
 				</div>
 			</div>
 
-		
-
 			<div class="form-group">
 				<div class="control-group">
 					<?= form_label('Nueva Contrase&ntilde;a*', 'contrasena', array('class'=>'col-lg-4 control-label')); ?>
@@ -45,8 +43,9 @@
 
 			<div class="form-actions">
 				<div class="col-lg-9 col-lg-offset-4">
-					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
-					<?= anchor('backend/perfil', 'Cancelar', array('class'=>'btn btn-default')); ?>
+					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary', 'id'=>'aceptar')); ?>
+					<a class="btn btn-default" href="javascript:window.history.back();">Cancelar</a>
+					<!--  ?= anchor('backend/perfil', 'Cancelar', array('class'=>'btn btn-default')); ?-->
 				</div>
 			</div>
 
@@ -55,3 +54,29 @@
 		</fieldset>
 	</div>
 </div>
+<script>
+	$(function() {
+	    $("#contrasena").prop("disabled", true);
+	    $("#contrasena_confirm").prop("disabled", true);
+	    $("#aceptar").prop("disabled", true);
+
+	    
+	});	
+</script>
+
+
+
+<!-- script type="text/javascript">
+		$(document).ready(function() {
+			$("#provincia").change(function() {
+				$("#provincia option:selected").each(function() {
+					provincia = $('#provincia').val();
+					$.post("http://localhost/finaldiciembre/backend/pdi/llena_localidades", {
+						provincia : provincia
+					}, function(data) {
+						$("#ciudad").html(data);
+					});
+				});
+			})
+		});
+</script-->
