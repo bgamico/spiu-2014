@@ -46,7 +46,7 @@
 			<div class="form-actions">
 				<div class="col-lg-9 col-lg-offset-4">
 					<?= form_button(array('type'=>'submit', 'content'=>'Aceptar', 'class'=>'btn btn-primary')); ?>
-					<a class="btn btn-default" onclick="window.history.back();">Cancelar</a>
+					<?= anchor('backend/perfil', 'Cancelar', array('class'=>'btn btn-default')); ?>
 				</div>
 			</div>
 
