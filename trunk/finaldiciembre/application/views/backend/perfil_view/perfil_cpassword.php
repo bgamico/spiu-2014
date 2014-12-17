@@ -9,14 +9,6 @@
 				<?= form_hidden('perfil_id', $registro->id); ?>
 			</div>
 
-			<div class="form-group">
-				<div class="control-group">
-					<?= form_label('Contrase&ntilde;a actual*', 'contrasena_act', array('class'=>'col-lg-4 control-label')); ?>
-					<div class="col-lg-7">
-						<?= form_password(array( 'class'=>"form-control", 'name'=>'contrasena_act', 'id'=>'contrasena_act', 'placeholder'=>'Contrase&ntilde;a actual', 'value'=>set_value('nombre'))); ?>						
-					</div>
-				</div>
-			</div>
 
 			<div class="form-group">
 				<div class="control-group">
@@ -54,29 +46,3 @@
 		</fieldset>
 	</div>
 </div>
-<script>
-	$(function() {
-	    $("#contrasena").prop("disabled", true);
-	    $("#contrasena_confirm").prop("disabled", true);
-	    $("#aceptar").prop("disabled", true);
-
-	    
-	});	
-</script>
-
-
-
-<!-- script type="text/javascript">
-		$(document).ready(function() {
-			$("#provincia").change(function() {
-				$("#provincia option:selected").each(function() {
-					provincia = $('#provincia').val();
-					$.post("http://localhost/finaldiciembre/backend/pdi/llena_localidades", {
-						provincia : provincia
-					}, function(data) {
-						$("#ciudad").html(data);
-					});
-				});
-			})
-		});
-</script-->
