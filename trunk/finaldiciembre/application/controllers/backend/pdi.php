@@ -71,6 +71,9 @@ class Pdi extends CI_Controller
 	function edit($id)
 	{
 		$query = $this->Model_Pdi->find($id);
+		
+// 		print_r($query);
+
 		$data['query'] = $query;
 		
 		$this->load->library('googlemaps');
@@ -93,6 +96,13 @@ class Pdi extends CI_Controller
 		//tipos de pdi
 		$data['tipos'] = $this->getTipos();
 		
+		$this->load->model('ciudades_model');
+		$data['provincias'] = $this->ciudades_model->all_provincias();
+		$data['ciudades'] = $this->ciudades_model->ciudades($query[0]->provincia);
+		
+// 		echo $query[0]->provincia;
+// 		print_r($ciudades);
+		
 		$this->load->view('backend/include/header');
 		$this->load->view('backend/include/nav');
 		$this->load->view('backend/pdi_view/pdi_edit',$data);
@@ -103,31 +113,31 @@ class Pdi extends CI_Controller
 	 * pagina para agregar puntos de informacion
 	 * @access public
 	 */
-	function addoriginal()
-	{
-		$this->load->library('googlemaps');
+// 	function addoriginal()
+// 	{
+// 		$this->load->library('googlemaps');
 		
-		$sede = $this->Model_Sede->find($this->session->userdata('sede'));
+// 		$sede = $this->Model_Sede->find($this->session->userdata('sede'));
 		
-		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
-		$config['zoom'] = '13';
-		$this->googlemaps->initialize($config);
+// 		$config['center'] = $sede[0]->latitud.','.$sede[0]->longitud;
+// 		$config['zoom'] = '13';
+// 		$this->googlemaps->initialize($config);
 		
-		$marker = array();
-		$marker['position'] = $sede[0]->latitud.','.$sede[0]->longitud;
-		$marker['draggable'] = true;
-		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
-		$this->googlemaps->add_marker($marker);
-		$data['map'] = $this->googlemaps->create_map();
+// 		$marker = array();
+// 		$marker['position'] = $sede[0]->latitud.','.$sede[0]->longitud;
+// 		$marker['draggable'] = true;
+// 		$marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+// 		$this->googlemaps->add_marker($marker);
+// 		$data['map'] = $this->googlemaps->create_map();
 		
-		$this->load->model('ciudades_model');
-		$data['provincias'] = $this->ciudades_model->provincias();
+// 		$this->load->model('ciudades_model');
+// 		$data['provincias'] = $this->ciudades_model->provincias();
 		
-		$this->load->view('backend/include/header');
-		$this->load->view('backend/include/nav');
-		$this->load->view('backend/pdi_view/pdi_add', $data);
-		$this->load->view('backend/include/footer');
-	}
+// 		$this->load->view('backend/include/header');
+// 		$this->load->view('backend/include/nav');
+// 		$this->load->view('backend/pdi_view/pdi_add', $data);
+// 		$this->load->view('backend/include/footer');
+// 	}
 	
 	function add()
 	{
@@ -216,6 +226,7 @@ class Pdi extends CI_Controller
 				}
 			}
 		}
+
 		
 		/**
 		 * retorna los tipos de PDIs
