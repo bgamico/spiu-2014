@@ -6,7 +6,6 @@ function updateDatabase(newLat, newLng)
 }
 </script>
 
-
 <div class="col-lg-12">
 	<?php echo $map['js']; ?>
 	<?php echo $map['html']; ?>
@@ -43,21 +42,24 @@ function updateDatabase(newLat, newLng)
 
 			<div class="form-group">
 				<div class="control-group">
-					<?= form_label('Ciudad*', 'ciudad', array('class'=>'col-lg-3 control-label')); ?>
-					<div class="col-lg-9">
-						<?= form_input(array('type'=>'text','class'=>"form-control", 'name'=>'ciudad', 'id'=>'ciudad', 'value'=>$registro->ciudad)); ?>
-					</div>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="control-group">
 					<?= form_label('Provincia*', 'provincia', array('class'=>'col-lg-3 control-label')); ?>
 					<div class="col-lg-9">
+						<!-- ?= form_dropdown('tipo', $tipos, $registro->tipo, 'id = "provincia" class="form-control"');?-->
 						<?= form_input(array('type'=>'text','class'=>"form-control", 'name'=>'provincia', 'id'=>'provincia', 'value'=>$registro->provincia)); ?>
 					</div>
 				</div>
 			</div>
+
+			
+			<div class="form-group">
+				<div class="control-group">
+					<?= form_label('Ciudad*', 'ciudad', array('class'=>'col-lg-3 control-label')); ?>
+					<div class="col-lg-9">
+						<?= form_input(array('type'=>'text','class'=>"form-control", 'name'=>'ciudad', 'id'=>'ciudad', 'value'=>$registro->ciudad)); ?>
+						</div>
+				</div>
+			</div>
+			
 
 			<div class="form-group">
 				<div class="control-group">
